@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="curve">
-    <img class="bg-white" src="../../public/img/curve.jpg" alt="curve.png">
+    <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
 
 
@@ -63,23 +63,27 @@
     </div>
 
     <div class="container">
-      <div class="p-5 pt-0 service">
+      <div class="pb-5 pt-0 service">
         <h2 class="text-center">Consegniamo tutto ciò che vuoi</h2>
-        <div class="d-flex px-4 pt-4 justify-content-between">
-          <div class="left text-center">
-            <p>I migliori ristoranti della tua città</p>
-            <img src="" alt="">
+        <div class="d-md-flex px-sm-4 pt-4 justify-content-between">
+          <div class="left text-center m-5 mt-0">
+            <h5>I migliori ristoranti della tua città</h5>
+            <img src="img/Food.png" alt="food.png">
+            <p>Approfitta di un'ampia varietà di ristoranti per ordinare i tuoi piatti preferiti oppure trovane di nuovi
+              nei dintorni!</p>
           </div>
-          <div class="righ text-center">
-            <p>Consegna rapida</p>
-            <img src="" alt="">
+          <div class="righ text-center m-5 mt-0">
+            <h5>Consegna veloce? velocissima!</h5>
+            <img src="img/Delivery.png" alt="delivery.png">
+            <p>La rapidità è un nostro punto d'orgoglio. Ordina o invia qualsiasi cosa nella tua città: lo ritireremo e te
+              lo consegneremo nel giro di qualche minuto.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="curved">
-    <img class="bg-white" src="../../public/img/curve.jpg" alt="curve.png">
+    <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
 
   <div class="container bottom">
@@ -144,6 +148,12 @@ export default {
   :root {
     --num-columns: 3;
   }
+
+  .service {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (min-width: 768px) {
@@ -156,6 +166,10 @@ export default {
       margin-left: auto;
       margin-right: auto;
     }
+  }
+
+  .left {
+    width: 950px;
   }
 }
 
@@ -181,5 +195,10 @@ export default {
 .curved img {
   width: 100%;
   transform: rotate(180deg);
+}
+
+.service img {
+  width: 200px;
+  height: auto;
 }
 </style>
