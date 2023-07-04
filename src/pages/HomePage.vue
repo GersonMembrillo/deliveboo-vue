@@ -87,20 +87,29 @@
   </div>
 
   <div class="container bottom">
-    <div class="row">
+    <div class="row d-flex justify-content-between mb-4">
       <div class="col-12 col-md-4">
-        <div class="">
-          <p>Diventa un Rider</p>
+        <div class="text-center">
+          <a href="">
+            <img src="img/rider.png" alt="rider">
+          </a>
+          <p class="fw-bold">Diventa un Rider</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="">
-          <p>Diventa un Partner</p>
+        <div class="text-center">
+          <a href="">
+            <img src="img/collab.png" alt="collab">
+          </a>
+          <p class="fw-bold">Diventa un Partner</p>
         </div>
       </div>
       <div class="col-12 col-md-4">
-        <div class="">
-          <p>Registra la tua attività</p>
+        <div class="text-center">
+          <a href="">
+            <img src="img/restaurant.png" alt="restaurant">
+          </a>
+          <p class="fw-bold">Registra la tua attività</p>
         </div>
       </div>
     </div>
@@ -198,6 +207,11 @@ export default {
 }
 
 .service img {
+  width: 200px;
+  height: auto;
+}
+
+.bottom img {
   width: 200px;
   height: auto;
 }

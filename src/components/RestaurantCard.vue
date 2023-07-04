@@ -7,13 +7,13 @@
 </template>
 
 <script>
-  export default {
-name: 'RestaurantCard'
-  }
+export default {
+  name: 'RestaurantCard'
+}
 </script>
 
 <style lang="scss" scoped>
-  .r-card {
-    height: 200px;
-  }
+.r-card {
+  height: 200px;
+}
 </style>
