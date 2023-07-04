@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar">
+  <nav :class="['navbar', { 'navbar-hidden': isNavbarHidden }]">
     <div class="navbar-logo">
       <a href="http://localhost:5174/">
-      <img src="../../public/img/deliveboo3.png" alt="Logo" />
+        <img src="../../public/img/deliveboo3.png" alt="Logo" />
       </a>
     </div>
     <div class="navbar-buttons">
@@ -13,10 +13,34 @@
 
 <script>
 export default {
-  name: 'HomeNav',
+  data() {
+    return {
+      searchQuery: '',
+      isNavbarHidden: false,
+      lastScrollPosition: 0,
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   methods: {
-    redirectToBackend() {
-      // Codice per reindirizzare alla parte backend
+    handleScroll() {
+      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScrollPosition > this.lastScrollPosition && currentScrollPosition > 0) {
+        // Scorri verso il basso, nascondi la navbar solo in formato mobile
+        if (window.innerWidth <= 768) {
+          this.isNavbarHidden = true;
+        }
+      } else {
+        // Scorri verso l'alto, mostra la navbar
+        this.isNavbarHidden = false;
+      }
+
+      this.lastScrollPosition = currentScrollPosition;
     },
   },
 };
@@ -28,7 +52,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-background-color: #ff9933;
+  background-color: #ff9933;
 }
 
 .navbar-logo img {
