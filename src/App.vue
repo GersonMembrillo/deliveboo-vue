@@ -9,9 +9,7 @@
     <main>
       <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" />
     </main>
-    <footer>
       <FooterVue />
-    </footer>
   </div>
 </template>
 

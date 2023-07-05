@@ -1,7 +1,7 @@
 <template>
   <nav :class="['navbar', { 'navbar-hidden': isNavbarHidden }]">
     <div class="navbar-logo">
-      <a href="http://localhost:5174/">
+      <a href="http://localhost:5173/">
       <img src="../../public/img/deliveboo3.png" alt="Logo" />
       </a>
     </div>

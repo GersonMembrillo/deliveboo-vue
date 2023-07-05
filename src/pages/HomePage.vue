@@ -41,9 +41,9 @@
       </div>
     </div>
   </div>
-  <div class="curved">
+  <!-- <div class="curved">
         <img class="bg-white" src="../../public/img/curve.jpg" alt="curve.png">
-    </div>
+    </div> -->
 
   <div class="container">
     <div class="row">
