@@ -108,7 +108,7 @@
 
 
   <div class="container bottom">
-    <div class="row d-flex justify-content-between mb-4">
+    <div class="row d-flex justify-content-between mb-5">
       <div class="col-12 col-md-4">
         <div class="text-center">
           <a href="">

@@ -1,5 +1,6 @@
 <template>
-  <footer class="bg-dark py-5 d-none d-sm-block">
+  <footer class="position-relative bg-dark py-5 d-none d-sm-block">
+    <img class="moto position-absolute" src="../../public/img/moto_dude.svg" alt="">
     <div class="container">
       <div class="row">
 
@@ -80,5 +81,62 @@ footer {
   height: 30px;
   width: auto;
   filter: brightness(0) saturate(100%) invert(98%) sepia(4%) saturate(4%) hue-rotate(356deg) brightness(105%) contrast(100%);
+}
+
+.moto {
+  top: 0;
+  left: 0;
+  transform: translateY(-64px) rotate(0deg);
+  animation: motorbike 7s infinite;
+  animation-timing-function: linear;
+  display: block;
+  width: 95px;
+  height: 85px;
+}
+
+@keyframes motorbike {
+  0% {
+    transform: translateY(-70px) rotate(0deg);
+  }
+
+  10% {
+    transform: translateY(-70px) translateX(10vw) rotate(-5deg);
+  }
+
+  20% {
+    transform: translateY(-70px) translateX(20vw) rotate(-3deg);
+  }
+
+  30% {
+    transform: translateY(-70px) translateX(30vw) rotate(-1deg);
+  }
+
+  40% {
+    transform: translateY(-70px) translateX(40vw) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-70px) translateX(50vw) rotate(0deg);
+  }
+
+  60% {
+    transform: translateY(-70px) translateX(60vw) rotate(-5deg);
+  }
+
+  70% {
+    transform: translateY(-70px) translateX(70vw) rotate(-9deg);
+  }
+
+  80% {
+    transform: translateY(-70px) translateX(80vw) rotate(-14deg);
+  }
+
+  90% {
+    transform: translateY(-70px) translateX(90vw) rotate(-20deg);
+  }
+
+  100% {
+    transform: translateY(-70px) translateX(100vw) rotate(-10deg);
+  }
 }
 </style>
