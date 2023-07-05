@@ -82,9 +82,15 @@
       </div>
     </div>
   </div>
+ footer
+  <!-- <div class="curved">
+        <img class="bg-white" src="../../public/img/curve.jpg" alt="curve.png">
+    </div> -->
+
   <div class="curved">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
+ main
 
   <div class="container bottom">
     <div class="row d-flex justify-content-between mb-4">

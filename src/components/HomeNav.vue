@@ -1,8 +1,13 @@
 <template>
   <nav :class="['navbar', { 'navbar-hidden': isNavbarHidden }]">
     <div class="navbar-logo">
+ footer
+      <a href="http://localhost:5173/">
+      <img src="../../public/img/deliveboo3.png" alt="Logo" />
+
       <a href="http://localhost:5174/">
         <img src="img/deliveboo3.png" alt="Logo" />
+ main
       </a>
     </div>
     <div class="navbar-buttons">
