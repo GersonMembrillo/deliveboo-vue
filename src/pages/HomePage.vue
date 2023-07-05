@@ -38,26 +38,6 @@
               <div class="">AAA</div>
             </a>
           </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
-            <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
-            <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
-            <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
-            </a>
-          </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
-            <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
-            </a>
-          </div>
         </div>
       </div>
     </div>
@@ -82,7 +62,7 @@
       </div>
     </div>
   </div>
- footer
+
   <!-- <div class="curved">
         <img class="bg-white" src="../../public/img/curve.jpg" alt="curve.png">
     </div> -->
@@ -90,7 +70,7 @@
   <div class="curved">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
- main
+
 
   <div class="container bottom">
     <div class="row d-flex justify-content-between mb-4">
@@ -186,6 +166,10 @@ export default {
   .left {
     width: 950px;
   }
+}
+
+.center {
+  width: 100%;
 }
 
 .center .row {

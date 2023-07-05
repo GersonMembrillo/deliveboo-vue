@@ -1,13 +1,8 @@
 <template>
-  <nav :class="['navbar', { 'navbar-hidden': isNavbarHidden }]">
+  <nav class="navbar">
     <div class="navbar-logo">
- footer
-      <a href="http://localhost:5173/"></a>
-      <img src="../../public/img/deliveboo3.png" alt="Logo" />
-
       <a href="http://localhost:5174/">
         <img src="img/deliveboo3.png" alt="Logo" />
- main
       </a>
     </div>
     <div class="navbar-buttons">
@@ -18,34 +13,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      searchQuery: '',
-      isNavbarHidden: false,
-      lastScrollPosition: 0,
-    };
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
   methods: {
-    handleScroll() {
-      const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (currentScrollPosition > this.lastScrollPosition && currentScrollPosition > 0) {
-        // Scorri verso il basso, nascondi la navbar solo in formato mobile
-        if (window.innerWidth <= 768) {
-          this.isNavbarHidden = true;
-        }
-      } else {
-        // Scorri verso l'alto, mostra la navbar
-        this.isNavbarHidden = false;
-      }
-
-      this.lastScrollPosition = currentScrollPosition;
+    redirectToBackend() {
+      // Codice per reindirizzare alla parte backend
     },
   },
 };
