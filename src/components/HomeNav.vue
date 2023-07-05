@@ -2,7 +2,7 @@
   <nav :class="['navbar', { 'navbar-hidden': isNavbarHidden }]">
     <div class="navbar-logo">
  footer
-      <a href="http://localhost:5173/">
+      <a href="http://localhost:5173/"></a>
       <img src="../../public/img/deliveboo3.png" alt="Logo" />
 
       <a href="http://localhost:5174/">
