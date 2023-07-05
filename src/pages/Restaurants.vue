@@ -16,7 +16,10 @@
   <div class="container">
     <p>Trovati i seguenti ristoranti:</p>
     <div class="">
+
       <RestaurantCard />
+
+
     </div>
   </div>
 </template>

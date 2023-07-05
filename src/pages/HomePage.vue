@@ -14,33 +14,68 @@
 
 
   <div class="bg-white center">
-    <div class="container center px-4 pb-0">
+    <div class="container center">
       <div class="p-5">
         <h2 class="text-center pb-4">I migliori ristoranti e molto altro</h2>
         <div class="row">
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
-            <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
+
+          <div class="col-6 col-md-4 col-lg-3 category">
+            <a class="text-decoration-none" href="">
+              <div class="position-relative">
+                <img class="position-absolute"
+                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/italiano"
+                  alt="">
+              </div>
             </a>
+            <p class="text-center">Italiano</p>
           </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
+
+          <div class="col-6 col-md-4 col-lg-3 category">
             <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
+              <div class="position-relative">
+                <img class="position-absolute"
+                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
+                  alt="">
+              </div>
             </a>
+            <p class="text-center">Pizza</p>
           </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
+
+          <div class="col-6 col-md-4 col-lg-3 category">
             <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
+              <div class="position-relative">
+                <img class="position-absolute"
+                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/cinese"
+                  alt="">
+              </div>
             </a>
+            <p class="text-center">Cinese</p>
           </div>
-          <div class="col-6 col-md-4 col-lg-3 home-cat">
+
+          <div class="col-6 col-md-4 col-lg-3 category">
             <a class="text-decoration-none text-white" href="">
-              <div class="">AAA</div>
+              <div class="position-relative">
+                <img class="position-absolute"
+                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/hamburger"
+                  alt="">
+              </div>
             </a>
+            <p class="text-center">Hamburger</p>
           </div>
+        </div>
+
+        <div class="div cat-all mt-2">
+          <a class="text-black text-decoration-none" href="http://localhost:5174/restaurants">
+            <div class="row category-all">
+              <div class="d-flex justify-content-center align-items-center">
+                <h3 class="text-uppercase">Tutti i ristoranti</h3>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
     </div>
+
 
     <div class="container">
       <div class="pb-5 pt-0 service">
@@ -124,14 +159,6 @@ export default {
   gap: calc((100% - (150px * var(--num-columns))) / (var(--num-columns) - 1));
 }
 
-/* Imposta la larghezza delle colonne in base alla grandezza dello schermo */
-.home-cat {
-  width: 100%;
-  max-width: 150px;
-  height: 150px;
-  background-color: black;
-}
-
 /* Imposta il numero di colonne in base alla grandezza dello schermo */
 @media (max-width: 576px) {
   :root {
@@ -170,13 +197,55 @@ export default {
 
 .center {
   width: 100%;
+
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0px 33px;
+  }
 }
 
-.center .row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 30px 60px;
+.category {
+  .position-relative {
+    width: 150px;
+    height: 150px;
+    border-radius: 20px;
+    background-color: #FFC001;
+    transition: background-color 0.5s;
+
+    &:hover {
+      background-color: #FF9934;
+    }
+
+    img.position-absolute {
+      width: 200px;
+      left: -25px;
+      transition: transform 0.5s;
+    }
+
+    &:hover img {
+      transform: scale(1.1);
+    }
+  }
 }
+
+.cat-all {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.category-all {
+  height: 150px;
+  background-color: #FFC001;
+  border-radius: 20px;
+  transition: background-color 0.5s;
+
+  &:hover {
+    background-color: #FF9934;
+
+  }
+}
+
 
 .main-image {
   width: 420px;
@@ -196,11 +265,7 @@ export default {
   transform: rotate(180deg);
 }
 
-.service img {
-  width: 200px;
-  height: auto;
-}
-
+.service img,
 .bottom img {
   width: 200px;
   height: auto;
