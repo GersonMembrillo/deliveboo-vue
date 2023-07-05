@@ -41,7 +41,7 @@ export default {
 <style lang="scss" scoped>
 main {
   background-color: #ff9933;
-  height: calc(100vh);
+  height: calc(100vh - 64px);
   background-attachment: fixed;
   overflow-y: auto;
 }
