@@ -1,6 +1,5 @@
 <template>
-  <LoaderComponent v-if="loading" />
-  <div class="container" v-if="!loading">
+  <div class="container">
     <div class="row mt-5 mb-5">
       <div class="col-12">
         <div class="row">
@@ -10,7 +9,7 @@
                 <div class="carousel-inner">
                   <div class="carousel-item" v-for="(image, index) in restaurant.images"
                     :class="{ 'active': index === activeIndex }" :key="image.id">
-                    <img :src="'http://127.0.0.1:8000/storage/' + image.image" class="d-block w-100" alt="...">
+                    <img :src="'http://localhost:8000/storage/' + image.image" class="d-block w-100" alt="...">
                   </div>
                 </div>
                 <button class="carousel-control-prev" type="button" @click="prev">
@@ -41,7 +40,7 @@
     <div class="row">
       <div class="col-3" v-for="dish in restaurant.dishes" :key="dish.id">
         <div class="card">
-          <img :src="'http://127.0.0.1:8000/storage/' + dish.image" :alt="dish.name">
+          <img :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name">
           <div class="card-body">
             <h5>{{ dish.name }}</h5>
             <h5>{{ dish.category }}</h5>
@@ -56,48 +55,47 @@
 
 <script>
 import axios from 'axios';
-import LoaderComponent from '../components/LoaderComponent.vue';
+
 export default {
   name: 'ShowRestaurant',
+
   data() {
     return {
-      components: {
-        LoaderComponent
-      },
       restaurant: [],
-      activeIndex: 0,
-      loading: true
+      activeIndex: 0
+
     }
+
   },
   methods: {
     getData() {
-      axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.slug}`).then((res) => {
-        // console.log(res.data.results.restaurant)
-        this.restaurant = res.data.results.restaurant;
-        // console.log(this.restaurant)
-        this.loading = false;
-      });
+      axios.get(`http://localhost:8000/api/restaurants/${this.$route.params.slug}`).then((res) => {
+        //console.log(res.data.results.restaurant)
+        this.restaurant = res.data.results.restaurant
+        console.log(this.restaurant)
+      })
+
     },
 
     next() {
-      this.activeIndex++;
+      this.activeIndex++
       if (this.activeIndex > this.restaurant.images.length - 1) {
         this.activeIndex = 0
-      };
-      // console.log(this.activeIndex)
+      }
+      console.log(this.activeIndex)
     },
     prev() {
-      this.activeIndex--;
+      this.activeIndex--
       if (this.activeIndex < 0) {
         this.activeIndex = this.restaurant.images.length - 1
-      };
-      // console.log(this.activeIndex)
-    }
+      }
+      console.log(this.activeIndex)
+    },
   },
+
   mounted() {
     this.getData();
-  },
-  components: { LoaderComponent }
+  }
 }
 </script>
 
