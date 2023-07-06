@@ -9,10 +9,10 @@ $fa-font-path: '../webfonts';
 @import 'bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
 
-*{
+* {
     font-family: 'Montserrat', sans-serif;
 }
-body{
+
+body {
     overflow-x: hidden;
 }
-

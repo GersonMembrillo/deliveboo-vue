@@ -7,8 +7,7 @@
     <HomeNav />
   </header>
   <main>
-    <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" />
-    -->
+    <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" /> -->
     <router-view></router-view>
   </main>
   <footer>
