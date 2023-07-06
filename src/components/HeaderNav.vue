@@ -9,7 +9,8 @@
       <input type="text" v-model="searchQuery" placeholder="Cerca..." @keyup.enter="search" />
     </div>
     <div class="navbar-buttons">
-      <button @click="redirectToBackend">Accedi</button>
+      <!-- <button @click="redirectToBackend()">Accedi</button> -->
+      <a href="http://localhost:8000">accedi</a>
     </div>
   </nav>
 </template>
@@ -26,7 +27,7 @@ export default {
       console.log('Ricerca:', this.searchQuery);
     },
     redirectToBackend() {
-      // Codice per reindirizzare alla parte backend
+      return 'http://localhost:8000'
     }
   }
 };

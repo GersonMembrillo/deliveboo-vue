@@ -6,7 +6,8 @@
       </a>
     </div>
     <div class="navbar-buttons">
-      <button @click="redirectToBackend">Accedi</button>
+      <!-- <button @click="redirectToBackend()">Accedi</button> -->
+      <a href="http://localhost:8000">accedi</a>
     </div>
   </nav>
 </template>
@@ -15,7 +16,7 @@
 export default {
   methods: {
     redirectToBackend() {
-      // Codice per reindirizzare alla parte backend
+      return 'http://localhost:8000'
     },
   },
 };
