@@ -27,8 +27,7 @@
               </a>
             </li>
             <li>
-              <a href="" class="text-decoration-none text-white">
-                Registra la tua attività
+              <a href="http://localhost:8000/register" class="text-decoration-none text-white">Registra la tua attività
               </a>
             </li>
           </ul>

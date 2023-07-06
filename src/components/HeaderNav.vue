@@ -10,7 +10,9 @@
     </div>
     <div class="navbar-buttons">
       <!-- <button @click="redirectToBackend()">Accedi</button> -->
-      <a href="http://localhost:8000">accedi</a>
+      <a href="http://localhost:8000">
+        <button>Accedi</button>
+      </a>
     </div>
   </nav>
 </template>

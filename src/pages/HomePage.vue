@@ -127,7 +127,7 @@
       </div>
       <div class="col-12 col-md-4">
         <div class="text-center">
-          <a href="">
+          <a href="http://localhost:8000/register">
             <img src="img/restaurant.png" alt="restaurant">
           </a>
           <p class="fw-bold">Registra la tua attività</p>

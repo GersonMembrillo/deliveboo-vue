@@ -1,38 +1,43 @@
 <template>
-  <header v-if="showHeader">
+  <!-- <header v-if="showHeader">
     <HeaderNav />
-  </header>
-  <header v-else>
+  </header> -->
+  <!-- <header v-else> -->
+  <header>
     <HomeNav />
   </header>
   <main>
-    <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" />
+    <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" />
+    -->
+    <router-view></router-view>
   </main>
-  <FooterVue />
+  <footer>
+    <FooterVue />
+  </footer>
 </template>
 
 <script>
-import HeaderNav from './components/HeaderNav.vue';
+// import HeaderNav from './components/HeaderNav.vue';
 import FooterVue from './components/FooterVue.vue';
 import HomeNav from './components/HomeNav.vue';
 
 export default {
   name: 'App',
   components: {
-    HeaderNav,
+    // HeaderNav,
     FooterVue,
     HomeNav
   },
-  data() {
-    return {
-      showHeader: true
-    };
-  },
-  methods: {
-    updateShowHeader(value) {
-      this.showHeader = value;
-    }
-  }
+  // data() {
+  //   return {
+  //     showHeader: true
+  //   };
+  // },
+  // methods: {
+  //   updateShowHeader(value) {
+  //     this.showHeader = value;
+  //   }
+  // }
 };
 </script>
 
