@@ -15,13 +15,15 @@
 import HeaderNav from './components/HeaderNav.vue';
 import FooterVue from './components/FooterVue.vue';
 import HomeNav from './components/HomeNav.vue';
+import LoaderComponent from './components/LoaderComponent.vue';
 
 export default {
   name: 'App',
   components: {
     HeaderNav,
     FooterVue,
-    HomeNav
+    HomeNav,
+    LoaderComponent
   },
   data() {
     return {
