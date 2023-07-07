@@ -1,8 +1,8 @@
 <template>
   <LoaderComponent v-if="loading" />
   <div class="container" v-if="!loading">
-    <div class="row mt-5 mb-5">
-      <div class="col-8">
+    <div class="row mt-4 mb-4">
+      <div class="col-12 col-lg-8 mb-2 mb-lg-0">
         <div class="card">
           <div class="card-body">
             <div class="card-title">
@@ -15,39 +15,42 @@
           </div>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-12 col-lg-4">
         <div class="card">
           <div class="card-body">
             <div class="card-title">
-              <h2 class="fw-bold">Categories</h2>
+              <h3 class="fw-bold">Categories</h3>
             </div>
-            <div class="card-text">
+            <div class="card-text d-flex d-lg-block">
               <div v-for="category in restaurant.categories" :key="category.id">
-                <h4><span class="badge rounded-pill text-white">{{ category.name }}</span></h4>
+                <h5><span class="badge rounded-pill text-white me-2 mb-0">{{ category.name }}</span></h5>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row mt-5 mb-5">
-        <div class="col-12">
-          <div class="card">
-            <div id="carouselExample" class="carousel slide custom-carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item" v-for="(image, index) in restaurant.images"
-                  :class="{ 'active': index === activeIndex }" :key="image.id">
-                  <img :src="'http://127.0.0.1:8000/storage/' + image.image" class="d-block w-100" alt="...">
+    </div>
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div id="carouselExample" class="carousel slide custom-carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="(image, index) in restaurant.images"
+                :class="{ 'active': index === activeIndex }" :key="image.id">
+                <div class="carousel-image-container">
+                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
+                    alt="...">
                 </div>
               </div>
-              <button class="carousel-control-prev" type="button" @click="prev">
-                <span class="carousel-control-prev-icon"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" @click="next">
-                <span class="carousel-control-next-icon"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
             </div>
+            <button class="carousel-control-prev" type="button" @click="prev">
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" @click="next">
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
       </div>
@@ -56,15 +59,15 @@
       <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
       <div class="col-8">
         <div class="row">
-          <div class="col-12 col-sm-6 col-md-6 col-lg-6" v-for="dish in restaurant.dishes" :key="dish.id">
-            <div class="card text-center p-3 mb-5" style="height: 30rem;">
+          <div class="col-12 col-lg-6" v-for="dish in restaurant.dishes" :key="dish.id">
+            <div class="card text-center p-3 mb-4" style="height: 30rem;">
               <div class="text-center pb-2">
                 <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
                 <h5 class="fw-bold">{{ dish.name }}</h5>
                 <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
               </div>
               <div class="card-image menù-image">
-                <img :src="'http://127.0.0.1:8000/storage/' + dish.image" :alt="dish.name"
+                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
                   style="width: 90%; height: 12rem;">
               </div>
               <div class="card-body">
@@ -80,6 +83,9 @@
       <div class="col-4">
         <div class="row">
           <div class="card rounded-5 overflow-y-auto" style="max-height: 30rem;">
+        <div class="row mx-1">
+          <img src="/img/tri.png" class="p-0" alt="">
+          <div class="card rounded-0 border-0" style="height: 30rem;">
             <div class="card-body text-center">
               <div class="card-title pt-4 pb-5">
                 <h2 class="fw-bold pb-3">Your DeliveBoo!</h2>
@@ -122,6 +128,7 @@
               </div>
             </div>
           </div>
+          <img src="/img/tri.png" class="p-0 rotate" alt="">
         </div>
       </div>
     </div>
@@ -149,7 +156,7 @@ export default {
   },
   methods: {
     getData() {
-      axios.get(`http://127.0.0.1:8000/api/restaurants/${this.$route.params.slug}`).then((res) => {
+      axios.get(`http://localhost:8000/api/restaurants/${this.$route.params.slug}`).then((res) => {
         // console.log(res.data.results.restaurant)
         this.restaurant = res.data.results.restaurant;
         // console.log(this.restaurant)
@@ -220,8 +227,22 @@ h1 {
   background-color: #ff9933;
 }
 
-.custom-carousel .carousel-inner {
-  max-height: 550px;
+.carousel-image-container {
+  width: 100%;
+  height: 350px;
+  /* altezza predefinita per dimensioni diverse da md */
+}
+
+/* Media query per dimensioni medie (md) */
+@media (min-width: 768px) {
+  .carousel-image-container {
+    height: 550px;
+    /* altezza desiderata per md */
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
 
 .card {
