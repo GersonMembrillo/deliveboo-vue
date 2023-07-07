@@ -1,6 +1,6 @@
 <template>
   <footer class="position-relative bg-dark py-5 d-none d-sm-block">
-    <img class="moto position-absolute" src="../../public/img/moto_dude.svg" alt="">
+    <img class="moto position-absolute" src="/img/moto_dude.svg" alt="">
     <div class="container">
       <div class="row">
 

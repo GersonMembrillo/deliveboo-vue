@@ -81,8 +81,9 @@
         </div>
       </div>
       <div class="col-4">
-        <div class="row">
-          <div class="card rounded-5" style="height: 30rem;">
+        <div class="row mx-1">
+          <img src="/img/tri.png" class="p-0" alt="">
+          <div class="card rounded-0 border-0" style="height: 30rem;">
             <div class="card-body text-center">
               <div class="card-title pt-5 pb-5">
                 <h2 class="fw-bold pb-5">Il tuo DeliveBoo</h2>
@@ -92,6 +93,7 @@
               </div>
             </div>
           </div>
+          <img src="/img/tri.png" class="p-0 rotate" alt="">
         </div>
       </div>
     </div>
@@ -168,6 +170,9 @@ h1 {
   }
 }
 
+.rotate {
+  transform: rotate(180deg);
+}
 
 .card {
   cursor: pointer;
