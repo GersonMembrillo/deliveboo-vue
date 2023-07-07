@@ -83,52 +83,54 @@
       <div class="col-4">
         <div class="row">
           <div class="card rounded-5 overflow-y-auto" style="max-height: 30rem;">
-        <div class="row mx-1">
-          <img src="/img/tri.png" class="p-0" alt="">
-          <div class="card rounded-0 border-0" style="height: 30rem;">
-            <div class="card-body text-center">
-              <div class="card-title pt-4 pb-5">
-                <h2 class="fw-bold pb-3">Your DeliveBoo!</h2>
-              </div>
-              <div class="card-text">
-                <div v-if="cartItems.length > 0">
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tbody v-for="(item, index) in cartItems" :key="index">
-                        <tr class="text-center align-middle">
-                          <th class="fs-5">
-                            {{ item.quantity }}<span>x</span>
-                          </th>
-                          <th>{{ item.name }}</th>
-                          <td>
-                            {{ item.totalPrice }} &euro;
-                          </td>
-                          <td>
-                            <span class="fs-4">
-                              <i @click="addToCart(item)" class="fa-solid fa-circle-plus px-2"></i>
-                              <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus"></i>
-                            </span>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="mt-5">
-                      <button type="button" class="btn btn-outline-warning text-uppercase fs-5 mt-5">
-                        order {{ finalQuantity }} to {{ finalPrice }} &euro;
-                      </button>
+            <div class="row mx-1">
+              <img src="/img/tri.png" class="p-0" alt="">
+              <div class="card rounded-0 border-0" style="height: 30rem;">
+                <div class="card-body text-center">
+                  <div class="card-title pt-4 pb-5">
+                    <h2 class="fw-bold pb-3">Your DeliveBoo!</h2>
+                  </div>
+                  <div class="card-text">
+                    <div v-if="cartItems.length > 0">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <tbody v-for="(item, index) in cartItems" :key="index">
+                            <tr class="text-center align-middle">
+                              <th class="fs-5">
+                                {{ item.quantity }}<span>x</span>
+                              </th>
+                              <th>{{ item.name }}</th>
+                              <td>
+                                {{ item.totalPrice }} &euro;
+                              </td>
+                              <td>
+                                <span class="fs-4">
+                                  <i @click="addToCart(item)" class="fa-solid fa-circle-plus px-2"></i>
+                                  <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus"></i>
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="mt-5">
+                          <button type="button" class="btn btn-outline-warning text-uppercase fs-5 mt-5">
+                            order {{ finalQuantity }} to {{ finalPrice }} &euro;
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="pt-2" v-else>
+                      <img src="/img/Food.png" alt="cart_image" style="width: 50%;">
+                      <div class="mt-5">
+                        You haven't added any products yet. When you do, they will appear here!
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="pt-2" v-else>
-                  <img src="/img/Food.png" alt="cart_image" style="width: 50%;">
-                  <div class="mt-5">
-                    You haven't added any products yet. When you do, they will appear here!
-                  </div>
-                </div>
               </div>
+              <!-- <img src="/img/tri.png" class="p-0 rotate" alt=""> -->
             </div>
           </div>
-          <img src="/img/tri.png" class="p-0 rotate" alt="">
         </div>
       </div>
     </div>
