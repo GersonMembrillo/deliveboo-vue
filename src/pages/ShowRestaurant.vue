@@ -59,7 +59,7 @@
           <div class="col-12 col-sm-6 col-md-6 col-lg-6" v-for="dish in restaurant.dishes" :key="dish.id">
             <div class="card text-center p-3 mb-5" style="height: 30rem;">
               <div class="text-center pb-2">
-                <div class="pb-3 fs-3"><i class="fa-solid fa-circle-plus"></i></div>
+                <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
                 <h5 class="fw-bold">{{ dish.name }}</h5>
                 <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
               </div>
@@ -79,13 +79,46 @@
       </div>
       <div class="col-4">
         <div class="row">
-          <div class="card rounded-5" style="height: 30rem;">
+          <div class="card rounded-5 overflow-y-auto" style="max-height: 30rem;">
             <div class="card-body text-center">
-              <div class="card-title pt-5 pb-5">
-                <h2 class="fw-bold pb-5">Il tuo DeliveBoo</h2>
+              <div class="card-title pt-4 pb-5">
+                <h2 class="fw-bold pb-3">Your DeliveBoo!</h2>
               </div>
               <div class="card-text">
-                <p class="pt-2">Non hai ancora aggiunto alcun prodotto. Quando lo farai, compariranno qui!</p>
+                <div v-if="cartItems.length > 0">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tbody v-for="(item, index) in cartItems" :key="index">
+                        <tr class="text-center align-middle">
+                          <th class="fs-5">
+                            {{ item.quantity }}<span>x</span>
+                          </th>
+                          <th>{{ item.name }}</th>
+                          <td>
+                            {{ item.totalPrice }} &euro;
+                          </td>
+                          <td>
+                            <span class="fs-4">
+                              <i @click="addToCart(item)" class="fa-solid fa-circle-plus px-2"></i>
+                              <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus"></i>
+                            </span>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="mt-5">
+                      <button type="button" class="btn btn-outline-warning text-uppercase fs-5 mt-5">
+                        order {{ finalQuantity }} to {{ finalPrice }} &euro;
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-2" v-else>
+                  <img src="/img/Food.png" alt="cart_image" style="width: 50%;">
+                  <div class="mt-5">
+                    You haven't added any products yet. When you do, they will appear here!
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -107,7 +140,11 @@ export default {
       },
       restaurant: [],
       activeIndex: 0,
-      loading: true
+      loading: true,
+      cartItems: [],
+      quantity: 0,
+      price: '',
+      totalPrice: ''
     }
   },
   methods: {
@@ -133,10 +170,42 @@ export default {
         this.activeIndex = this.restaurant.images.length - 1
       };
       // console.log(this.activeIndex)
+    },
+
+    addToCart(item) {
+      const existingItem = this.cartItems.find((cartItem) => cartItem.id === item.id);
+      if (existingItem) {
+        existingItem.quantity++; // Incrementa la quantità se il prodotto è già presente nel carrello
+        existingItem.totalPrice = item.price * existingItem.quantity; // Calcola il nuovo prezzo totale nel carrello
+      } else {
+        item.quantity = 1; // Imposta la quantità a 1 se il prodotto è nuovo nel carrello
+        item.totalPrice = item.price; // Imposta il prezzo totale iniziale
+        this.cartItems.push(item); // Aggiunge il prodotto al carrello
+      }
+    },
+    removeFromCart(item) {
+      const existingItemIndex = this.cartItems.findIndex((cartItem) => cartItem.id === item.id);
+      if (existingItemIndex !== -1) {
+        const existingItem = this.cartItems[existingItemIndex];
+        existingItem.quantity--;
+        if (existingItem.quantity === 0) {
+          this.cartItems.splice(existingItemIndex, 1); // Rimuove l'elemento dal carrello se la quantità diventa zero
+        } else {
+          existingItem.totalPrice = item.price * existingItem.quantity; // Aggiorna il prezzo totale nel carrello
+        }
+      }
     }
   },
   mounted() {
     this.getData();
+  },
+  computed: {
+    finalQuantity() {
+      return this.cartItems.reduce((total, item) => total + item.quantity, 0);
+    },
+    finalPrice() {
+      return this.cartItems.reduce((total, item) => total + parseFloat(item.totalPrice), 0);
+    }
   },
   components: { LoaderComponent }
 }
@@ -175,7 +244,16 @@ h2.menù-title {
   }
 }
 
-.fa-circle-plus:hover {
+.plus-button:hover {
   font-size: 30px;
+  color: #ff9933;
+}
+
+.fa-circle-plus:hover {
+  color: #ff9933;
+}
+
+.fa-circle-minus:hover {
+  color: #ff9933;
 }
 </style>
