@@ -1,5 +1,6 @@
 <template>
   <section class="w-100 bg-light">
+    <ShoppingCart :key="cartKey" @cartChanged="cartKey++"/>
     <div id="restaurants-category" class="container">
       <div class="row pt-5">
         <div class="col-12">
@@ -124,10 +125,12 @@
 <script>
 import axios from 'axios';
 import RestaurantCard from '../components/RestaurantCard.vue';
+import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
   name: 'Restaurants',
   components: {
-    RestaurantCard
+    RestaurantCard,
+    ShoppingCart
   },
   data() {
     return {
@@ -141,7 +144,7 @@ export default {
       categoryChecked: false,
       currentPage: 1,
       lastPage: null,
-
+      cartKey: 0
     }
 
   },
@@ -233,6 +236,10 @@ export default {
 
 
     },
+
+    prova(data){
+      console.log("cao");
+    }
   },
 
   mounted() {
