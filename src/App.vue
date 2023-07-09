@@ -34,11 +34,25 @@ export default {
   //     showHeader: true
   //   };
   // },
-  // methods: {
-  //   updateShowHeader(value) {
-  //     this.showHeader = value;
-  //   }
-  // }
+  methods: {
+    // updateShowHeader(value) {
+    //   this.showHeader = value;
+    // }
+
+      setCart(){
+        // localStorage.clear();
+        let cart = localStorage.getItem("cart");
+
+        if(!cart){
+          let items = [];
+          localStorage.setItem("cart", JSON.stringify(items));
+        }
+      }
+  },
+
+  mounted() {
+    this.setCart();
+  },
 };
 </script>
 

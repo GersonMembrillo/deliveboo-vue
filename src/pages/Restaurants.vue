@@ -1,6 +1,11 @@
 <template>
   <section class="w-100 bg-light">
+ persistent-cart
+    <ShoppingCart :key="cartKey" @cartChanged="cartKey++"/>
+    <div id="restaurants-category" class="container">
+
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
+ main oppa
       <div class="row pt-5">
         <div class="col-12">
           <div class="row">
@@ -135,11 +140,16 @@
 import LoaderComponent from '../components/LoaderComponent.vue';
 import axios from 'axios';
 import RestaurantCard from '../components/RestaurantCard.vue';
+import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
   name: 'Restaurants',
   components: {
     RestaurantCard,
+ persistent-cart
+    ShoppingCart
+
     LoaderComponent
+ main oppa
   },
   data() {
     return {
@@ -153,8 +163,12 @@ export default {
       categoryChecked: false,
       currentPage: 1,
       lastPage: null,
+ persistent-cart
+      cartKey: 0
+
       loading:true,
 
+ main oppa
     }
 
   },
@@ -241,6 +255,10 @@ export default {
 
 
     },
+
+    prova(data){
+      console.log("cao");
+    }
   },
 
   mounted() {
