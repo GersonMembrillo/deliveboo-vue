@@ -132,11 +132,11 @@ export default {
     },
 
     addToCart(newItem) {
-      let items = localStorage.getItem("cart");
+      let items = localStorage.getItem("cartItems");
       items = JSON.parse(items);
       let quantity = 1;
       let index = -1;
-      console.log(items);
+
       for (let i = 0; i < items.length && index < 0; i++)
         if (items[i].id == newItem.id) {
           quantity = items[i].quantity + 1;
@@ -158,7 +158,7 @@ export default {
           quantity: quantity
         });
 
-      localStorage.setItem("cart", JSON.stringify(items));
+      localStorage.setItem("cartItems", JSON.stringify(items));
       this.cartKey++;
     }
   },

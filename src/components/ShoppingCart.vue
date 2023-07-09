@@ -63,7 +63,7 @@ export default {
 
     methods: {
         addToCart(newItem) {
-            let items = localStorage.getItem("cart");
+            let items = localStorage.getItem("cartItems");
             items = JSON.parse(items);
             let quantity = 1;
             let index = -1;
@@ -89,12 +89,12 @@ export default {
                     quantity: quantity
                 });
 
-            localStorage.setItem("cart", JSON.stringify(items));
+            localStorage.setItem("cartItems", JSON.stringify(items));
             this.$emit("cartChanged");
         },
 
         removeFromCart(oldItem) {
-            let items = localStorage.getItem("cart");
+            let items = localStorage.getItem("cartItems");
             items = JSON.parse(items);
             let index = -1;
             let quantity = 1;
@@ -115,7 +115,7 @@ export default {
             else
                 items.splice(index, 1);
 
-            localStorage.setItem("cart", JSON.stringify(items));
+            localStorage.setItem("cartItems", JSON.stringify(items));
             this.$emit("cartChanged");
         },
     },
@@ -143,7 +143,7 @@ export default {
     },
 
     mounted() {
-        let items = localStorage.getItem("cart");
+        let items = localStorage.getItem("cartItems");
         items = JSON.parse(items);
         this.items = items;
     },

@@ -40,12 +40,11 @@ export default {
     // }
 
       setCart(){
-        // localStorage.clear();
-        let cart = localStorage.getItem("cart");
+        let cartItems = localStorage.getItem("cartItems");
 
-        if(!cart){
+        if(!cartItems){
           let items = [];
-          localStorage.setItem("cart", JSON.stringify(items));
+          localStorage.setItem("cartItems", JSON.stringify(items));
         }
       }
   },
