@@ -10,18 +10,21 @@
               <div class="card d-none d-md-block">
                 <div class="card-body">
                   <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all" @click="resetCeckBox()">
+                    <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all"
+                      @click="resetCeckBox()">
                     <label class="form-check-label">all</label>
                   </div>
                   <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                    <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
+                    <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name"
+                      @click="clickCheckBox(category.name)">
                     <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                   </div>
                 </div>
               </div>
               <div class="d-md-none mt-2 mb-5">
                 <p>
-                  <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                    aria-expanded="false" aria-controls="collapseExample">
                     Cerca il tuo Ristorante
                   </a>
                 </p>
@@ -29,11 +32,13 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all" @click="resetCeckBox()">
+                        <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all"
+                          @click="resetCeckBox()">
                         <label class="form-check-label">all</label>
                       </div>
                       <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                        <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
+                        <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name"
+                          @click="clickCheckBox(category.name)">
                         <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                       </div>
                     </div>
@@ -49,20 +54,26 @@
                 <div class="row ps-2 pe-2 mb-3">
                   <div class="col-12">
                     <h3>Ristoranti a domicilio nella tua zona</h3>
-                    <span v-if="filteredRestaurants.length == 0" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">Tutti</span>
+                    <span v-if="filteredRestaurants.length == 0"
+                      class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">Tutti</span>
                   </div>
                 </div>
                 <div :class="{ 'opacity-0': loading }">
                   <div class="row ps-2 pe-2 mb-5">
                     <p class="fs-4 mb-3">I più richiesti</p>
-                    <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurantsRanked" :key="restaurant.id">
-                      <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                    <div class="col-sm-6 col-lg-4 col-xl-3 pb-4" v-for="restaurant in restaurantsRanked"
+                      :key="restaurant.id">
+                      <router-link class="link-offset-2 link-underline link-underline-opacity-0"
+                        :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
                         <div class="card bg-light border border-0">
-                          <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                          <img class="w-100 rounded-4 img-restaurant shadow rounded"
+                            :src="'http://localhost:8000/storage/' + restaurant.image" :alt="restaurant.name">
                           <div class="pt-2">
                             <p class="m-0 ps-2">{{ restaurant.name }}</p>
                             <div class="pt-1">
-                              <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
+                              <span v-for="category in restaurant.categories" :key="category"
+                                class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{
+                                  category }}</span>
                             </div>
                           </div>
                         </div>
@@ -71,27 +82,35 @@
                   </div>
                   <div class="row ps-2 pe-2" v-if="!loading">
                     <p class="fs-4 mb-3">Tutti i ristoranti</p>
-                    <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurants" :key="restaurant.id">
-                      <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                    <div class="col-sm-6 col-lg-4 col-xl-3 pb-4" v-for="restaurant in restaurants" :key="restaurant.id">
+                      <router-link class="link-offset-2 link-underline link-underline-opacity-0"
+                        :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
                         <div class="card bg-light border border-0">
-                          <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                          <img class="w-100 rounded-4 img-restaurant shadow rounded"
+                            :src="'http://localhost:8000/storage/' + restaurant.image" :alt="restaurant.name">
                           <div class="pt-2">
                             <p class="m-0 ps-2">{{ restaurant.name }}</p>
                             <div class="pt-1">
-                              <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
+                              <span v-for="category in restaurant.categories" :key="category"
+                                class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{
+                                  category }}</span>
                             </div>
                           </div>
                         </div>
                       </router-link>
                     </div>
-                    <div class="d-flex justify-content-center mt-5 mb-5">
+                    <div class="d-flex justify-content-center mb-5">
                       <nav aria-label="Page navigation example my-3">
                         <ul class="pagination">
-                          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === 1 }" @click="getData(currentPage - 1)">Previous</button></li>
+                          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === 1 }"
+                              @click="getData(currentPage - 1)">Previous</button></li>
                           <li class="page-item" v-for="n in lastPage" :key="n">
-                            <button class="page-link" :class="{ 'active': currentPage === n }" @click="getData(n)">{{ n }}</button>
+                            <button class="page-link" :class="{ 'active': currentPage === n }" @click="getData(n)">{{ n
+                            }}</button>
                           </li>
-                          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === lastPage }" @click="getData(currentPage + 1)">Next</button></li>
+                          <li class="page-item"><button class="page-link"
+                              :class="{ 'disabled': currentPage === lastPage }"
+                              @click="getData(currentPage + 1)">Next</button></li>
                         </ul>
                       </nav>
                     </div>
@@ -106,19 +125,25 @@
               <div class="row ps-2 pe-2 mb-3">
                 <div class="col-12">
                   <h3 class="">Ristoranti filtrati</h3>
-                  <span v-for="category in checkedCategories" :key="category" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
+                  <span v-for="category in checkedCategories" :key="category"
+                    class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
                 </div>
               </div>
               <div class="row ps-2 pe-2 mb-5 min-h" :class="{ 'opacity-0': loading }">
                 <p class="fs-4 mb-3">Le tue scelte</p>
-                <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants" :key="restaurant.id">
-                  <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants"
+                  :key="restaurant.id">
+                  <router-link class="link-offset-2 link-underline link-underline-opacity-0"
+                    :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
                     <div class="card bg-light border border-0">
-                      <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                      <img class="w-100 rounded-4 img-restaurant shadow rounded"
+                        :src="'http://localhost:8000/storage/' + restaurant.image" :alt="restaurant.name">
                       <div class="pt-2">
                         <p class="m-0 ps-2">{{ restaurant.name }}</p>
                         <div class="pt-1">
-                          <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
+                          <span v-for="category in restaurant.categories" :key="category"
+                            class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{
+                              category }}</span>
                         </div>
                       </div>
                     </div>
@@ -159,7 +184,6 @@ export default {
       lastPage: null,
       cartKey: 0,
       loading: true,
-
     }
 
   },
@@ -168,7 +192,7 @@ export default {
       let params = {
         'page': page
       };
-      axios.get(`http://127.0.0.1:8000/api/mixed`, { params }).then((res) => {
+      axios.get(`http://localhost:8000/api/mixed`, { params }).then((res) => {
         this.currentPage = res.data.results.restaurants.current_page
         this.lastPage = res.data.results.restaurants.last_page
 
@@ -236,15 +260,11 @@ export default {
       } else if (this.isAllChecked) {
         this.filteredRestaurants = [];
       }
-
-
     },
 
     getRestaurantsRanked(data) {
       data.sort((a, b) => b.total_orders - a.total_orders);
       this.restaurantsRanked = data.slice(0, 7);
-
-
     },
 
     prova(data) {

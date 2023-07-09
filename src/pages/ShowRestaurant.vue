@@ -39,9 +39,11 @@
         <div class="card">
           <div id="carouselExample" class="carousel slide custom-carousel">
             <div class="carousel-inner">
-              <div class="carousel-item" v-for="(image, index) in restaurant.images" :class="{ 'active': index === activeIndex }" :key="image.id">
+              <div class="carousel-item" v-for="(image, index) in restaurant.images"
+                :class="{ 'active': index === activeIndex }" :key="image.id">
                 <div class="carousel-image-container">
-                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100" alt="...">
+                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
+                    alt="...">
                 </div>
               </div>
             </div>
@@ -59,9 +61,9 @@
     </div>
     <div class="row mb-5">
       <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
-      <div class="col-8">
+      <div class="col-11 col-sm-12">
         <div class="row">
-          <div class="col-12 col-lg-6" v-for="dish in restaurant.dishes" :key="dish.id">
+          <div class="col-12 col-md-6 col-lg-4" v-for="dish in restaurant.dishes" :key="dish.id">
             <div class="card text-center p-3 mb-4" style="height: 30rem;">
               <div class="text-center pb-2">
                 <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
@@ -69,12 +71,13 @@
                 <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
               </div>
               <div class="card-image menù-image">
-                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name" style="width: 90%; height: 12rem;">
+                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
+                  style="width: 90%; height: 12rem;">
               </div>
               <div class="card-body">
                 <div class="card-text">
                   <div class="pb-2">{{ dish.price }} &euro;</div>
-                  <div>{{ dish.description }}</div>
+                  <div class="overflow-y-scroll">{{ dish.description }}</div>
                 </div>
               </div>
             </div>
