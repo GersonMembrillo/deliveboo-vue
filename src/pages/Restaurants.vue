@@ -1,11 +1,8 @@
 <template>
   <section class="w-100 bg-light">
- persistent-cart
-    <ShoppingCart :key="cartKey" @cartChanged="cartKey++"/>
-    <div id="restaurants-category" class="container">
+    <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
 
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
- main oppa
       <div class="row pt-5">
         <div class="col-12">
           <div class="row">
@@ -17,7 +14,7 @@
                     <label class="form-check-label">all</label>
                   </div>
                   <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                    <input type="checkbox" class="form-check-input"  :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
+                    <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
                     <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                   </div>
                 </div>
@@ -36,7 +33,7 @@
                         <label class="form-check-label">all</label>
                       </div>
                       <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                        <input type="checkbox" class="form-check-input"  :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
+                        <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
                         <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                       </div>
                     </div>
@@ -46,7 +43,7 @@
             </div>
             <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0">
               <div v-if="loading" class="position-abs">
-                <LoaderComponent class=""/>
+                <LoaderComponent class="" />
               </div>
               <div>
                 <div class="row ps-2 pe-2 mb-3">
@@ -55,46 +52,46 @@
                     <span v-if="filteredRestaurants.length == 0" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">Tutti</span>
                   </div>
                 </div>
-                <div :class="{'opacity-0' : loading}">
+                <div :class="{ 'opacity-0': loading }">
                   <div class="row ps-2 pe-2 mb-5">
                     <p class="fs-4 mb-3">I più richiesti</p>
-                      <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurantsRanked" :key="restaurant.id">
-                        <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
-                          <div class="card bg-light border border-0">
-                            <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
-                            <div class="pt-2">
-                              <p class="m-0 ps-2">{{ restaurant.name }}</p>
-                              <div class="pt-1">
-                                <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
-                              </div>
+                    <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurantsRanked" :key="restaurant.id">
+                      <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                        <div class="card bg-light border border-0">
+                          <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                          <div class="pt-2">
+                            <p class="m-0 ps-2">{{ restaurant.name }}</p>
+                            <div class="pt-1">
+                              <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
                             </div>
                           </div>
-                        </router-link>
-                      </div>
+                        </div>
+                      </router-link>
+                    </div>
                   </div>
                   <div class="row ps-2 pe-2" v-if="!loading">
                     <p class="fs-4 mb-3">Tutti i ristoranti</p>
                     <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurants" :key="restaurant.id">
-                        <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
-                          <div class="card bg-light border border-0">
-                            <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
-                            <div class="pt-2">
-                              <p class="m-0 ps-2">{{ restaurant.name }}</p>
-                              <div class="pt-1">
-                                <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
-                              </div>
+                      <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                        <div class="card bg-light border border-0">
+                          <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                          <div class="pt-2">
+                            <p class="m-0 ps-2">{{ restaurant.name }}</p>
+                            <div class="pt-1">
+                              <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
                             </div>
                           </div>
-                        </router-link>
-                      </div>
+                        </div>
+                      </router-link>
+                    </div>
                     <div class="d-flex justify-content-center mt-5 mb-5">
                       <nav aria-label="Page navigation example my-3">
                         <ul class="pagination">
-                            <li class="page-item"><button class="page-link" :class="{  'disabled': currentPage === 1 }" @click="getData(currentPage - 1)">Previous</button></li>
-                            <li class="page-item" v-for="n in lastPage" :key="n">
-                              <button class="page-link" :class="{ 'active': currentPage === n }" @click="getData(n)">{{ n }}</button>
-                            </li>
-                            <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === lastPage }" @click="getData(currentPage + 1)">Next</button></li>
+                          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === 1 }" @click="getData(currentPage - 1)">Previous</button></li>
+                          <li class="page-item" v-for="n in lastPage" :key="n">
+                            <button class="page-link" :class="{ 'active': currentPage === n }" @click="getData(n)">{{ n }}</button>
+                          </li>
+                          <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === lastPage }" @click="getData(currentPage + 1)">Next</button></li>
                         </ul>
                       </nav>
                     </div>
@@ -104,7 +101,7 @@
             </div>
             <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-else>
               <div v-if="loading" class="position-abs">
-                <LoaderComponent class=""/>
+                <LoaderComponent class="" />
               </div>
               <div class="row ps-2 pe-2 mb-3">
                 <div class="col-12">
@@ -112,21 +109,21 @@
                   <span v-for="category in checkedCategories" :key="category" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
                 </div>
               </div>
-              <div class="row ps-2 pe-2 mb-5 min-h" :class="{'opacity-0' : loading}">
-                 <p class="fs-4 mb-3">Le tue scelte</p>
-                  <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants" :key="restaurant.id">
-                    <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
-                      <div class="card bg-light border border-0">
-                        <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
-                        <div class="pt-2">
-                          <p class="m-0 ps-2">{{ restaurant.name }}</p>
-                          <div class="pt-1">
-                            <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
-                          </div>
+              <div class="row ps-2 pe-2 mb-5 min-h" :class="{ 'opacity-0': loading }">
+                <p class="fs-4 mb-3">Le tue scelte</p>
+                <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants" :key="restaurant.id">
+                  <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                    <div class="card bg-light border border-0">
+                      <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://127.0.0.1:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                      <div class="pt-2">
+                        <p class="m-0 ps-2">{{ restaurant.name }}</p>
+                        <div class="pt-1">
+                          <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category }}</span>
                         </div>
                       </div>
-                    </router-link>
-                  </div>
+                    </div>
+                  </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -145,11 +142,8 @@ export default {
   name: 'Restaurants',
   components: {
     RestaurantCard,
- persistent-cart
-    ShoppingCart
-
+    ShoppingCart,
     LoaderComponent
- main oppa
   },
   data() {
     return {
@@ -163,12 +157,9 @@ export default {
       categoryChecked: false,
       currentPage: 1,
       lastPage: null,
- persistent-cart
-      cartKey: 0
+      cartKey: 0,
+      loading: true,
 
-      loading:true,
-
- main oppa
     }
 
   },
@@ -217,7 +208,7 @@ export default {
     },
 
     clickCheckBox(value) {
-      
+
       if (this.checkedCategories.includes(value)) {
         const index = this.checkedCategories.indexOf(value);
         this.checkedCategories.splice(index, 1);
@@ -256,7 +247,7 @@ export default {
 
     },
 
-    prova(data){
+    prova(data) {
       console.log("cao");
     }
   },
@@ -277,15 +268,15 @@ export default {
   }
 }
 
-.min-h{
+.min-h {
   min-height: 600px;
 }
-.position-abs{
+
+.position-abs {
   position: absolute;
   left: calc(50% - 60px);
   top: 300px;
   z-index: 10000;
 
 }
-
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <ShoppingCart :key="cartKey" @cartChanged="cartKey++"/>
+  <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
 
   <LoaderComponent v-if="loading" />
   <div>
@@ -136,7 +136,7 @@ export default {
       items = JSON.parse(items);
       let quantity = 1;
       let index = -1;
-        console.log(items);
+      console.log(items);
       for (let i = 0; i < items.length && index < 0; i++)
         if (items[i].id == newItem.id) {
           quantity = items[i].quantity + 1;
