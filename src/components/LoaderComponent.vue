@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex align-items-center justify-content-center my-5">
+    <div class="d-flex align-items-center justify-content-center">
         <div class="circle"></div>
         <div class="circle"></div>
         <div class="circle"></div>
