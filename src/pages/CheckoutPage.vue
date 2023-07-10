@@ -13,7 +13,7 @@
                     <form>
                         <div class="d-flex flex-column gap-4">
                             <div class="d-flex flex-column gap-1">
-                                <label for="customer_name">First Name</label>
+                                <label for="customer_name">Name</label>
                                 <input type="text" name="customer_name" id="customer_name" placeholder="Name..." v-model="customerName" class="form-control">
 
                                 <span id="errName" class="invalid-feedback" role="alert">
