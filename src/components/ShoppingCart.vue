@@ -1,6 +1,6 @@
 <template>
     <!-- Button trigger modal -->
-    <div class="cart-icon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <div class="cart-icon" :class="{'custom-p': totalQuantity > 0}" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-solid fa-cart-shopping"></i>
         <div v-if="totalQuantity > 0" :class="[{'changed-items': even()}, {'changed-items': !even()}]">
             {{ totalQuantity }}
@@ -190,6 +190,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 2px;
     background-color: #ff9933;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: white;
@@ -203,6 +204,10 @@ export default {
     &:active {
         background-color: #fcff60;
     }
+}
+
+.custom-p {
+    padding-top: 5px;
 }
 
 td {
