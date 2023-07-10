@@ -1,6 +1,6 @@
 <template>
-    <div v-if="!checkoutCompleted" class="container py-5 my-3">
-        <div class="col-6 offset-3">
+    <div v-if="!checkoutCompleted" class="container d-flex justify-content-center py-5 my-3">
+        <div class="col-10 col-md-8 col-lg-8 col-xl-6">
             <div class="card bg-light">
                 <div class="card-header">Payment Information</div>
                 <div class="card-body">
