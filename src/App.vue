@@ -34,11 +34,24 @@ export default {
   //     showHeader: true
   //   };
   // },
-  // methods: {
-  //   updateShowHeader(value) {
-  //     this.showHeader = value;
-  //   }
-  // }
+  methods: {
+    // updateShowHeader(value) {
+    //   this.showHeader = value;
+    // }
+
+      setCart(){
+        let cartItems = localStorage.getItem("cartItems");
+
+        if(!cartItems){
+          let items = [];
+          localStorage.setItem("cartItems", JSON.stringify(items));
+        }
+      }
+  },
+
+  mounted() {
+    this.setCart();
+  },
 };
 </script>
 

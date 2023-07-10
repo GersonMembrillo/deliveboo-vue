@@ -1,5 +1,9 @@
 <template>
+  <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
+
   <LoaderComponent v-if="loading" />
+  <div>
+  </div>
   <div class="container" v-if="!loading">
     <div class="row mt-4 mb-4">
       <div class="col-12 col-lg-8 mb-2 mb-lg-0">
@@ -57,9 +61,9 @@
     </div>
     <div class="row mb-5">
       <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
-      <div class="col-8">
+      <div class="col-11 col-sm-12">
         <div class="row">
-          <div class="col-12 col-lg-6" v-for="dish in restaurant.dishes" :key="dish.id">
+          <div class="col-12 col-md-6 col-lg-4" v-for="dish in restaurant.dishes" :key="dish.id">
             <div class="card text-center p-3 mb-4" style="height: 30rem;">
               <div class="text-center pb-2">
                 <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
@@ -73,62 +77,9 @@
               <div class="card-body">
                 <div class="card-text">
                   <div class="pb-2">{{ dish.price }} &euro;</div>
-                  <div>{{ dish.description }}</div>
+                  <div class="overflow-y-scroll">{{ dish.description }}</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="row">
-          <div class="card rounded-5 overflow-y-auto" style="max-height: 30rem;">
-            <div class="row mx-1">
-              <img src="/img/tri.png" class="p-0" alt="">
-              <div class="card rounded-0 border-0" style="height: 30rem;">
-                <div class="card-body text-center">
-                  <div class="card-title pt-4 pb-5">
-                    <h2 class="fw-bold pb-3">Your DeliveBoo!</h2>
-                  </div>
-                  <div class="card-text">
-                    <div v-if="cartItems.length > 0">
-                      <div class="table-responsive">
-                        <table class="table">
-                          <tbody v-for="(item, index) in cartItems" :key="index">
-                            <tr class="text-center align-middle">
-                              <th class="fs-5">
-                                {{ item.quantity }}<span>x</span>
-                              </th>
-                              <th>{{ item.name }}</th>
-                              <td>
-                                {{ item.totalPrice }} &euro;
-                              </td>
-                              <td>
-                                <span class="fs-4">
-                                  <i @click="addToCart(item)" class="fa-solid fa-circle-plus px-2"></i>
-                                  <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus"></i>
-                                </span>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <div class="mt-5">
-                          <button type="button" class="btn btn-outline-warning text-uppercase fs-5 mt-5">
-                            order {{ finalQuantity }} to {{ finalPrice }} &euro;
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="pt-2" v-else>
-                      <img src="/img/Food.png" alt="cart_image" style="width: 50%;">
-                      <div class="mt-5">
-                        You haven't added any products yet. When you do, they will appear here!
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- <img src="/img/tri.png" class="p-0 rotate" alt=""> -->
             </div>
           </div>
         </div>
@@ -140,20 +91,22 @@
 <script>
 import axios from 'axios';
 import LoaderComponent from '../components/LoaderComponent.vue';
+import ShoppingCart from '../components/ShoppingCart.vue';
+
 export default {
   name: 'ShowRestaurant',
+
+  components: {
+    LoaderComponent,
+    ShoppingCart
+  },
+
   data() {
     return {
-      components: {
-        LoaderComponent
-      },
       restaurant: [],
       activeIndex: 0,
       loading: true,
-      cartItems: [],
-      quantity: 0,
-      price: '',
-      totalPrice: ''
+      cartKey: 0
     }
   },
   methods: {
@@ -181,42 +134,40 @@ export default {
       // console.log(this.activeIndex)
     },
 
-    addToCart(item) {
-      const existingItem = this.cartItems.find((cartItem) => cartItem.id === item.id);
-      if (existingItem) {
-        existingItem.quantity++; // Incrementa la quantità se il prodotto è già presente nel carrello
-        existingItem.totalPrice = item.price * existingItem.quantity; // Calcola il nuovo prezzo totale nel carrello
-      } else {
-        item.quantity = 1; // Imposta la quantità a 1 se il prodotto è nuovo nel carrello
-        item.totalPrice = item.price; // Imposta il prezzo totale iniziale
-        this.cartItems.push(item); // Aggiunge il prodotto al carrello
-      }
-    },
-    removeFromCart(item) {
-      const existingItemIndex = this.cartItems.findIndex((cartItem) => cartItem.id === item.id);
-      if (existingItemIndex !== -1) {
-        const existingItem = this.cartItems[existingItemIndex];
-        existingItem.quantity--;
-        if (existingItem.quantity === 0) {
-          this.cartItems.splice(existingItemIndex, 1); // Rimuove l'elemento dal carrello se la quantità diventa zero
-        } else {
-          existingItem.totalPrice = item.price * existingItem.quantity; // Aggiorna il prezzo totale nel carrello
+    addToCart(newItem) {
+      let items = localStorage.getItem("cartItems");
+      items = JSON.parse(items);
+      let quantity = 1;
+      let index = -1;
+
+      for (let i = 0; i < items.length && index < 0; i++)
+        if (items[i].id == newItem.id) {
+          quantity = items[i].quantity + 1;
+          index = i;
         }
-      }
+
+      if (index >= 0)
+        items.splice(index, 1, {
+          id: newItem.id,
+          name: newItem.name,
+          price: newItem.price,
+          quantity: quantity
+        });
+      else
+        items.push({
+          id: newItem.id,
+          name: newItem.name,
+          price: newItem.price,
+          quantity: quantity
+        });
+
+      localStorage.setItem("cartItems", JSON.stringify(items));
+      this.cartKey++;
     }
   },
   mounted() {
     this.getData();
-  },
-  computed: {
-    finalQuantity() {
-      return this.cartItems.reduce((total, item) => total + item.quantity, 0);
-    },
-    finalPrice() {
-      return this.cartItems.reduce((total, item) => total + parseFloat(item.totalPrice), 0);
-    }
-  },
-  components: { LoaderComponent }
+  }
 }
 </script>
 
