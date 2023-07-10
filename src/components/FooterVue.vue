@@ -8,7 +8,7 @@
         <div class="col-4">
           <div class="navbar-logo">
             <a href="http://localhost:5174/">
-              <img src="img/deliveboo3.png" alt="Logo" />
+              <img src="/img/deliveboo3.png" alt="Logo" />
             </a>
           </div>
         </div>
