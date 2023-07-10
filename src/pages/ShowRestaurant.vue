@@ -1,5 +1,5 @@
 <template>
-  <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
+  <ShoppingCart :key="cartKey" />
 
   <LoaderComponent v-if="loading" />
   <div>

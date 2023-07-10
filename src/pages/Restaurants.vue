@@ -1,6 +1,6 @@
 <template>
   <section class="w-100 bg-light">
-    <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
+    <ShoppingCart  />
 
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
       <div class="row pt-5">
@@ -182,7 +182,6 @@ export default {
       categoryChecked: false,
       currentPage: 1,
       lastPage: null,
-      cartKey: 0,
       loading: true,
     }
 
