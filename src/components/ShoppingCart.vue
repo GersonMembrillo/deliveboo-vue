@@ -180,8 +180,8 @@ export default {
 
 .cart-icon{
     position: fixed;
-    bottom: 5px;
-    left: 5px;
+    bottom: 8px;
+    left: 8px;
     width: 60px;
     height: 60px;
     border: 1px solid rgb(161, 81, 0);
@@ -198,7 +198,7 @@ export default {
     transition: all 300ms;
 
     &:hover{
-        transform: scale(1.05);
+        transform: scale(1.08);
     }
 
     &:active {
