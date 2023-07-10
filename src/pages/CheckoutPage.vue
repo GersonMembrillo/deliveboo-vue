@@ -17,7 +17,7 @@
                                 <input type="text" name="customer_name" id="customer_name" placeholder="Name..." v-model="customerName" class="form-control">
 
                                 <span id="errName" class="invalid-feedback" role="alert">
-                                    <strong>oppa</strong>
+                                    <strong></strong>
                                 </span>
                             </div>
 
@@ -77,7 +77,7 @@
             <h1>Thanks for choosing us!</h1>
             <h3>Enjoy your meal.</h3>
             <!-- <router-link :to="router.back()" class="btn btn-primary">Continua la navigazione</router-link> -->
-            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer">Continue Browsing.</div>
+            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer">Continue Browsing</div>
             <div class="confetti">
                 <div class="confetti-piece"></div>
                 <div class="confetti-piece"></div>
@@ -125,8 +125,6 @@ export default {
             let errNameStrong = document.getElementById("errName").querySelector("strong");
             let errAddressStrong = document.getElementById("errAddress").querySelector("strong");
 
-
-            document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
 
             customerNameElement.classList.remove("is-invalid");
@@ -179,13 +177,15 @@ export default {
                     });
                 })
                     .catch(err => {
-                        console.error(err);
+                        // console.error(err);
                         this.error = err.message;
                     })
             }
         }
     },
     mounted() {
+        document.documentElement.scrollTop = 0;
+
         braintree.client.create({
             authorization: "sandbox_93smtrz3_bbgx4xf7h8bx24xg"
         })
@@ -252,7 +252,7 @@ export default {
                         // console.log("Payment Cancelled");
                     },
                     onError: (err) => {
-                        console.error(err);
+                        // console.error(err);
                         this.error = "An error occurred while processing the paypal payment.";
                     }
                 }, '#paypalButton')
@@ -281,7 +281,7 @@ export default {
     position: relative;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
