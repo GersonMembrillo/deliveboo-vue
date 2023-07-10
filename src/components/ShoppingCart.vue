@@ -33,9 +33,9 @@
 
                     <tr>
                         <td colspan="4">
-                            <button type="button" class="btn btn-outline-warning text-uppercase fs-6">
+                            <router-link :to="{name: 'checkout', params: {amount: totalPrice, quantity: totalQuantity}}" class="btn btn-outline-warning text-uppercase fs-6">
                                 order {{ totalQuantity }} items for {{ totalPrice }} &euro;
-                            </button>
+                            </router-link>
                         </td>
                     </tr>
                 </tbody>
