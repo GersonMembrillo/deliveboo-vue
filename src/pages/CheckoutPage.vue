@@ -76,22 +76,23 @@
             <h5>The order has been processed successfully.</h5>
             <h1>Thanks for choosing us!</h1>
             <h3>Enjoy your meal.</h3>
-
+            <!-- <router-link :to="router.back()" class="btn btn-primary">Continua la navigazione</router-link> -->
+            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer">Continue Browsing.</div>
             <div class="confetti">
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-            <div class="confetti-piece"></div>
-        </div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+                <div class="confetti-piece"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -175,10 +176,6 @@ export default {
                     }).finally(() => {
                         items = [];
                         localStorage.setItem("cartItems", JSON.stringify(items));
-
-                        setTimeout(() => {
-                            this.$router.back();
-                        }, 4000);
                     });
                 })
                     .catch(err => {
@@ -273,14 +270,19 @@ export default {
     overflow: hidden;
 }
 
-.farewell{
+.farewell {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: start;
     background-color: transparent;
     position: relative;
+}
+
+.cursor-pointer{
+    cursor: pointer;
 }
 
 .confetti {
@@ -292,6 +294,7 @@ export default {
     height: 100%;
     overflow: hidden;
     z-index: 1000;
+    pointer-events: none;
 }
 
 .confetti-piece {
