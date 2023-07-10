@@ -19,7 +19,7 @@
 // import HeaderNav from './components/HeaderNav.vue';
 import FooterVue from './components/FooterVue.vue';
 import HomeNav from './components/HomeNav.vue';
-import LoaderComponent from './components/LoaderComponent.vue';
+
 
 export default {
   name: 'App',
@@ -27,7 +27,7 @@ export default {
     // HeaderNav,
     FooterVue,
     HomeNav,
-    LoaderComponent
+    
   },
   // data() {
   //   return {

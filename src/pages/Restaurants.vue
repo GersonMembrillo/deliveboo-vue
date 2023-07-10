@@ -1,5 +1,8 @@
 <template>
-  <section class="w-100 bg-light">
+  <div>
+    <LoaderComponent v-if="loading" class="position-abs w-100 h-100 bg-light"/>
+  </div> 
+  <section class="w-100 bg-light" v-if="!loading">
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
       <div class="row pt-5">
         <div class="col-12">
@@ -39,10 +42,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0">
-              <div v-if="loading" class="position-abs">
-                <LoaderComponent class=""/>
-              </div>
+            <div class="col-md-8 col-lg-9 col-xl-10" v-if="filteredRestaurants.length === 0 && !resultsNotFound">
               <div>
                 <div class="row ps-2 pe-2 mb-3">
                   <div class="col-12">
@@ -50,7 +50,7 @@
                     <span v-if="filteredRestaurants.length == 0" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">Tutti</span>
                   </div>
                 </div>
-                <div :class="{'opacity-0' : loading}">
+                <div>
                   <div class="row ps-2 pe-2 mb-5">
                     <p class="fs-4 mb-3">I più richiesti</p>
                       <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurantsRanked" :key="restaurant.id">
@@ -67,7 +67,7 @@
                         </router-link>
                       </div>
                   </div>
-                  <div class="row ps-2 pe-2" v-if="!loading">
+                  <div class="row ps-2 pe-2">
                     <p class="fs-4 mb-3">Tutti i ristoranti</p>
                     <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in restaurants" :key="restaurant.id">
                         <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
@@ -97,17 +97,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-else>
-              <div v-if="loading" class="position-abs">
-                <LoaderComponent class=""/>
-              </div>
+            <div class="col-md-8 col-lg-9 col-xl-10" v-if="filteredRestaurants.length > 0 && !resultsNotFound">
               <div class="row ps-2 pe-2 mb-3">
                 <div class="col-12">
                   <h3 class="">Ristoranti filtrati</h3>
                   <span v-for="category in checkedCategories" :key="category" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
                 </div>
               </div>
-              <div class="row ps-2 pe-2 mb-5 min-h" :class="{'opacity-0' : loading}">
+              <div class="row ps-2 pe-2 mb-5">
                  <p class="fs-4 mb-3">Le tue scelte</p>
                   <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants" :key="restaurant.id">
                     <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
@@ -122,6 +119,26 @@
                       </div>
                     </router-link>
                   </div>
+              </div>
+            </div>
+            <div class="col-md-8 col-lg-9 col-xl-10" v-if="resultsNotFound">
+              <div class="row ps-2 pe-2 mb-3">
+                <div class="col-12">
+                  <h3 class="">La tua ricerca non ha avuto successo</h3>
+                  <span v-for="category in checkedCategories" :key="category" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
+                </div>
+              </div>
+              <div class="row ps-2 pe-2 mb-5 mt-3">
+                <p class="fs-5 mb-3 text-center mt-5">Ristoranti non trovati</p>
+                <div class="col-12 mb-4 mt-1">
+                  <div class="card bg-light border border-0 d-flex justify-content-center align-items-center">
+                    <img class="not-found rounded-4 shadow rounded" src="../../public/img/5203299.jpg" alt="not found">
+                    <div class="mt-4 text-center">
+                      <p class="mb-3 mt-1 ps-2 max-w">Ci dispiace, i tuoi filtri non corrispondono a nessun ristorante</p>
+                      <input class="btn btn-primary" type="button" value="Riprova" @click="resetSearch()">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -154,6 +171,7 @@ export default {
       currentPage: 1,
       lastPage: null,
       loading:true,
+      resultsNotFound: false
 
     }
 
@@ -179,6 +197,28 @@ export default {
 
     },
 
+    loaderTimeout(){
+      setTimeout(()=>{
+        this.loading = false
+      },200)
+    },
+
+    resetSearch(){
+      this.resultsNotFound = false;
+      this.checkedCategories = [];
+      this.filteredRestaurants = [];
+      let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
+      console.log(checkboxprova)
+      checkboxprova.forEach((item, index) => {
+        if (index == 0) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+      })
+
+    },
+
     resetCeckBox() {
       this.isAllChecked = true;
       this.checkedCategories = [];
@@ -186,18 +226,17 @@ export default {
       let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
       //console.log(checkboxprova)
       checkboxprova.forEach((item, index) => {
-
         if (index == 0) {
           item.checked = true;
           this.isAllChecked = true
           //console.log(this.isAllChecked)
-          console.log(item.checked)
+          //console.log(item.checked)
           this.filteredRestaurants = []
         } else {
           item.checked = false;
           this.isAllChecked = false
           //console.log(this.isAllChecked)
-          console.log(item.checked)
+          //console.log(item.checked)
         }
       })
     },
@@ -215,7 +254,7 @@ export default {
         let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
         checkboxprova[0].checked = false
         this.isAllChecked = false;
-        console.log(this.isAllChecked)
+        //console.log(this.isAllChecked)
       } else {
         this.isAllChecked = true;
         this.filteredRestaurants = [];
@@ -225,14 +264,17 @@ export default {
 
     filteredRestaurant() {
       if (this.checkedCategories.length > 0) {
+        //this.loading = true
         this.filteredRestaurants = this.restaurants.filter(restaurante =>
           this.checkedCategories.every(category => restaurante.categories.includes(category))
         );
-      } else if (this.isAllChecked) {
-        this.filteredRestaurants = [];
       }
-
-
+      if(this.filteredRestaurants.length == 0 && this.checkedCategories.length > 0){
+        this.resultsNotFound = true
+      } else{
+        this.resultsNotFound = false
+       // this.loaderTimeout()
+      }
     },
 
     getRestaurantsRanked(data) {
@@ -259,15 +301,24 @@ export default {
   }
 }
 
-.min-h{
-  min-height: 600px;
-}
-.position-abs{
-  position: absolute;
-  left: calc(50% - 60px);
-  top: 300px;
-  z-index: 10000;
 
+.position-abs {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
 }
+
+
+
+.max-w{
+  max-width: 300px;
+}
+.not-found{
+  width: 400px;
+}
+
+
 
 </style>
