@@ -131,7 +131,7 @@
               </div>
               <div class="row ps-2 pe-2 mb-5 min-h" :class="{ 'opacity-0': loading }">
                 <p class="fs-4 mb-3">Le tue scelte</p>
-                <div class="col-sm-6 col-md-6 col-lg-3 pb-4" v-for="restaurant in filteredRestaurants"
+                <div class="col-sm-6 col-lg-4 col-xl-3 pb-4" v-for="restaurant in filteredRestaurants"
                   :key="restaurant.id">
                   <router-link class="link-offset-2 link-underline link-underline-opacity-0"
                     :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
