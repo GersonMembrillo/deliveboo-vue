@@ -28,12 +28,29 @@ export default {
     };
   },
   methods: {
+ cart-check-restaurant
+    // updateShowHeader(value) {
+    //   this.showHeader = value;
+    // }
+
+      setCart(){
+        let cartItems = localStorage.getItem("cartItems");
+        let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
+        let cartRestaurantName = localStorage.getItem("cartRestaurantName");
+        
+        if(!cartItems || !cartRestaurantSlug || !cartRestaurantName){
+          localStorage.setItem("cartItems", JSON.stringify([]));
+          localStorage.setItem("cartRestaurantSlug", "");
+          localStorage.setItem("cartRestaurantName", "");
+        }
+
     setCart() {
       let cartItems = localStorage.getItem("cartItems");
 
       if (!cartItems) {
         let items = [];
         localStorage.setItem("cartItems", JSON.stringify(items));
+ main
       }
     }
   },
