@@ -1,6 +1,6 @@
 <template>
   <section class="w-100 bg-light">
-    <ShoppingCart  />
+    <ShoppingCart />
 
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
       <div class="row pt-5">
@@ -279,6 +279,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+section {}
+
 #restaurants-category {
   .img-restaurant {
     width: 100%;

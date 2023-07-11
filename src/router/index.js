@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import Restaurants from '../pages/Restaurants.vue';
 import ShowRestaurant from '../pages/ShowRestaurant.vue';
-import CheckoutPage from '../pages/CheckoutPage.vue';
 // import NotFound from '../pages/NotFound.vue';
 
 const router = createRouter({
@@ -23,12 +22,7 @@ const router = createRouter({
 			name: 'restaurant-show',
 			component: ShowRestaurant,
 		},
-		{
-			path: '/checkout/:amount:quantity',
-			name: 'checkout',
-			component: CheckoutPage,
-			props: true
-		},
+
 		// {
 		// 	path: '/not-found',
 		// 	name: 'not-found',
