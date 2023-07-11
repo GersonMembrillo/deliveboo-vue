@@ -61,7 +61,7 @@
     </div>
     <div class="row mb-5">
       <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
-      <div class="col-11 col-sm-12">
+      <div class="col-12">
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4" v-for="dish in restaurant.dishes" :key="dish.id">
             <div class="card text-center p-3 mb-4" style="height: 30rem;">
