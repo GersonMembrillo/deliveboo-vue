@@ -12,6 +12,8 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "axios": "^1.4.0",
     "bootstrap": "^5.3.0",
+    "braintree-web": "^3.96.0",
+    "paypal-checkout": "^4.0.338",
     "sass": "^1.63.6",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
