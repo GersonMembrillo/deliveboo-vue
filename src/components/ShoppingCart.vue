@@ -49,8 +49,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button v-if="items.length > 0" @click="goToCheckout()" type="button"
-                        class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
+                    <button v-if="items.length > 0" @click="goToCheckout()" type="button" class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
                         order {{ totalQuantity }} items for {{ totalPrice }} &euro;
                     </button>
                     <span v-else class="w-100 text-center">This is your cart. Add some items!</span>
@@ -129,7 +128,7 @@ export default {
             this.items = items;
             localStorage.setItem("cartItems", JSON.stringify(items));
 
-            if(items.length < 1){
+            if (items.length < 1) {
                 localStorage.setItem("cartRestaurantSlug", "");
                 localStorage.setItem("cartRestaurantName", "");
 
@@ -218,7 +217,6 @@ export default {
     cursor: pointer;
     z-index: 1000;
     transition: all 300ms;
-    z-index: 1000;
 
     &:hover {
         transform: scale(1.08);
@@ -236,9 +234,11 @@ export default {
 .modal {
     word-wrap: break-word;
 }
+
 .cursor-pointer {
     cursor: pointer;
 }
+
 .green {
     color: rgb(141, 255, 47);
     cursor: pointer;
@@ -282,12 +282,9 @@ export default {
         color: white;
     }
 }
- cart-check-restaurant
 
-.small-x{
+.small-x {
     font-size: 0.8rem;
     opacity: 0.5;
 }
-
- main
 </style>
