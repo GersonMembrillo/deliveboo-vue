@@ -1,40 +1,34 @@
 <template>
-  <!-- <header v-if="showHeader">
-    <HeaderNav />
-  </header> -->
-  <!-- <header v-else> -->
-  <header>
-    <HomeNav />
-  </header>
-  <main>
-    <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" /> -->
-    <router-view></router-view>
-  </main>
-  <footer>
-    <FooterVue />
-  </footer>
+  <div class="app">
+    <header>
+      <HomeNav />
+    </header>
+    <main :class="{ 'bg-white': isRestaurantsView }">
+      <router-view></router-view>
+    </main>
+    <footer>
+      <FooterVue />
+    </footer>
+  </div>
 </template>
 
 <script>
-// import HeaderNav from './components/HeaderNav.vue';
 import FooterVue from './components/FooterVue.vue';
 import HomeNav from './components/HomeNav.vue';
-
 
 export default {
   name: 'App',
   components: {
-    // HeaderNav,
     FooterVue,
     HomeNav,
-    
   },
-  // data() {
-  //   return {
-  //     showHeader: true
-  //   };
-  // },
+  data() {
+    return {
+      isRestaurantsView: false,
+    };
+  },
   methods: {
+ cart-check-restaurant
     // updateShowHeader(value) {
     //   this.showHeader = value;
     // }
@@ -49,20 +43,43 @@ export default {
           localStorage.setItem("cartRestaurantSlug", "");
           localStorage.setItem("cartRestaurantName", "");
         }
-      }
-  },
 
+    setCart() {
+      let cartItems = localStorage.getItem("cartItems");
+
+      if (!cartItems) {
+        let items = [];
+        localStorage.setItem("cartItems", JSON.stringify(items));
+ main
+      }
+    }
+  },
+  watch: {
+    $route(to) {
+      this.isRestaurantsView = to.name === 'Restaurants';
+    },
+  },
   mounted() {
     this.setCart();
+    this.isRestaurantsView = this.$route.name === 'Restaurants';
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
+  flex: 1;
   background-color: #ff9933;
-  width: 100%;
-  // background-attachment: fixed;
   overflow-y: auto;
+}
+
+.bg-white {
+  background-color: white;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <!-- Button trigger modal -->
-    <div class="cart-icon" :class="{'custom-p': totalQuantity > 0}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <div class="cart-icon" :class="{ 'custom-p': totalQuantity > 0 }" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <i class="fa-solid fa-cart-shopping"></i>
-        <div v-if="totalQuantity > 0" :class="[{'changed-items': even()}, {'changed-items': !even()}]">
+        <div v-if="totalQuantity > 0" :class="[{ 'changed-items': even() }, { 'changed-items': !even() }]">
             {{ totalQuantity }}
         </div>
     </div>
@@ -49,7 +49,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button v-if="items.length > 0" @click="goToCheckout()" type="button" class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
+                    <button v-if="items.length > 0" @click="goToCheckout()" type="button"
+                        class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
                         order {{ totalQuantity }} items for {{ totalPrice }} &euro;
                     </button>
                     <span v-else class="w-100 text-center">This is your cart. Add some items!</span>
@@ -153,7 +154,7 @@ export default {
         even() {
             let result = false;
 
-            if(this.totalQuantity % 2 == 0)
+            if (this.totalQuantity % 2 == 0)
                 result = true;
 
             return result;
@@ -193,13 +194,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .modal-body {
     max-height: 350px;
     overflow-y: auto;
 }
 
-.cart-icon{
+.cart-icon {
     position: fixed;
     bottom: 8px;
     left: 8px;
@@ -218,8 +218,9 @@ export default {
     cursor: pointer;
     z-index: 1000;
     transition: all 300ms;
+    z-index: 1000;
 
-    &:hover{
+    &:hover {
         transform: scale(1.08);
     }
 
@@ -268,12 +269,12 @@ export default {
     animation: change-color linear 300ms;
 }
 
-@keyframes change-color{
+@keyframes change-color {
     from {
         color: white;
     }
 
-    50%{
+    50% {
         color: rgb(255, 56, 56);
     }
 
@@ -281,9 +282,12 @@ export default {
         color: white;
     }
 }
+ cart-check-restaurant
 
 .small-x{
     font-size: 0.8rem;
     opacity: 0.5;
 }
+
+ main
 </style>

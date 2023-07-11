@@ -142,7 +142,7 @@
 import HomeNav from '../components/HomeNav.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
-  components:  {
+  components: {
     ShoppingCart
   },
   data() {
