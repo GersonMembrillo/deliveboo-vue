@@ -1,5 +1,5 @@
 <template>
-  <ShoppingCart :key="cartKey" @cartChanged="cartKey++" />
+  <ShoppingCart />
   <div class="container top">
     <div class="d-lg-flex align-items-center">
       <div class="main-image my-4 ms-4 ms-md-5"></div>
@@ -142,13 +142,12 @@
 import HomeNav from '../components/HomeNav.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
-  components:  {
+  components: {
     ShoppingCart
   },
   data() {
     return {
-      showHeader: false,
-      cartKey: 0
+      showHeader: false
     };
   },
   mounted() {

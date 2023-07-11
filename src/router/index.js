@@ -22,6 +22,7 @@ const router = createRouter({
 			name: 'restaurant-show',
 			component: ShowRestaurant,
 		},
+
 		// {
 		// 	path: '/not-found',
 		// 	name: 'not-found',
