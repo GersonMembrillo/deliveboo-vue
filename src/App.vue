@@ -41,10 +41,13 @@ export default {
 
       setCart(){
         let cartItems = localStorage.getItem("cartItems");
-
-        if(!cartItems){
-          let items = [];
-          localStorage.setItem("cartItems", JSON.stringify(items));
+        let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
+        let cartRestaurantName = localStorage.getItem("cartRestaurantName");
+        
+        if(!cartItems || !cartRestaurantSlug || !cartRestaurantName){
+          localStorage.setItem("cartItems", JSON.stringify([]));
+          localStorage.setItem("cartRestaurantSlug", "");
+          localStorage.setItem("cartRestaurantName", "");
         }
       }
   },

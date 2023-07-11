@@ -39,11 +39,9 @@
         <div class="card">
           <div id="carouselExample" class="carousel slide custom-carousel">
             <div class="carousel-inner">
-              <div class="carousel-item" v-for="(image, index) in restaurant.images"
-                :class="{ 'active': index === activeIndex }" :key="image.id">
+              <div class="carousel-item" v-for="(image, index) in restaurant.images" :class="{ 'active': index === activeIndex }" :key="image.id">
                 <div class="carousel-image-container">
-                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
-                    alt="...">
+                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100" alt="...">
                 </div>
               </div>
             </div>
@@ -71,8 +69,7 @@
                 <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
               </div>
               <div class="card-image menù-image">
-                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
-                  style="width: 90%; height: 12rem;">
+                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name" style="width: 90%; height: 12rem;">
               </div>
               <div class="card-body">
                 <div class="card-text">
@@ -135,11 +132,25 @@ export default {
     },
 
     addToCart(newItem) {
+      let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
+      let cartRestaurantName = localStorage.getItem("cartRestaurantName");
+
+      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug) 
+        if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
+          localStorage.setItem("cartItems", JSON.stringify([]));
+        else
+          return;
+
+      cartRestaurantSlug = this.restaurant.slug;
+      cartRestaurantName = this.restaurant.name;
+
+      localStorage.setItem("cartRestaurantSlug", cartRestaurantSlug);
+      localStorage.setItem("cartRestaurantName", cartRestaurantName);
+
       let items = localStorage.getItem("cartItems");
       items = JSON.parse(items);
       let quantity = 1;
       let index = -1;
-
       for (let i = 0; i < items.length && index < 0; i++)
         if (items[i].id == newItem.id) {
           quantity = items[i].quantity + 1;

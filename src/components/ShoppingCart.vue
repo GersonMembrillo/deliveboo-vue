@@ -12,7 +12,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Your DeliveBoo!</h5>
+                    <!-- <h5 class="modal-title" id="exampleModalLabel">Your DeliveBoo!</h5> -->
+                    <div class="d-flex flex-column gap-2">
+                        <h4>Your DeliveBoo!</h4>
+                        <h6 v-if="restaurantName != ''" data-bs-dismiss="modal" @click="goToRestaurant()" class="text-primary text-decoration-underline cursor-pointer">{{ restaurantName }}</h6>
+                    </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -20,7 +24,7 @@
                         <tbody>
                             <tr v-for="item in items" class="align-middle">
                                 <td>
-                                    {{ item.quantity }}x
+                                    <span class="small-x">x</span> {{ item.quantity }}
                                 </td>
 
                                 <td>
@@ -63,6 +67,7 @@ export default {
     data() {
         return {
             items: [],
+            restaurantName: ""
         }
     },
 
@@ -122,12 +127,26 @@ export default {
 
             this.items = items;
             localStorage.setItem("cartItems", JSON.stringify(items));
+
+            if(items.length < 1){
+                localStorage.setItem("cartRestaurantSlug", "");
+                localStorage.setItem("cartRestaurantName", "");
+
+                this.restaurantName = "";
+            }
         },
 
         goToCheckout() {
             this.$router.push({
                 name: 'checkout',
                 params: { amount: this.totalPrice, quantity: this.totalQuantity }
+            });
+        },
+
+        goToRestaurant() {
+            this.$router.push({
+                name: 'restaurant-show',
+                params: { slug: localStorage.getItem("cartRestaurantSlug") }
             });
         },
 
@@ -167,6 +186,8 @@ export default {
         let items = localStorage.getItem("cartItems");
         items = JSON.parse(items);
         this.items = items;
+
+        this.restaurantName = localStorage.getItem("cartRestaurantName");
     },
 }
 </script>
@@ -195,6 +216,7 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: white;
     cursor: pointer;
+    z-index: 1000;
     transition: all 300ms;
 
     &:hover{
@@ -210,10 +232,12 @@ export default {
     padding-top: 5px;
 }
 
-td {
+.modal {
     word-wrap: break-word;
 }
-
+.cursor-pointer {
+    cursor: pointer;
+}
 .green {
     color: rgb(141, 255, 47);
     cursor: pointer;
@@ -258,4 +282,8 @@ td {
     }
 }
 
+.small-x{
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
 </style>

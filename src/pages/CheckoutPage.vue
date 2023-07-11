@@ -76,8 +76,8 @@
             <h5>The order has been processed successfully.</h5>
             <h1>Thanks for choosing us!</h1>
             <h3>Enjoy your meal.</h3>
-            <!-- <router-link :to="router.back()" class="btn btn-primary">Continua la navigazione</router-link> -->
-            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer">Continue Browsing</div>
+            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer mt-1">Continue Browsing</div>
+
             <div class="confetti">
                 <div class="confetti-piece"></div>
                 <div class="confetti-piece"></div>
@@ -129,9 +129,6 @@ export default {
 
             customerNameElement.classList.remove("is-invalid");
             customerAddressElement.classList.remove("is-invalid");
-            errNameStrong.textContent = "ciao";
-            errAddressStrong.textContent = "ciao";
-
 
             if (this.customerName == "" && this.customerAddress == "") {
                 customerNameElement.classList.add("is-invalid");
@@ -172,8 +169,9 @@ export default {
                     axios.post(`http://localhost:8000/api/orders`, { price: this.amount, items: items, customer_name: this.customerName, customer_address: this.customerAddress }).then((res) => {
                         this.checkoutCompleted = true;
                     }).finally(() => {
-                        items = [];
-                        localStorage.setItem("cartItems", JSON.stringify(items));
+                        localStorage.setItem("cartItems", JSON.stringify([]));
+                        localStorage.setItem("cartRestaurantSlug", "");
+                        localStorage.setItem("cartRestaurantName", "");
                     });
                 })
                     .catch(err => {
