@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import Restaurants from '../pages/Restaurants.vue';
 import ShowRestaurant from '../pages/ShowRestaurant.vue';
-// import NotFound from '../pages/NotFound.vue';
+import NotFound from '../pages/NotFound.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -22,12 +22,11 @@ const router = createRouter({
 			name: 'restaurant-show',
 			component: ShowRestaurant,
 		},
-
-		// {
-		// 	path: '/not-found',
-		// 	name: 'not-found',
-		// 	component: NotFound,
-		// },
+		{
+			path: "/:pathMatch(.*)*",
+			name: "not-found",
+			component: NotFound
+		}
 		// {
 		// 	path: '/about',
 		// 	name: 'about',
