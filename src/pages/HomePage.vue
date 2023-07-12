@@ -16,7 +16,17 @@
   <div class="bg-white center">
     <div class="container center">
       <div class="p-5">
-        <h2 class="text-center text-uppercase fw-bold fs-1 pt-3 pb-5">categorie</h2>
+
+        <div class="mt-5 mb-5">
+          <div class="d-grid row">
+            <a id="all-restaurants" href="http://localhost:5174/restaurants" class="btn btn-warning text-uppercase fs-1"
+              type="button">
+              tutti i ristoranti
+            </a>
+          </div>
+        </div>
+
+        <h2 class="text-center text-uppercase fw-bold fs-1 pt-4 pb-5">categorie</h2>
         <div class="row">
 
           <div class="col-6 col-md-4 col-lg-3 category">
@@ -64,14 +74,6 @@
           </div>
         </div>
 
-        <div class="mt-5 mb-3">
-          <div class="d-grid row">
-            <a id="all-restaurants" href="http://localhost:5174/restaurants" class="btn btn-warning text-uppercase fs-1"
-              type="button">
-              tutti i ristoranti
-            </a>
-          </div>
-        </div>
       </div>
     </div>
 
