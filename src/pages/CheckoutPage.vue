@@ -282,6 +282,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .ext-bg {
+    flex-grow: 1;
     background-color: #f8f9fa;
     color: black;
     overflow: hidden;

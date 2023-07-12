@@ -56,6 +56,8 @@ export default {
 
 main {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   background-color: #ff9933;
   overflow-y: auto;
 }
