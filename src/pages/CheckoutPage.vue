@@ -100,11 +100,12 @@
         </div>
         <div v-else class="container">
             <div class="row wrapper py-5">
-                <div class="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end align-items-end align-items-sm-center">
+                <div class="col-12 col-sm-6 d-flex flex-column align-items-start align-items-sm-end justify-content-end justify-content-sm-center">
                     <span class="display-1">419</span>
+                    <hr class="w-100 d-sm-none my-2">
                 </div>
                 <div class="col-12 col-sm-6 d-flex justify-content-start align-items-sm-start align-items-sm-center">
-                    <div class="custom-border ps-sm-3 pe-5 me-md-5">
+                    <div class="custom-border ps-sm-3">
                         <h1>Page Expired</h1>
                         <h3>The page you are trying to access is no longer available.</h3>
                     </div>
