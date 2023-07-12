@@ -18,7 +18,7 @@
       <div class="p-5">
 
         <div class="mt-5 mb-5">
-          <div class="d-grid row">
+          <div class="d-grid">
             <a id="all-restaurants" href="http://localhost:5174/restaurants" class="btn btn-warning text-uppercase fs-1"
               type="button">
               tutti i ristoranti
@@ -27,7 +27,7 @@
         </div>
 
         <h2 class="text-center text-uppercase fw-bold fs-1 pt-4 pb-5">categorie</h2>
-        <div class="row">
+        <div class="row grid">
 
           <div class="col-6 col-md-4 col-lg-3 category">
             <a class="text-decoration-none" href="#">
@@ -79,7 +79,7 @@
 
     <div class="container">
       <div class="pb-4 pt-0 service">
-        <h2 class="text-center text-uppercase fw-bold fs-1 pt-3 pb-5">consegniamo tutto ciò che vuoi!</h2>
+        <h2 class="text-center text-uppercase fw-bold fs-1 pt-4 pb-4">consegniamo tutto ciò che vuoi!</h2>
         <div class="d-md-flex px-sm-4 pt-4 justify-content-between">
           <div class="left text-center m-5 mt-0">
             <h5 class="pb-3">I migliori ristoranti della tua città</h5>
@@ -100,8 +100,35 @@
         </div>
       </div>
 
+      <div class="pb-5">
+        <h2 class="text-center text-uppercase fw-bold fs-1 pt-3 pb-4">novità</h2>
+        <div class="container">
+          <div class="row gx-5">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+              <h3 class="text-uppercase text-warning text-center fw-bold fs-2 pt-3 pb-5">deliveboo gold</h3>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/QAnLqf2PTrg"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center">
+              <h3 class="text-uppercase fw-bold fs-2 pt-3 pb-5">Hai già la nostra App?</h3>
+              <div class="card">
+                <img src="/img/app_logo.png" alt="deliveboo_app_logo" class="card-img-top">
+                <div class="card-body">
+                  <div class="card-title">
+                    <h5 class="text-secondary">Scaricala ora! Disponibile su Apple Store e Google Play!</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div>
-        <h2 class="text-center text-uppercase fw-bold title fs-1 pb-5">domande frequenti</h2>
+        <h2 class="text-center text-uppercase fw-bold title fs-1 pt-5 pb-5">domande frequenti</h2>
         <div class="accordion pb-5" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -211,7 +238,7 @@
   </div>
 
   <div class="container bottom">
-    <div class="row d-flex justify-content-between mb-5">
+    <div class="row grid d-flex justify-content-between mb-5">
       <div class="col-12 col-md-4">
         <div class="text-center">
           <a href="">
@@ -248,7 +275,8 @@ export default {
   },
   data() {
     return {
-      showHeader: false
+      showHeader: false,
+      videoUrl: "https://www.youtube.com/embed/QAnLqf2PTrg"
     };
   },
   mounted() {
@@ -259,7 +287,7 @@ export default {
 
 <style lang="scss" scoped>
 /* Imposta il gap tra le colonne in base alla grandezza dello schermo */
-.center .row {
+.center .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: calc((100% - (150px * var(--num-columns))) / (var(--num-columns) - 1));
@@ -288,7 +316,7 @@ export default {
   :root {
     --num-columns: 4;
 
-    .center .row,
+    .center .grid,
     .service {
       max-width: 800px;
       margin-left: auto;
@@ -304,7 +332,7 @@ export default {
 .center {
   width: 100%;
 
-  .row {
+  .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 0px 33px;
