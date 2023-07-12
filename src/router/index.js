@@ -30,10 +30,9 @@ const router = createRouter({
 		},
 
 		{
-			path: '/checkout/:amount:quantity',
+			path: '/checkout',
 			name: 'checkout',
 			component: CheckoutPage,
-			props: true
 		},
 		// {
 		// 	path: '/about',

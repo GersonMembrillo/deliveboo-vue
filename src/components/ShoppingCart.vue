@@ -1,6 +1,6 @@
 <template>
     <!-- Button trigger modal -->
-    <div class="cart-icon" :class="{ 'custom-p': totalQuantity > 0 }" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <div class="cart-icon" :class="{ 'custom-p': totalQuantity > 0 }" data-bs-toggle="modal" data-bs-target="#cartModal">
         <i class="fa-solid fa-cart-shopping"></i>
         <div v-if="totalQuantity > 0" :class="[{ 'changed-items': even() }, { 'changed-items': !even() }]">
             {{ totalQuantity }}
@@ -8,16 +8,16 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="exampleModalLabel">Your DeliveBoo!</h5> -->
+                    <!-- <h5 class="modal-title" id="cartModalLabel">Your DeliveBoo!</h5> -->
                     <div class="d-flex flex-column gap-2">
                         <h4>Your DeliveBoo!</h4>
                         <h6 v-if="restaurantName != ''" data-bs-dismiss="modal" @click="goToRestaurant()" class="text-primary text-decoration-underline cursor-pointer">{{ restaurantName }}</h6>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table v-if="items.length > 0" class="table table-light">
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { store } from "../store.js";
 
 export default {
     name: "ShoppingCart",
@@ -67,7 +68,8 @@ export default {
     data() {
         return {
             items: [],
-            restaurantName: ""
+            restaurantName: "",
+            store: store
         }
     },
 
@@ -137,9 +139,11 @@ export default {
         },
 
         goToCheckout() {
+            this.store.checkoutQuantity = this.totalQuantity;
+            this.store.checkoutPrice = this.totalPrice;
+
             this.$router.push({
-                name: 'checkout',
-                params: { amount: this.totalPrice, quantity: this.totalQuantity }
+                name: 'checkout'
             });
         },
 

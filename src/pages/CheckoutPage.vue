@@ -1,97 +1,110 @@
 <template>
-    <div v-if="!checkoutCompleted" class="container d-flex justify-content-center py-5 my-3">
-        <div class="col-10 col-md-8 col-lg-8 col-xl-6">
-            <div class="card bg-light">
-                <div class="card-header">Payment Information</div>
-                <div class="card-body">
-                    <div class="alert alert-success" v-if="nonce">
-                        The payment has been successful. Thanks for choosing us!
-                    </div>
-                    <div class="alert alert-danger" v-if="error">
-                        {{ error }}
-                    </div>
-                    <form>
-                        <div class="d-flex flex-column gap-4">
-                            <div class="d-flex flex-column gap-1">
-                                <label for="customer_name">Name</label>
-                                <input type="text" name="customer_name" id="customer_name" placeholder="Name..." v-model="customerName" class="form-control">
-
-                                <span id="errName" class="invalid-feedback" role="alert">
-                                    <strong></strong>
-                                </span>
-                            </div>
-
-                            <div class="d-flex flex-column gap-1">
-                                <label for="customer_address">Address</label>
-                                <input type="text" name="customer_address" id="customer_address" placeholder="Address..." v-model="customerAddress" class="form-control">
-
-                                <span id="errAddress" class="invalid-feedback" role="alert">
-                                    <strong></strong>
-                                </span>
-                            </div>
+    <div v-if="quantity && quantity > 0 && amount && amount > 0">
+        <div v-if="!checkoutCompleted" class="container d-flex justify-content-center py-5 my-3">
+            <div class="col-10 col-md-8 col-lg-8 col-xl-6">
+                <div class="card bg-light">
+                    <div class="card-header">Payment Information</div>
+                    <div class="card-body">
+                        <div class="alert alert-success" v-if="nonce">
+                            The payment has been successful. Thanks for choosing us!
                         </div>
-
-                        <hr />
-                        <div class="form-group">
-                            <label>Credit Card Number</label>
-                            <div id="creditCardNumber" class="form-control"></div>
+                        <div class="alert alert-danger" v-if="error">
+                            {{ error }}
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label>Expire Date</label>
-                                    <div id="expireDate" class="form-control"></div>
+                        <form>
+                            <div class="d-flex flex-column gap-4">
+                                <div class="d-flex flex-column gap-1">
+                                    <label for="customer_name">Name</label>
+                                    <input type="text" name="customer_name" id="customer_name" placeholder="Name..." v-model="customerName" class="form-control">
+
+                                    <span id="errName" class="invalid-feedback" role="alert">
+                                        <strong></strong>
+                                    </span>
                                 </div>
-                                <div class="col-6">
-                                    <label>CVV</label>
-                                    <div id="cvv" class="form-control"></div>
+
+                                <div class="d-flex flex-column gap-1">
+                                    <label for="customer_address">Address</label>
+                                    <input type="text" name="customer_address" id="customer_address" placeholder="Address..." v-model="customerAddress" class="form-control">
+
+                                    <span id="errAddress" class="invalid-feedback" role="alert">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
-                        </div>
 
-                        <hr>
-
-                        <div class="d-flex flex-wrap gap-5">
-                            <div class="d-flex align-items-center gap-2">
-                                Items: <span class="badge bg-secondary fs-5">{{ quantity }}</span>
+                            <hr />
+                            <div class="form-group">
+                                <label>Credit Card Number</label>
+                                <div id="creditCardNumber" class="form-control"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Expire Date</label>
+                                        <div id="expireDate" class="form-control"></div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>CVV</label>
+                                        <div id="cvv" class="form-control"></div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="d-flex align-items-center gap-2">
-                                Price: <span class="badge bg-secondary fs-5">{{ amount }} &euro;</span>
+                            <hr>
+
+                            <div class="d-flex flex-wrap gap-5">
+                                <div class="d-flex align-items-center gap-2">
+                                    Items: <span class="badge bg-secondary fs-5">{{ quantity }}</span>
+                                </div>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    Price: <span class="badge bg-secondary fs-5">{{ amount }} &euro;</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <hr>
+                            <hr>
 
-                        <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
-                        <hr />
-                        <div id="paypalButton"></div>
-                    </form>
+                            <button class="btn btn-primary btn-block" @click.prevent="payWithCreditCard">Pay with Credit Card</button>
+                            <hr />
+                            <div id="paypalButton"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else class="container py-5 my-3 wrapper">
+            <div class="farewell">
+                <h5>The order has been processed successfully.</h5>
+                <h1>Thanks for choosing us!</h1>
+                <h3>Enjoy your meal.</h3>
+                <div @click="this.$router.back()" class="btn btn-primary cursor-pointer mt-1">Continue Browsing</div>
+
+                <div class="confetti">
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div v-else class="container py-5 my-3 wrapper">
-        <div class="farewell">
-            <h5>The order has been processed successfully.</h5>
-            <h1>Thanks for choosing us!</h1>
-            <h3>Enjoy your meal.</h3>
-            <div @click="this.$router.back()" class="btn btn-primary cursor-pointer mt-1">Continue Browsing</div>
-
-            <div class="confetti">
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
-                <div class="confetti-piece"></div>
+    <div v-else class="row w-100 wrapper px-3 py-5 text-white">
+        <div class="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end align-items-end align-items-sm-center">
+            <span class="display-1">419</span>
+        </div>
+        <div class="col-12 col-sm-6 d-flex justify-content-start align-items-sm-start align-items-sm-center">
+            <div class="custom-border ps-sm-3 pe-5 me-md-5">
+                <h1>Page Expired</h1>
+                <h3>The page you are trying to access is no longer available.</h3>
             </div>
         </div>
     </div>
@@ -100,6 +113,7 @@
 import braintree from 'braintree-web';
 import paypal from 'paypal-checkout';
 import axios from "axios";
+import { store } from "../store.js";
 
 export default {
     data() {
@@ -109,13 +123,11 @@ export default {
             error: "",
             customerName: "",
             customerAddress: "",
-            checkoutCompleted: false
+            checkoutCompleted: false,
+            store: store,
+            amount: null,
+            quantity: null
         }
-    },
-
-    props: {
-        amount: String,
-        quantity: String
     },
 
     methods: {
@@ -172,6 +184,8 @@ export default {
                         localStorage.setItem("cartItems", JSON.stringify([]));
                         localStorage.setItem("cartRestaurantSlug", "");
                         localStorage.setItem("cartRestaurantName", "");
+                        this.store.checkoutQuantity = null;
+                        this.store.checkoutPrice = null;
                     });
                 })
                     .catch(err => {
@@ -182,6 +196,9 @@ export default {
         }
     },
     mounted() {
+        this.quantity = this.store.checkoutQuantity;
+        this.amount = this.store.checkoutPrice;
+
         document.documentElement.scrollTop = 0;
 
         braintree.client.create({
@@ -261,9 +278,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+
 .wrapper {
-    width: 100vw;
+    width: 100%;
     height: 80vh;
+    max-height: 600px;
+    min-height: 200px;
     color: white;
     overflow: hidden;
 }
@@ -281,6 +301,14 @@ export default {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.custom-border {
+    border-left: 0;
+
+    @media screen and (min-width: 576px) {
+        border-left: 1px solid white;
+    }
 }
 
 .confetti {

@@ -1,13 +1,9 @@
 <template>
   <div class="app">
-    <!-- <header v-if="showHeader">
-    <HeaderNav />
-  </header> -->
-    <!-- <header v-else> -->
     <header>
       <HomeNav />
     </header>
-    <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" /> -->
+
     <main>
       <router-view></router-view>
     </main>
@@ -18,7 +14,6 @@
 </template>
 
 <script>
-// import HeaderNav from './components/HeaderNav.vue';
 import FooterVue from './components/FooterVue.vue';
 import HomeNav from './components/HomeNav.vue';
 
@@ -26,20 +21,12 @@ import HomeNav from './components/HomeNav.vue';
 export default {
   name: 'App',
   components: {
-    // HeaderNav,
     FooterVue,
     HomeNav,
 
   },
-  // data() {
-  //   return {
-  //     showHeader: true
-  //   };
-  // },
+
   methods: {
-    // updateShowHeader(value) {
-    //   this.showHeader = value;
-    // }
 
     setCart() {
       let cartItems = localStorage.getItem("cartItems");
