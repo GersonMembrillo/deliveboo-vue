@@ -104,21 +104,21 @@
         <h2 class="text-center text-uppercase fw-bold fs-1 pt-3 pb-4">novità</h2>
         <div class="container">
           <div class="row gx-5">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-12 col-lg-6 text-center">
               <h3 class="text-uppercase text-warning text-center fw-bold fs-2 pt-3 pb-5">deliveboo gold</h3>
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/QAnLqf2PTrg"
+              <iframe width="450" height="315" src="https://www.youtube.com/embed/QAnLqf2PTrg"
                 title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen>
               </iframe>
             </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-center">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-6 text-center" style="margin: 0 auto;">
               <h3 class="text-uppercase fw-bold fs-2 pt-3 pb-5">Hai già la nostra App?</h3>
-              <div class="card">
-                <img src="/img/app_logo.png" alt="deliveboo_app_logo" class="card-img-top">
+              <div class="card d-flex flex-column app-logo">
+                <img src="/img/app_logo.png" alt="deliveboo_app_logo" class="card-img-top deliveboo-app">
                 <div class="card-body">
                   <div class="card-title">
-                    <h5 class="text-secondary">Scaricala ora! Disponibile su Apple Store e Google Play!</h5>
+                    <h5 class="text-secondary px-xl-5">Scaricala ora! Disponibile su Apple Store e Google Play!</h5>
                   </div>
                 </div>
               </div>
@@ -310,11 +310,19 @@ export default {
   :root {
     --num-columns: 2;
   }
+
+  iframe {
+    width: 450px;
+  }
 }
 
 @media (min-width: 576px) and (max-width: 768px) {
   :root {
     --num-columns: 3;
+  }
+
+  iframe {
+    width: 500px;
   }
 
   .service {
@@ -338,6 +346,12 @@ export default {
 
   .left {
     width: 950px;
+  }
+}
+
+@media (min-width: 1200px) {
+  iframe {
+    width: 550px;
   }
 }
 
@@ -373,6 +387,12 @@ export default {
       transform: scale(1.1);
     }
   }
+}
+
+.deliveboo-app {
+  width: 150px;
+  height: auto;
+  margin: 40px auto;
 }
 
 .main-image {
