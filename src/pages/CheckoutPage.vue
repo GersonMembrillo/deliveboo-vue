@@ -98,14 +98,16 @@
                 </div>
             </div>
         </div>
-        <div v-else class="row w-100 wrapper px-3 py-5">
-            <div class="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end align-items-end align-items-sm-center">
-                <span class="display-1">419</span>
-            </div>
-            <div class="col-12 col-sm-6 d-flex justify-content-start align-items-sm-start align-items-sm-center">
-                <div class="custom-border ps-sm-3 pe-5 me-md-5">
-                    <h1>Page Expired</h1>
-                    <h3>The page you are trying to access is no longer available.</h3>
+        <div v-else class="container">
+            <div class="row wrapper py-5">
+                <div class="col-12 col-sm-6 d-flex justify-content-start justify-content-sm-end align-items-end align-items-sm-center">
+                    <span class="display-1">419</span>
+                </div>
+                <div class="col-12 col-sm-6 d-flex justify-content-start align-items-sm-start align-items-sm-center">
+                    <div class="custom-border ps-sm-3 pe-5 me-md-5">
+                        <h1>Page Expired</h1>
+                        <h3>The page you are trying to access is no longer available.</h3>
+                    </div>
                 </div>
             </div>
         </div>
