@@ -1,18 +1,20 @@
 <template>
-  <!-- <header v-if="showHeader">
+  <div class="app">
+    <!-- <header v-if="showHeader">
     <HeaderNav />
   </header> -->
-  <!-- <header v-else> -->
-  <header>
-    <HomeNav />
-  </header>
-  <main>
+    <!-- <header v-else> -->
+    <header>
+      <HomeNav />
+    </header>
     <!-- <router-view :showHeader="showHeader" @update:showHeader="updateShowHeader" /> -->
-    <router-view></router-view>
-  </main>
-  <footer>
-    <FooterVue />
-  </footer>
+    <main>
+      <router-view></router-view>
+    </main>
+    <footer>
+      <FooterVue />
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -59,10 +61,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
+  flex: 1;
   background-color: #ff9933;
-  width: 100%;
-  // background-attachment: fixed;
   overflow-y: auto;
 }
 </style>
