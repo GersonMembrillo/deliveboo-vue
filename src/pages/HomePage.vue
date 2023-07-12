@@ -133,40 +133,20 @@
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
+                aria-expanded="false" aria-controls="collapseOne">
                 Cos'è Deliveboo?
               </button>
             </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <p>
                   La missione di Deliveboo è quella di trasformare il mondo del cibo a domicilio. Collaboriamo con i
-                  migliori ristoranti della città - dalle gemme locali alle grandi catene nazionali - per portarti dove
-                  vuoi i tuoi piatti preferiti.
-                  Con centinaia di ristoranti e rider esperti, ti consegniamo il tuo ordine il più velocemente possibile.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button fs-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
-                Qual È La Storia Della Fondazione Di Deliveboo?
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <p>
-                  Deliveboo è un'azienda inglese digitale con una storia di successo. Dopo essersi trasferito da New York
-                  a Londra, il nostro fondatore rimase stupito dal non trovare servizi di food delivery di qualità. Quindi
-                  decise che la sua missione sarebbe stata quella di portare i piatti dei migliori ristoranti direttamente
-                  casa dei loro clienti.
-                  Il nostro servizio oggi è attivo in più di 100 città in tutto il mondo, offrendo lavoro a più di 600
-                  ingegneri e impiegati nel quartier generale di Londra, collaborando con più di 8000 ristoranti e 15000
-                  riders.
+                  migliori
+                  ristoranti della città - dalle gemme locali alle grandi catene nazionali - per portarti dove vuoi i tuoi
+                  piatti
+                  preferiti. Con centinaia di ristoranti e rider esperti, ti consegniamo il tuo ordine il più velocemente
+                  possibile.
                 </p>
               </div>
             </div>
@@ -175,19 +155,23 @@
             <h2 class="accordion-header" id="headingTwo">
               <button class="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Come Funziona?
+                Qual È La Storia Della Fondazione Di Deliveboo?
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <p>
-                  Puoi ordinare sia dal sito sia dalla nostra app, disponibile per iOS e Android. Aggiungi il tuo
-                  indirizzo di consegna per vedere quali ristoranti consegnano da te, scegli i tuoi piatti preferiti ed
-                  effettua l'ordine.
-                  Quando il tuo ordine viene accettato, il ristorante inizia a prepararlo e a confezionarlo. Una volta
-                  pronto, un nostro rider lo ritira e lo porta da te.
-                  Se vuoi essere super organizzato, puoi ordinare fino a 24 ore in anticipo con un ordine programmato.
+                  Deliveboo è un'azienda inglese digitale con una storia di successo. Dopo essersi trasferito da New York
+                  a
+                  Londra, il nostro fondatore rimase stupito dal non trovare servizi di food delivery di qualità. Quindi
+                  decise
+                  che la sua missione sarebbe stata quella di portare i piatti dei migliori ristoranti direttamente casa
+                  dei loro
+                  clienti. Il nostro servizio oggi è attivo in più di 100 città in tutto il mondo, offrendo lavoro a più
+                  di 600
+                  ingegneri e impiegati nel quartier generale di Londra, collaborando con più di 8000 ristoranti e 15000
+                  riders.
                 </p>
               </div>
             </div>
@@ -196,39 +180,67 @@
             <h2 class="accordion-header" id="headingThree">
               <button class="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Che Tipo Di Ristoranti Trovo Su Deliveboo?
+                Come Funziona?
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+              data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                <p>
+                  Puoi ordinare sia dal sito sia dalla nostra app, disponibile per iOS e Android. Aggiungi il tuo
+                  indirizzo di
+                  consegna per vedere quali ristoranti consegnano da te, scegli i tuoi piatti preferiti ed effettua
+                  l'ordine.
+                  Quando il tuo ordine viene accettato, il ristorante inizia a prepararlo e a confezionarlo. Una volta
+                  pronto, un
+                  nostro rider lo ritira e lo porta da te. Se vuoi essere super organizzato, puoi ordinare fino a 24 ore
+                  in
+                  anticipo con un ordine programmato.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+              <button class="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Che Tipo Di Ristoranti Trovo Su Deliveboo?
+              </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <p>
                   Ci prendiamo cura personalmente di proporti un'ampia selezione di ristoranti di alta qualità nella tua
-                  area. Questo significa che puoi trovare dal miglior ristorante giapponese, all'hamburgheria più gustosa,
-                  alla pizzeria italiana tradizionale con forno a legna. L'unica cosa che non troverai su Deliveboo sono
-                  ristoranti di scarsa qualità.
+                  area.
+                  Questo significa che puoi trovare dal miglior ristorante giapponese, all'hamburgheria più gustosa, alla
+                  pizzeria italiana tradizionale con forno a legna. L'unica cosa che non troverai su Deliveboo sono
+                  ristoranti di
+                  scarsa qualità.
                 </p>
               </div>
             </div>
           </div>
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
+            <h2 class="accordion-header" id="headingFive">
               <button class="accordion-button collapsed fs-2" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                 Come Viene Consegnato Il Cibo?
               </button>
             </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 <p>
                   Una volta che hai effettuato l'ordine, il ristorante lo riceve, lo prepara e lo impacchetta. Quando è
-                  pronto, un rider lo ritira e si reca all'indirizzo di consegna.
+                  pronto,
+                  un rider lo ritira e si reca all'indirizzo di consegna.
                 </p>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -398,6 +410,6 @@ export default {
 }
 
 .accordion {
-  --bs-accordion-border-color: none;
+  --bs-accordion-border-color: rgb(197, 197, 197);
 }
 </style>
