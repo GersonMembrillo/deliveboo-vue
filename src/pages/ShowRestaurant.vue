@@ -1,194 +1,196 @@
 <template>
   <ShoppingCart :key="cartKey" />
-  <LoaderComponent v-if="loading" />
-  <div>
+  <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+    <LoaderComponent />
   </div>
-  <div v-if="popUpDish" class="position-abs d-flex align-items-center justify-content-center">
-    <div class="container">
-      <div class="row">
-        <div class="m-auto col-sm-12 col-md-9 col-lg-8 col-xl-6">
-          <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
-            <p @click="popUpDish = false"><i class="fa-solid fa-xmark fs-3"></i></p>
-            <img class="w-50 m-auto rounded-3" :src="'http://localhost:8000/storage/' + dataDish.image" :alt="dataDish.name">
-            <div class="pe-5 ps-5 mt-4">
-              <p class="m-0 fs-4">{{dataDish.name}}</p>
-              <p class="fs-6">{{dataDish.description}}</p>
-              <p class="fs-6">{{dataDish.price}} euro</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <section class="w-100 bg-light position-relative">
-    <div v-if="!loading" id="carouselExample" class="carousel slide custom-carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item" v-for="(image, index) in restaurant.images" :class="{ 'active': index === activeIndex }" :key="image.id">
-          <div class="carousel-image-container">
-            <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 img-effetto" alt="...">
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" @click="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" @click="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-    <div class="container-sm-fluid container-xl ps-sm-5 pe-sm-5 ps-xl-0 pe-xl-0">
-      <div class="row pb-5 mb-4">
-        <div class="col-12">
-          <div class="row m-position">
-            <div class="col-md-12 col-lg-9">
-              <div class="card p-3 pt-4 pb-4  border border-0 shadow bg-body-tertiary rounded-4">
-                <h1>{{ restaurant.name }}</h1>
-                <div class="d-flex align-items-center">
-                  <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category.name }}</span>
-                </div>
-              </div>
-              <div class="row pt-3">
-                <div class="col-sm-12 col-md-3 pb-3 d-none d-md-block">
-                  <div class="card border border-0 shadow bg-body-tertiary rounded-4">
-                    <p class="m-0 pt-3 ps-3 fw-bold fs-5"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
-                    <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
-                    <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
-                    <p>
-                      <button class="button-style pt-2 ps-3 pb-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Categorie</button>
-                    </p>
-                    <div>
-                      <div class="bg-light pt-0 pb-2 rounded-4" id="collapseWidthExample">
-                       <div v-for="(category, index) in dishCategory" :key="category">
-                         <p class="text-center"  :class="{ 'selected': selectedCategory === index }" @click="filterCategory(category, index)">{{ category }}</p>
-                       </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-3 pb-3 d-sm-block d-md-none">
-                  <div class="card border border-0 shadow bg-body-tertiary rounded-4">
-                    <p class="m-0 pt-3 ps-3 fw-bold fs-5 text-center"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
-                    <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
-                    <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
-                    <div class="p-3">
-                      <div class="d-flex align-items-center">
-                        <p class="mb-1 me-2">Categorie:</p>
-                        <span v-for="(category, index) in dishCategory" :key="category" class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded"  :class="{ 'selected-bg': selectedCategory === index }" @click="filterCategory(category, index)">{{ category }}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-12 col-md-9"> 
-                  <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 min-h">
-                    <div class="input-group mb-4">
-                      <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nomePiatto" @keyup="filterSearchDish" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
-                    </div>
-                    <h3 v-if="showAllDishes && !filteredCategory">Tutti i piatti</h3>
-                    <h3 v-if="!showAllDishes && !notFound || filteredCategory">La tua ricerca</h3>
-                    <div class="row max-h mt-2">
-                      <div v-if="showAllDishes && !filteredCategory" class="row">
-                        <div class="col-12 col-xxl-6 pt-2 pb-2" v-for="dish in restaurant.dishes" :key="dish.id">
-                          <div class="card p-3 border border-0 shadow-sm rounded-3 h-100 d-flex flex-column">
-                            <div class="row align-items-start" @click="showDish(dish)">
-                              <div class="col-3 col-xxl-4">
-                                <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
-                              </div>
-                              <div class="col-9 col-xxl-8">
-                                <div class="d-flex">
-                                  <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
-                                  <div class="">
-                                    <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
-                                  </div>
-                                </div>
-                                <p class="">{{ dish.description }}</p>
-                              </div>
-                            </div>
-                            <div class="row mt-3 align-items-end h-100">
-                              <div class="d-flex justify-content-between align-items-center">
-                                <p class="m-0">{{ dish.price }} euro</p>
-                                <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div v-if="!showAllDishes && !notFound && !filteredCategory">
-                        <div class="col-12 pt-2 pb-2" v-for="dish in filteredDish" :key="dish.id">
-                          <div class="card p-3 border border-0 shadow-sm rounded-3">
-                            <div class="row" @click="showDish(dish)">
-                              <div class="col-3">
-                                <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
-                              </div>
-                              <div class="col-9">
-                                <div class="d-flex">
-                                  <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
-                                  <div class="">
-                                    <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
-                                  </div>
-                                </div>
-                                <p class="">{{ dish.description }}</p>
-                              </div>
-                            </div>
-                            <div class="row mt-3">
-                              <div class="d-flex justify-content-between align-items-center">
-                                <p class="m-0">{{ dish.price }} euro</p>
-                                <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div v-if="filteredCategory">
-                        <div class="col-12 pt-2 pb-2" v-for="dish in filteredDish" :key="dish.id">
-                          <div class="card p-3 border border-0 shadow-sm rounded-3">
-                            <div class="row" @click="showDish(dish)">
-                              <div class="col-3">
-                                <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
-                              </div>
-                              <div class="col-9">
-                                <div class="d-flex">
-                                  <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
-                                  <div class="">
-                                    <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
-                                  </div>
-                                </div>
-                                <p class="">{{ dish.description }}</p>
-                              </div>
-                            </div>
-                            <div class="row mt-3">
-                              <div class="d-flex justify-content-between align-items-center">
-                                <p class="m-0">{{ dish.price }} euro</p>
-                                <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div v-if="notFound" class="min-h d-flex align-items-center justify-content-center">
-                        <div>
-                          <h3 class="text-center mt-5">La tua ricerca non ha prodotto risultati</h3>
-                          <div class="col-12 pt-2 pb-2">
-                            <p class="text-center">Nessun piatto corrisponde alla ricerca</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-lg-3 d-none d-lg-block">
-              <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
-                <h4>questo potrebbe essere un carrello</h4>
-                <p>sparisce a dimensione 800 circa</p>
+  <section v-if="!loading">
+    <div v-if="popUpDish" class="position-abs d-flex align-items-center justify-content-center">
+      <div class="container">
+        <div class="row">
+          <div class="m-auto col-sm-12 col-md-9 col-lg-8 col-xl-6">
+            <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
+              <p @click="popUpDish = false"><i class="fa-solid fa-xmark fs-3"></i></p>
+              <img class="w-50 m-auto rounded-3" :src="'http://localhost:8000/storage/' + dataDish.image" :alt="dataDish.name">
+              <div class="pe-5 ps-5 mt-4">
+                <p class="m-0 fs-4">{{dataDish.name}}</p>
+                <p class="fs-6">{{dataDish.description}}</p>
+                <p class="fs-6">{{dataDish.price}} euro</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <section class="w-100 bg-light position-relative">
+      <div v-if="!loading" id="carouselExample" class="carousel slide custom-carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" v-for="(image, index) in restaurant.images" :class="{ 'active': index === activeIndex }" :key="image.id">
+            <div class="carousel-image-container">
+              <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 img-effetto" alt="...">
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" @click="prev">
+          <span class="carousel-control-prev-icon"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" @click="next">
+          <span class="carousel-control-next-icon"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="container-sm-fluid container-xl ps-sm-5 pe-sm-5 ps-xl-0 pe-xl-0">
+        <div class="row pb-5 mb-4">
+          <div class="col-12">
+            <div class="row m-position">
+              <div class="col-md-12 col-lg-9">
+                <div class="card p-3 pt-4 pb-4  border border-0 shadow bg-body-tertiary rounded-4">
+                  <h1>{{ restaurant.name }}</h1>
+                  <div class="d-flex align-items-center">
+                    <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category.name }}</span>
+                  </div>
+                </div>
+                <div class="row pt-3">
+                  <div class="col-sm-12 col-md-3 pb-3 d-none d-md-block">
+                    <div class="card border border-0 shadow bg-body-tertiary rounded-4">
+                      <p class="m-0 pt-3 ps-3 fw-bold fs-5"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
+                      <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
+                      <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
+                      <p>
+                        <button class="button-style pt-2 ps-3 pb-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Categorie</button>
+                      </p>
+                      <div>
+                        <div class="bg-light pt-0 pb-2 rounded-4" id="collapseWidthExample">
+                         <div v-for="(category, index) in dishCategory" :key="category">
+                           <p class="text-center"  :class="{ 'selected': selectedCategory === index }" @click="filterCategory(category, index)">{{ category }}</p>
+                         </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-3 pb-3 d-sm-block d-md-none">
+                    <div class="card border border-0 shadow bg-body-tertiary rounded-4">
+                      <p class="m-0 pt-3 ps-3 fw-bold fs-5 text-center"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
+                      <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
+                      <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
+                      <div class="p-3">
+                        <div class="d-flex align-items-center">
+                          <p class="mb-1 me-2">Categorie:</p>
+                          <span v-for="(category, index) in dishCategory" :key="category" class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded"  :class="{ 'selected-bg': selectedCategory === index }" @click="filterCategory(category, index)">{{ category }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-9"> 
+                    <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 min-h">
+                      <div class="input-group mb-4">
+                        <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nomePiatto" @keyup="filterSearchDish" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                      </div>
+                      <h3 v-if="showAllDishes && !filteredCategory">Tutti i piatti</h3>
+                      <h3 v-if="!showAllDishes && !notFound || filteredCategory">La tua ricerca</h3>
+                      <div class="row max-h mt-2">
+                        <div v-if="showAllDishes && !filteredCategory" class="row">
+                          <div class="col-12 col-xxl-6 pt-2 pb-2" v-for="dish in restaurant.dishes" :key="dish.id">
+                            <div class="card p-3 border border-0 shadow-sm rounded-3 h-100 d-flex flex-column">
+                              <div class="row align-items-start" @click="showDish(dish)">
+                                <div class="col-3 col-xxl-4">
+                                  <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
+                                </div>
+                                <div class="col-9 col-xxl-8">
+                                  <div class="d-flex">
+                                    <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
+                                    <div class="">
+                                      <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
+                                    </div>
+                                  </div>
+                                  <p class="">{{ dish.description }}</p>
+                                </div>
+                              </div>
+                              <div class="row mt-3 align-items-end h-100">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <p class="m-0">{{ dish.price }} euro</p>
+                                  <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-if="!showAllDishes && !notFound && !filteredCategory">
+                          <div class="col-12 pt-2 pb-2" v-for="dish in filteredDish" :key="dish.id">
+                            <div class="card p-3 border border-0 shadow-sm rounded-3">
+                              <div class="row" @click="showDish(dish)">
+                                <div class="col-3">
+                                  <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
+                                </div>
+                                <div class="col-9">
+                                  <div class="d-flex">
+                                    <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
+                                    <div class="">
+                                      <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
+                                    </div>
+                                  </div>
+                                  <p class="">{{ dish.description }}</p>
+                                </div>
+                              </div>
+                              <div class="row mt-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <p class="m-0">{{ dish.price }} euro</p>
+                                  <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-if="filteredCategory">
+                          <div class="col-12 pt-2 pb-2" v-for="dish in filteredDish" :key="dish.id">
+                            <div class="card p-3 border border-0 shadow-sm rounded-3">
+                              <div class="row" @click="showDish(dish)">
+                                <div class="col-3">
+                                  <img :src="'http://localhost:8000/storage/' + dish.image" class="immagine-uguale w-100 h-100 rounded-3">
+                                </div>
+                                <div class="col-9">
+                                  <div class="d-flex">
+                                    <p class="m-0 me-2 fs-6 fw-bold">{{ dish.name }}</p>
+                                    <div class="">
+                                      <span class="me-2 mb-1 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ dish.category }}</span>
+                                    </div>
+                                  </div>
+                                  <p class="">{{ dish.description }}</p>
+                                </div>
+                              </div>
+                              <div class="row mt-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                  <p class="m-0">{{ dish.price }} euro</p>
+                                  <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-if="notFound" class="min-h d-flex align-items-center justify-content-center">
+                          <div>
+                            <h3 class="text-center mt-5">La tua ricerca non ha prodotto risultati</h3>
+                            <div class="col-12 pt-2 pb-2">
+                              <p class="text-center">Nessun piatto corrisponde alla ricerca</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-lg-3 d-none d-lg-block">
+                <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
+                  <h4>questo potrebbe essere un carrello</h4>
+                  <p>sparisce a dimensione 800 circa</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
   
 </template>
@@ -232,8 +234,11 @@ export default {
         this.restaurant = res.data.results.restaurant;
         this.dishesCategories = res.data.results.restaurant.dishes
         this.getDishCategory(this.dishesCategories)
+      }).catch((error) => {
+        console.log(error);
+      }).finally(() => {
         this.loading = false;
-      });
+      })
     },
 
     filterSearchDish() {
@@ -458,8 +463,12 @@ export default {
   width: 100vw;
   height: 100%;
   background-color: rgba(69, 69, 69, 0.552);
+}
 
-  
+.position-abs {
+  position: absolute;
+  top: 0;
+  z-index: 10000;
 }
 // h1 {
 //   font-size: 5rem;
