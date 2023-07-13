@@ -1,7 +1,9 @@
 <template>
-  <section class="w-100 bg-light">
+  <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
+    <LoaderComponent />
+  </div>
+  <section v-if="!loading" class="w-100 bg-light">
     <ShoppingCart />
-
     <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
       <div class="row pt-5">
         <div class="col-12">
@@ -47,9 +49,6 @@
               </div>
             </div>
             <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1">
-              <div v-if="loading" class="position-abs">
-                <LoaderComponent class="" />
-              </div>
               <div>
                 <div class="row ps-2 pe-2 mb-3">
                   <div class="col-12">
@@ -119,9 +118,6 @@
               </div>
             </div>
             <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-else>
-              <div v-if="loading" class="position-abs">
-                <LoaderComponent class="" />
-              </div>
               <div class="row ps-2 pe-2 mb-3">
                 <div class="col-12">
                   <h3 class="">Ristoranti filtrati</h3>
@@ -333,9 +329,7 @@ export default {
 
 .position-abs {
   position: absolute;
-  left: calc(50% - 60px);
-  top: 300px;
+  top: 0;
   z-index: 10000;
-
 }
 </style>
