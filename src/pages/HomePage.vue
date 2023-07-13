@@ -19,55 +19,19 @@
       <div class="p-5">
         <h2 class="text-center pb-4">I migliori ristoranti e molto altro</h2>
         <div class="row">
-
-          <div class="col-6 col-md-4 col-lg-3 category">
-            <a class="text-decoration-none" href="">
+          <div class="col-6 col-md-4 col-lg-3 category" v-for="(category, index) in categories" :key="category.id">
+            <a class="text-decoration-none text-white" @click="navigateToCategory(category.id)">
               <div class="position-relative">
-                <img class="position-absolute"
-                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/italiano"
-                  alt="">
+                <img class="position-absolute" :src="'http://localhost:8000/storage/' + category.image" :alt="category.name">
               </div>
             </a>
-            <p class="text-center">Italiano</p>
-          </div>
-
-          <div class="col-6 col-md-4 col-lg-3 category">
-            <a class="text-decoration-none text-white" href="">
-              <div class="position-relative">
-                <img class="position-absolute"
-                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
-                  alt="">
-              </div>
-            </a>
-            <p class="text-center">Pizza</p>
-          </div>
-
-          <div class="col-6 col-md-4 col-lg-3 category">
-            <a class="text-decoration-none text-white" href="">
-              <div class="position-relative">
-                <img class="position-absolute"
-                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/cinese"
-                  alt="">
-              </div>
-            </a>
-            <p class="text-center">Cinese</p>
-          </div>
-
-          <div class="col-6 col-md-4 col-lg-3 category">
-            <a class="text-decoration-none text-white" href="">
-              <div class="position-relative">
-                <img class="position-absolute"
-                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/hamburger"
-                  alt="">
-              </div>
-            </a>
-            <p class="text-center">Hamburger</p>
+            <p class="text-center">{{ category.name }}</p>
           </div>
         </div>
 
         <div class="div cat-all mt-2">
-          <a class="text-black text-decoration-none" href="http://localhost:5174/restaurants">
-            <div class="row category-all">
+          <a class="text-black text-decoration-none" href="">
+            <div class="row category-all" @click="navigateToCategory('all')">
               <div class="d-flex justify-content-center align-items-center">
                 <h3 class="text-uppercase">Tutti i ristoranti</h3>
               </div>
@@ -139,6 +103,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import HomeNav from '../components/HomeNav.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
@@ -148,11 +113,28 @@ export default {
   data() {
     return {
       showHeader: false,
-      cartKey: 0
+      cartKey: 0,
+      categories: []
     };
+  },
+  methods: {
+    getData() {
+      axios.get(`http://localhost:8000/api/mixed`).then((res) => {
+          this.categories = res.data.results.categories;
+          console.log(this.categories);
+      }).catch((errors) => {
+          console.log(errors);
+      })
+    },
+    navigateToCategory(categoryId) {
+      // console.log(categoryId);
+      this.$router.push(`/restaurants/${categoryId}`);
+    }
+
   },
   mounted() {
     this.$emit('update:showHeader', false);
+    this.getData();
   },
 };
 </script>

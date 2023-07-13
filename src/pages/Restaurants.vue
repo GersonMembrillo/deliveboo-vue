@@ -10,12 +10,12 @@
               <div class="card d-none d-md-block">
                 <div class="card-body">
                   <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all"
+                    <input type="checkbox" class="form-check-input" :checked="isAllChecked && index > 1" :value="all"
                       @click="resetCeckBox()">
                     <label class="form-check-label">all</label>
                   </div>
                   <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                    <input type="checkbox" class="form-check-input" :id="category.id" :value="category.name"
+                    <input type="checkbox" class="form-check-input" :checked="this.categoryId == category.id ? true : false" :id="category.id" :value="category.name"
                       @click="clickCheckBox(category.name)">
                     <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                   </div>
@@ -46,7 +46,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0">
+            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1">
               <div v-if="loading" class="position-abs">
                 <LoaderComponent class="" />
               </div>
@@ -165,6 +165,7 @@ import RestaurantCard from '../components/RestaurantCard.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
   name: 'Restaurants',
+  props: ['categoryId'],
   components: {
     RestaurantCard,
     ShoppingCart,
@@ -184,6 +185,8 @@ export default {
       lastPage: null,
       cartKey: 0,
       loading: true,
+      index: 0,
+      name: ''
     }
 
   },
@@ -199,6 +202,7 @@ export default {
         //dati che verranno stampati
         this.categories = res.data.results.categories;
         this.restaurants = res.data.results.restaurants.data;
+        this.clickCheckBox();
         this.getRestaurantsRanked(this.restaurants)
       }).catch((error) => {
         console.log(error);
@@ -207,7 +211,7 @@ export default {
       })
 
     },
-
+    
     resetCeckBox() {
       this.isAllChecked = true;
       this.checkedCategories = [];
@@ -232,34 +236,66 @@ export default {
     },
 
     clickCheckBox(value) {
-
-      if (this.checkedCategories.includes(value)) {
-        const index = this.checkedCategories.indexOf(value);
-        this.checkedCategories.splice(index, 1);
+      if (this.index === 0 && this.categoryId){
+        if(this.categoryId == 1){
+          this.name = 'Italiano'
+        } else if (this.categoryId == 2){
+          this.name = 'Pizza'
+        } else if (this.categoryId == 3){
+          this.name = 'Cinese'
+        } else if (this.categoryId == 4){
+          this.name = 'Hamburger'
+        } else {
+          this.name = 'All'
+          this.index = 2;
+        }
+        if(this.name !== 'All'){
+          this.checkedCategories.push(this.name);
+        }
+        this.index ++;
+        this.filteredRestaurant();
+        console.log(this.checkedCategories);
       } else {
-        this.checkedCategories.push(value);
-      }
+        if (this.checkedCategories.includes(value)) {
+          const index = this.checkedCategories.indexOf(value);
+          this.checkedCategories.splice(index, 1);
+        } else {
+          this.checkedCategories.push(value);
+          console.log(value);
+        }
 
-      if (this.checkedCategories.length > 0) {
-        let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
-        checkboxprova[0].checked = false
-        this.isAllChecked = false;
-        console.log(this.isAllChecked)
-      } else {
-        this.isAllChecked = true;
-        this.filteredRestaurants = [];
+        if (this.checkedCategories.length > 0) {
+          let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
+          checkboxprova[0].checked = false
+          this.isAllChecked = false;
+          console.log(this.isAllChecked)
+        } else {
+          this.isAllChecked = true;
+          this.filteredRestaurants = [];
+        }
+        console.log(this.checkedCategories);
+        this.index ++;
+        this.filteredRestaurant();
       }
-      this.filteredRestaurant();
     },
 
     filteredRestaurant() {
       if (this.checkedCategories.length > 0) {
+        console.log(this.checkedCategories.length);
         this.filteredRestaurants = this.restaurants.filter(restaurante =>
           this.checkedCategories.every(category => restaurante.categories.includes(category))
         );
       } else if (this.isAllChecked) {
         this.filteredRestaurants = [];
       }
+      console.log(this.filteredRestaurants);
+    },
+
+    firstFilter() {
+      this.filteredRestaurants = this.restaurants.filter(restaurant => {
+        console.log(this.categoryId);
+        return restaurant.categories.includes(this.name);
+      });
     },
 
     getRestaurantsRanked(data) {
@@ -269,12 +305,15 @@ export default {
 
     prova(data) {
       console.log("cao");
-    }
+    },
   },
-
+  computed: {
+    
+  },
   mounted() {
     this.getData();
-
+    console.log(this.categoryId);
+    
   }
 }
 </script>
