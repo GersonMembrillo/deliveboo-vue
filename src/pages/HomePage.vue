@@ -16,6 +16,12 @@
   <div class="bg-white center">
     <div class="container center">
       <div class="p-5">
+ categories
+        <h2 class="text-center pb-4">I migliori ristoranti e molto altro</h2>
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-3 category" v-for="(category, index) in categories" :key="category.id">
+            <a class="text-decoration-none text-white" @click="navigateToCategory(category.id)">
+
 
         <div class="mt-5 mb-5">
           <div class="d-grid">
@@ -42,12 +48,26 @@
 
           <div class="col-6 col-md-4 col-lg-3 category">
             <a class="text-decoration-none text-white" href="#">
+
               <div class="position-relative">
-                <img class="position-absolute"
-                  src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
-                  alt="">
+                <img class="position-absolute" :src="'http://localhost:8000/storage/' + category.image" :alt="category.name">
               </div>
             </a>
+
+            <p class="text-center">{{ category.name }}</p>
+          </div>
+        </div>
+
+        <div class="div cat-all mt-2">
+          <a class="text-black text-decoration-none" href="">
+            <div class="row category-all" @click="navigateToCategory('all')">
+              <div class="d-flex justify-content-center align-items-center">
+                <h3 class="text-uppercase">Tutti i ristoranti</h3>
+              </div>
+            </div>
+          </a>
+        </div>
+
             <p class="fs-4 pt-2">Pizza</p>
           </div>
 
@@ -74,6 +94,7 @@
           </div>
         </div>
 
+ main
       </div>
     </div>
 
@@ -280,6 +301,11 @@
 </template>
 
 <script>
+ categories
+import axios from 'axios';
+import HomeNav from '../components/HomeNav.vue';
+
+ main
 import ShoppingCart from '../components/ShoppingCart.vue';
 export default {
   components: {
@@ -288,11 +314,32 @@ export default {
   data() {
     return {
       showHeader: false,
+ categories
+      cartKey: 0,
+      categories: []
+
       videoUrl: "https://www.youtube.com/embed/QAnLqf2PTrg"
+ main
     };
+  },
+  methods: {
+    getData() {
+      axios.get(`http://localhost:8000/api/mixed`).then((res) => {
+          this.categories = res.data.results.categories;
+          console.log(this.categories);
+      }).catch((errors) => {
+          console.log(errors);
+      })
+    },
+    navigateToCategory(categoryId) {
+      // console.log(categoryId);
+      this.$router.push(`/restaurants/${categoryId}`);
+    }
+
   },
   mounted() {
     this.$emit('update:showHeader', false);
+    this.getData();
   },
 };
 </script>

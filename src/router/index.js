@@ -2,8 +2,14 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import Restaurants from '../pages/Restaurants.vue';
 import ShowRestaurant from '../pages/ShowRestaurant.vue';
+ categories
+// import RestaurantListPage from '../pages/RestaurantListPage.vue';
+import { triggerRef } from 'vue';
+// import NotFound from '../pages/NotFound.vue';
+
 import NotFound from '../pages/NotFound.vue';
 import CheckoutPage from '../pages/CheckoutPage.vue';
+ main
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -14,9 +20,10 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path: '/restaurants',
+			path: '/restaurants/:categoryId',
 			name: 'all-restaurants',
 			component: Restaurants,
+			props: true,
 		},
 		{
 			path: '/restaurants/:slug',
