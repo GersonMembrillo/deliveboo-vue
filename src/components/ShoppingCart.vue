@@ -1,48 +1,59 @@
 <template>
-    <div class="cart" :class="{ 'cart-resized': store.cartResized }">
-        <div @click="store.cartResized = !store.cartResized" class="line">
-            <div class="resizer">
-                <i class="fa-solid" :class="[{ 'fa-chevron-left': store.cartResized }, { 'fa-chevron-right': !store.cartResized }]"></i>
-            </div>
+    <!-- Button trigger modal -->
+    <div class="cart-icon" :class="{ 'custom-p': totalQuantity > 0 }" data-bs-toggle="modal" data-bs-target="#cartModal">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <div v-if="totalQuantity > 0" :class="[{ 'changed-items': even() }, { 'changed-items': !even() }]">
+            {{ totalQuantity }}
         </div>
-        <div class="wrapper">
-            <h3 class="pb-3">Your DeliveBoo!</h3>
+    </div>
 
-            <table v-if="items.length > 0" class="table table-light">
-                <tbody>
-                    <tr v-for="item in items" class="align-middle">
-                        <td>
-                            {{ item.quantity }}x
-                        </td>
+    <!-- Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="cartModalLabel">Your DeliveBoo!</h5> -->
+                    <div class="d-flex flex-column gap-2">
+                        <h4>Your DeliveBoo!</h4>
+                        <h6 v-if="restaurantName != ''" data-bs-dismiss="modal" @click="goToRestaurant()" class="text-primary text-decoration-underline cursor-pointer">{{ restaurantName }}</h6>
+                    </div>
+                    <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table v-if="items.length > 0" class="table table-light">
+                        <tbody>
+                            <tr v-for="item in items" class="align-middle">
+                                <td>
+                                    <span class="small-x">x</span> {{ item.quantity }}
+                                </td>
 
-                        <td>
-                            {{ item.name }}
-                        </td>
+                                <td>
+                                    {{ item.name }}
+                                </td>
 
-                        <td>
-                            {{ item.price }}
-                        </td>
+                                <td>
+                                    {{ item.price }}
+                                </td>
 
-                        <td>
-                            <span class="d-flex gap-2 fs-4">
-                                <i @click="addToCart(item)" class="fa-solid fa-circle-plus green"></i>
-                                <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus red"></i>
-                            </span>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="4">
-                            <button type="button" class="btn btn-outline-warning text-uppercase fs-6">
-                                order {{ totalQuantity }} items for {{ totalPrice }} &euro;
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div v-else class="img-container">
-                <img src="/img/Food.png" alt="cart_image">
-                <small>Add some products to your cart!</small>
+                                <td>
+                                    <span class="d-flex gap-2 fs-4">
+                                        <i @click="addToCart(item)" class="fa-solid fa-circle-plus green"></i>
+                                        <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus red"></i>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div v-else class="img-container">
+                        <img src="/img/Food.png" alt="cart_image">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button v-if="items.length > 0" @click="goToCheckout()" type="button" class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
+                        order {{ totalQuantity }} items for {{ totalPrice }} &euro;
+                    </button>
+                    <span v-else class="w-100 text-center">This is your cart. Add some items!</span>
+                </div>
             </div>
         </div>
     </div>
@@ -57,6 +68,7 @@ export default {
     data() {
         return {
             items: [],
+            restaurantName: "",
             store: store
         }
     },
@@ -89,8 +101,8 @@ export default {
                     quantity: quantity
                 });
 
+            this.items = items;
             localStorage.setItem("cartItems", JSON.stringify(items));
-            this.$emit("cartChanged");
         },
 
         removeFromCart(oldItem) {
@@ -115,13 +127,45 @@ export default {
             else
                 items.splice(index, 1);
 
+            this.items = items;
             localStorage.setItem("cartItems", JSON.stringify(items));
-            this.$emit("cartChanged");
+
+            if (items.length < 1) {
+                localStorage.setItem("cartRestaurantSlug", "");
+                localStorage.setItem("cartRestaurantName", "");
+
+                this.restaurantName = "";
+            }
         },
+
+        goToCheckout() {
+            this.store.checkoutQuantity = this.totalQuantity;
+            this.store.checkoutPrice = this.totalPrice;
+
+            this.$router.push({
+                name: 'checkout'
+            });
+        },
+
+        goToRestaurant() {
+            this.$router.push({
+                name: 'restaurant-show',
+                params: { slug: localStorage.getItem("cartRestaurantSlug") }
+            });
+        },
+
+        even() {
+            let result = false;
+
+            if (this.totalQuantity % 2 == 0)
+                result = true;
+
+            return result;
+        }
     },
 
     computed: {
-        totalPrice(){
+        totalPrice() {
             let totalPrice = 0;
 
             this.items.forEach((item) => {
@@ -131,7 +175,7 @@ export default {
             return totalPrice;
         },
 
-        totalQuantity(){
+        totalQuantity() {
             let totalQuantity = 0;
 
             this.items.forEach((item) => {
@@ -146,78 +190,57 @@ export default {
         let items = localStorage.getItem("cartItems");
         items = JSON.parse(items);
         this.items = items;
+
+        this.restaurantName = localStorage.getItem("cartRestaurantName");
     },
 }
 </script>
 
 <style lang="scss" scoped>
-.cart {
+.modal-body {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.cart-icon {
     position: fixed;
-    top: 100px;
-    right: 0;
-    padding: 0 0.5rem 0 3rem;
-    width: 350px;
-    height: 400px;
-    border: 1px solid black;
-    border-radius: 30% 0 0 30%;
-    background-color: whitesmoke;
-    z-index: 10000;
-    overflow: hidden;
-    color: black;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    ;
-    transition: all 300ms;
-}
-
-.cart-resized {
-    width: 2.5rem;
-    padding: 0;
-    color: transparent;
-    overflow: hidden;
-}
-
-.resizer {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    transform: translateY(-50%);
+    bottom: 8px;
+    left: 8px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgb(161, 81, 0);
+    border-radius: 50%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: white;
-}
-
-.wrapper {
-    overflow-y: auto;
-    overflow-x: hidden;
-    text-align: center;
-    width: 100%;
-    height: 100%;
-    padding: 1rem 0;
-}
-
-.line {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2.5rem;
-    height: 100%;
+    gap: 2px;
     background-color: #ff9933;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: white;
     cursor: pointer;
-    transition: background-color 300ms;
+    z-index: 1000;
+    transition: all 300ms;
 
     &:hover {
-        background-color: #ffae5e;
+        transform: scale(1.08);
+    }
+
+    &:active {
+        background-color: #fcff60;
     }
 }
 
-td {
+.custom-p {
+    padding-top: 5px;
+}
+
+.modal {
     word-wrap: break-word;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .green {
@@ -231,20 +254,41 @@ td {
 }
 
 .img-container {
-    margin-top: 2.5rem;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 2.5rem;
     padding: 0 0.5rem;
     white-space: nowrap;
 
     img {
-        width: 140px;
+        width: 40%;
+        padding: 2rem 0;
     }
 }
 
-h3 {
-    white-space: nowrap;
+.changed-items {
+    animation: change-color linear 300ms;
+}
+
+@keyframes change-color {
+    from {
+        color: white;
+    }
+
+    50% {
+        color: rgb(255, 56, 56);
+    }
+
+    to {
+        color: white;
+    }
+}
+
+.small-x {
+    font-size: 0.8rem;
+    opacity: 0.5;
 }
 </style>
