@@ -318,7 +318,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {}
 
 #restaurants-category {
   .img-restaurant {
