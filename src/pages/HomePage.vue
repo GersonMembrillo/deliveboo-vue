@@ -255,21 +255,36 @@
             </router-link>
             <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
           </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="text-center">
-            <a href="">
-              <img src="img/collab.png" alt="partner">
-            </a>
-            <p class="fw-bold fs-4 pt-3">Diventa un Partner!</p>
+          <div class="curved">
+            <img class="bg-white" src="img/curve.jpg" alt="curve.png">
           </div>
-        </div>
-        <div class="col-12 col-md-4">
-          <div class="text-center">
-            <a href="http://localhost:8000/register">
-              <img src="img/restaurant.png" alt="activity">
-            </a>
-            <p class="fw-bold fs-4 pt-3">Registra la tua attività!</p>
+          <div class="container bottom mt-3">
+            <div class="row d-flex justify-content-between mb-5">
+              <div class="col-12 col-md-4">
+                <div class="text-center">
+                  <a href="">
+                    <img src="img/rider.png" alt="rider">
+                  </a>
+                  <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="text-center">
+                    <a href="">
+                      <img src="img/collab.png" alt="partner">
+                    </a>
+                    <p class="fw-bold fs-4 pt-3">Diventa un Partner!</p>
+                  </div>
+                </div>
+                <div class="col-12 col-md-4">
+                  <div class="text-center">
+                    <a href="http://localhost:8000/register">
+                      <img src="img/restaurant.png" alt="activity">
+                    </a>
+                    <p class="fw-bold fs-4 pt-3">Registra la tua attività!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -16,6 +16,15 @@
           </a>
         </div>
       </div>
+      <nav class="navbar py-3">
+        <div class="container">
+          <div class="navbar-logo">
+            <a href="http://localhost:5174/">
+              <img src="/img/deliveboo3.png" alt="deliveboo_logo" />
+            </a>
+          </div>
+        </div>
+      </nav>
     </nav>
   </nav>
 </template>
