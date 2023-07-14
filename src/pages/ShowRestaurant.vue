@@ -2,8 +2,6 @@
   <ShoppingCart :key="cartKey" />
 
   <LoaderComponent v-if="loading" />
-  <div>
-  </div>
   <div class="container" v-if="!loading">
     <div class="row mt-4 mb-4">
       <div class="col-12 col-lg-8 mb-2 mb-lg-0">
@@ -39,9 +37,11 @@
         <div class="card">
           <div id="carouselExample" class="carousel slide custom-carousel">
             <div class="carousel-inner">
-              <div class="carousel-item" v-for="(image, index) in restaurant.images" :class="{ 'active': index === activeIndex }" :key="image.id">
+              <div class="carousel-item" v-for="(image, index) in restaurant.images"
+                :class="{ 'active': index === activeIndex }" :key="image.id">
                 <div class="carousel-image-container">
-                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100" alt="...">
+                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
+                    alt="...">
                 </div>
               </div>
             </div>
@@ -69,7 +69,8 @@
                 <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
               </div>
               <div class="card-image menù-image">
-                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name" style="width: 90%; height: 12rem;">
+                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
+                  style="width: 90%; height: 12rem;">
               </div>
               <div class="card-body">
                 <div class="card-text">
@@ -135,7 +136,7 @@ export default {
       let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
       let cartRestaurantName = localStorage.getItem("cartRestaurantName");
 
-      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug) 
+      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)
         if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
           localStorage.setItem("cartItems", JSON.stringify([]));
         else
@@ -240,5 +241,4 @@ h2.menù-title {
 
 .fa-circle-minus:hover {
   color: #ff9933;
-}
-</style>
+}</style>

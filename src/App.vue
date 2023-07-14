@@ -22,8 +22,7 @@ export default {
   name: 'App',
   components: {
     FooterVue,
-    HomeNav,
-
+    HomeNav
   },
 
   methods: {

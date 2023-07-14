@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar pt-3 pb-2">
+  <nav class="navbar pt-3 pb-3">
     <div class="container">
       <div class="navbar-logo">
         <a href="http://localhost:5174/">
@@ -34,7 +34,7 @@
 }
 
 .navbar-buttons button {
-  padding: 13px 28px;
+  padding: 10px 28px;
   background-color: white;
 }
 </style>

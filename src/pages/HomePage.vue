@@ -24,7 +24,8 @@
                 <img class="position-absolute"
                   src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
                   alt="">
-                <img class="position-absolute" :src="'http://localhost:8000/storage/' + category.image" :alt="category.name">
+                <img class="position-absolute" :src="'http://localhost:8000/storage/' + category.image"
+                  :alt="category.name">
               </div>
             </a>
             <p>{{ category.name }}</p>
@@ -211,7 +212,7 @@
     </div>
   </div>
 
-  <div class="curved pb-4">
+  <div class="curved pb-5">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
 
@@ -219,9 +220,9 @@
     <div class="row grid d-flex justify-content-between mb-5">
       <div class="col-12 col-md-4">
         <div class="text-center">
-          <a href="">
+          <router-link to="/rider">
             <img src="img/rider.png" alt="rider">
-          </a>
+          </router-link>
           <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
         </div>
       </div>
@@ -264,10 +265,10 @@ export default {
   methods: {
     getData() {
       axios.get(`http://localhost:8000/api/mixed`).then((res) => {
-          this.categories = res.data.results.categories;
-          console.log(this.categories);
+        this.categories = res.data.results.categories;
+        console.log(this.categories);
       }).catch((errors) => {
-          console.log(errors);
+        console.log(errors);
       })
     },
     navigateToCategory(categoryId) {
