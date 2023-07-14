@@ -60,8 +60,6 @@
             </div>
           </a>
         </div>
-
-        <p class="mb-0">{{ category.name }}</p>
       </div>
     </div>
   </div>
