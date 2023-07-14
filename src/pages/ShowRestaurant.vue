@@ -54,7 +54,7 @@
                   <div class="col-sm-12 col-md-3 pb-3 d-none d-md-block">
                     <div class="card border border-0 shadow bg-body-tertiary rounded-4">
                       <p class="m-0 pt-3 ps-3 fw-bold fs-5"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
-                      <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
+                      <p class="m-0 pt-3 ps-3 p-selected" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
                       <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
                       <p>
                         <button class="button-style pt-2 ps-3 pb-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">Categorie</button>
@@ -71,7 +71,7 @@
                   <div class="col-sm-12 col-md-3 pb-3 d-sm-block d-md-none">
                     <div class="card border border-0 shadow bg-body-tertiary rounded-4">
                       <p class="m-0 pt-3 ps-3 fw-bold fs-5 text-center"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
-                      <p class="m-0 pt-3 ps-3" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
+                      <p class="m-0 pt-3 ps-3 p-selected" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
                       <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
                       <div class="p-3">
                         <div class="d-flex align-items-center">
@@ -238,25 +238,28 @@ export default {
         console.log(error);
       }).finally(() => {
         this.loading = false;
+        this.selectedAll = true
       })
     },
 
     filterSearchDish() {
+    
     this.nomePiatto = this.nomePiatto.toLowerCase();
     this.filteredDish = [];
   
     if (this.nomePiatto !== "") {
+
       this.dishesCategories.forEach((dish) => {
         let dishName = dish.name.toLowerCase();
         if (dishName.includes(this.nomePiatto)) {
           this.filteredDish.push(dish);
         }
       });
+      this.selectedCategory = null
+      this.selectedAll = false
       this.showAllDishes = false;
-      console.log('nascondi tutti i piatti',this.showAllDishes)
     } else {
       this.showAllDishes = true;
-      console.log('mostra tutti i piatti', this.showAllDishes)
     }
 
     
@@ -272,6 +275,7 @@ export default {
     
   },
   filterCategory(category, index){
+    this.nomePiatto = ''
     if (this.selectedCategory === index) {
     this.resetFilter();
     return;
@@ -312,6 +316,7 @@ export default {
   },
 
   resetFilter(){
+    this.nomePiatto = ''
     this.selectedAll = !this.selectedAll
     this.selectedCategory = null;
     this.showAllDishes = true;

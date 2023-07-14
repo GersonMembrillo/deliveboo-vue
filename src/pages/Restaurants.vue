@@ -4,15 +4,22 @@
   </div>
   <section v-if="!loading" class="w-100 bg-light">
     <ShoppingCart />
-    <div id="restaurants-category" class="container container-sm-fluid container-md-fluid container-lg-fluid">
+    <div id="restaurants-category" class="container-sm-fluid container-md-fluid container-lg-fluid container-xl">
       <div class="row pt-5">
         <div class="col-12">
           <div class="row">
+            <div class="row">
+              <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                <div class="input-group mb-4">
+                    <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                </div>
+              </div>
+            </div>
             <div class="col-md-4 col-lg-3 col-xl-2 pe-3 pt-2">
-              <div class="card d-none d-md-block">
+              <div class="card d-none d-md-block border border-0 shadow-sm rounded-4 rounded">
                 <div class="card-body">
                   <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" :checked="isAllChecked && index > 1" :value="all"
+                    <input type="checkbox" class="form-check-input inputt" :checked="isAllChecked && index > 1" :value="all"
                       @click="resetCeckBox()">
                     <label class="form-check-label">all</label>
                   </div>
@@ -23,15 +30,15 @@
                   </div>
                 </div>
               </div>
-              <div class="d-md-none mt-2 mb-5">
+              <div class="d-md-none mt-2 mb-4 ps-2">
                 <p>
                   <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample" role="button"
                     aria-expanded="false" aria-controls="collapseExample">
-                    Cerca il tuo Ristorante
+                    <i class="fa-solid fa-filter"></i>
                   </a>
                 </p>
                 <div class="collapse" id="collapseExample">
-                  <div class="card">
+                  <div class="card rounded-4 rounded">
                     <div class="card-body">
                       <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all"
@@ -48,17 +55,17 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1">
-              <div>
+            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1 && !notFound">
+              <div class="">
                 <div class="row ps-2 pe-2 mb-3">
                   <div class="col-12">
                     <h3>Ristoranti a domicilio nella tua zona</h3>
                     <span v-if="filteredRestaurants.length == 0"
-                      class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">Tutti</span>
+                      class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">Tutti</span>
                   </div>
                 </div>
-                <div :class="{ 'opacity-0': loading }">
-                  <div class="row ps-2 pe-2 mb-5">
+                <div>
+                  <div class="row ps-2 pe-2 mb-5" v-if="showPopular">
                     <p class="fs-4 mb-3">I più richiesti</p>
                     <div class="col-sm-6 col-lg-4 col-xl-3 pb-4" v-for="restaurant in restaurantsRanked"
                       :key="restaurant.id">
@@ -117,15 +124,15 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-else>
+            <div class="col-md-8 col-lg-9 col-xl-10" v-if="filteredRestaurants.length != 0 && !notFound">
               <div class="row ps-2 pe-2 mb-3">
                 <div class="col-12">
                   <h3 class="">Ristoranti filtrati</h3>
                   <span v-for="category in checkedCategories" :key="category"
-                    class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded">{{ category }}</span>
+                    class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">{{ category }}</span>
                 </div>
               </div>
-              <div class="row ps-2 pe-2 mb-5 min-h" :class="{ 'opacity-0': loading }">
+              <div class="row ps-2 pe-2 mb-5" :class="{ 'opacity-0': loading }">
                 <p class="fs-4 mb-3">Le tue scelte</p>
                 <div class="col-sm-6 col-lg-4 col-xl-3 pb-4" v-for="restaurant in filteredRestaurants"
                   :key="restaurant.id">
@@ -144,6 +151,27 @@
                       </div>
                     </div>
                   </router-link>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 col-lg-9 col-xl-10" v-if="notFound">
+              <div class="row ps-2 pe-2 mb-3">
+                <div class="col-12">
+                  <h3 class="">Ristoranti filtrati</h3>
+                  <span v-for="category in checkedCategories" :key="category"
+                    class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">{{ category }}</span>
+                </div>
+              </div>
+              <div class="row ps-2 pe-2 mb-5 mt-5 pt-5 pb-5">
+                <div class="col-sm-5 col-lg-5 col-xl-3 pb-4 m-auto">
+                    <div class="card bg-light border border-0">
+                      <div class="pt-2">
+                        <p class="m-0 ps-2 text-center">Ci dispiace, non sono stati trovati ristoranti con le categorie selezionate</p>
+                        <div class="pt-1 text-center mt-3">
+                          <a class="btn btn-primary" href="#" role="button" @click="resetCeckBox()">Inzia da capo</a>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -171,15 +199,20 @@ export default {
     return {
       categories: [],
       restaurants: [],
+      restaurantsAll: [],
       filteredRestaurants: [],
+      searchRestaurants: [],
       checkedCategories: [],
       restaurantsRanked: [],
       all: 'all',
+      nameRestaurants: '',
       isAllChecked: true,
+      showPopular: true,
       categoryChecked: false,
       currentPage: 1,
       lastPage: null,
       loading: true,
+      notFound: false,
       index: 0,
       name: ''
     }
@@ -187,6 +220,8 @@ export default {
   },
   methods: {
     getData(page) {
+
+
       let params = {
         'page': page
       };
@@ -197,35 +232,45 @@ export default {
         //dati che verranno stampati
         this.categories = res.data.results.categories;
         this.restaurants = res.data.results.restaurants.data;
+        this.restaurantsAll = res.data.results.restaurantsAll;
         this.clickCheckBox();
-        this.getRestaurantsRanked(this.restaurants)
+        this.getRestaurantsRanked(this.restaurantsAll)
+       
       }).catch((error) => {
         console.log(error);
       }).finally(() => {
         this.loading = false;
+        this.notFound = false
+        this.filteredRestaurants = []
       })
+
+      if(page != undefined){
+        this.showPopular = false
+        this.isAllChecked = true
+      }
+      if(page == 1){
+        this.showPopular = true
+        this.isAllChecked = true
+      }
+      
 
     },
     
     resetCeckBox() {
+      this.notFound = false
       this.isAllChecked = true;
       this.checkedCategories = [];
       this.filteredRestaurants = [];
       let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
-      //console.log(checkboxprova)
       checkboxprova.forEach((item, index) => {
 
         if (index == 0) {
           item.checked = true;
           this.isAllChecked = true
-          //console.log(this.isAllChecked)
-          console.log(item.checked)
           this.filteredRestaurants = []
         } else {
           item.checked = false;
           this.isAllChecked = false
-          //console.log(this.isAllChecked)
-          console.log(item.checked)
         }
       })
     },
@@ -249,26 +294,24 @@ export default {
         }
         this.index ++;
         this.filteredRestaurant();
-        console.log(this.checkedCategories);
       } else {
         if (this.checkedCategories.includes(value)) {
           const index = this.checkedCategories.indexOf(value);
           this.checkedCategories.splice(index, 1);
         } else {
           this.checkedCategories.push(value);
-          console.log(value);
         }
 
         if (this.checkedCategories.length > 0) {
           let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
           checkboxprova[0].checked = false
           this.isAllChecked = false;
-          console.log(this.isAllChecked)
         } else {
           this.isAllChecked = true;
+          let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
+          checkboxprova[0].checked = true
           this.filteredRestaurants = [];
         }
-        console.log(this.checkedCategories);
         this.index ++;
         this.filteredRestaurant();
       }
@@ -276,19 +319,52 @@ export default {
 
     filteredRestaurant() {
       if (this.checkedCategories.length > 0) {
-        console.log(this.checkedCategories.length);
-        this.filteredRestaurants = this.restaurants.filter(restaurante =>
-          this.checkedCategories.every(category => restaurante.categories.includes(category))
-        );
-      } else if (this.isAllChecked) {
-        this.filteredRestaurants = [];
+    this.filteredRestaurants = this.restaurantsAll.filter(restaurante =>
+      this.checkedCategories.every(category => restaurante.categories.includes(category))
+    );
+    this.notFound = this.filteredRestaurants.length === 0;
+  } else {
+    this.filteredRestaurants = [];
+    this.notFound = false;
+  }
+      
+    },
+
+    filterSearch() {
+      if (this.nameRestaurants != '') {
+        let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
+        checkboxprova.forEach(item => {
+        if(item.checked){
+          item.checked = false
+          this.checkedCategories = []
+        } 
+      })
+        this.nameRestaurants = this.nameRestaurants.toLowerCase()
+        this.filteredRestaurants = []
+        this.restaurantsAll.forEach(restaurant => {
+          let name = restaurant.name.toLowerCase()
+          if (name.includes(this.nameRestaurants)) {
+            this.filteredRestaurants.push(restaurant)
+          }
+        })
+      } else{
+        this.isAllChecked = true
+        this.filteredRestaurants = []
+        let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
+        checkboxprova.forEach(item => {
+        console.log(item.value)
+        if(item.value == 'all'){
+          item.checked = true
+        } else{
+          item.checked = false
+        }
+      })
+
       }
-      console.log(this.filteredRestaurants);
     },
 
     firstFilter() {
       this.filteredRestaurants = this.restaurants.filter(restaurant => {
-        console.log(this.categoryId);
         return restaurant.categories.includes(this.name);
       });
     },
@@ -297,18 +373,12 @@ export default {
       data.sort((a, b) => b.total_orders - a.total_orders);
       this.restaurantsRanked = data.slice(0, 7);
     },
-
-    prova(data) {
-      console.log("cao");
-    },
   },
   computed: {
     
   },
   mounted() {
     this.getData();
-    console.log(this.categoryId);
-    
   }
 }
 </script>
@@ -324,12 +394,17 @@ export default {
 }
 
 .min-h {
-  min-height: 600px;
+  min-height: 1200px;
 }
 
 .position-abs {
   position: absolute;
   top: 0;
   z-index: 10000;
+}
+
+.badge-style{
+  background-color: rgb(255, 204, 0) !important;
+  color: rgb(255, 255, 255) !important;
 }
 </style>
