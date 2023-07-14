@@ -1,4 +1,5 @@
 <template>
+  <nav class="navbar pt-3 pb-3">
   <nav class="navbar py-3">
     <div class="container">
       <div class="navbar-logo">
@@ -34,7 +35,7 @@
 }
 
 .navbar-buttons button {
-  padding: 13px 28px;
+  padding: 10px 28px;
   background-color: white;
 }
 </style>

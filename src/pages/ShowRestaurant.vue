@@ -1,5 +1,31 @@
 <template>
   <ShoppingCart :key="cartKey" />
+
+  <LoaderComponent v-if="loading" />
+  <div class="container" v-if="!loading">
+    <div class="row mt-4 mb-4">
+      <div class="col-12 col-lg-8 mb-2 mb-lg-0">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h1 class="fw-bold">{{ restaurant.name }}</h1>
+              <div class="mx-2">
+                <span><i class="fa-solid fa-location-dot mx-2"></i></span>
+                {{ restaurant.address }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title">
+              <h3 class="fw-bold">Categories</h3>
+            </div>
+            <div class="card-text d-flex d-lg-block">
+              <div v-for="category in restaurant.categories" :key="category.id">
+                <h5><span class="badge rounded-pill text-white me-2 mb-0">{{ category.name }}</span></h5>
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
@@ -21,6 +47,18 @@
         </div>
       </div>
     </div>
+    <div class="row mb-4">
+      <div class="col-12">
+        <div class="card">
+          <div id="carouselExample" class="carousel slide custom-carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="(image, index) in restaurant.images"
+                :class="{ 'active': index === activeIndex }" :key="image.id">
+                <div class="carousel-image-container">
+                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
+                    alt="...">
+                </div>
+              </div>
     <section class="w-100 bg-light position-relative">
       <div v-if="!loading" id="carouselExample" class="carousel slide custom-carousel">
         <div class="carousel-inner">
@@ -39,6 +77,21 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+    </div>
+    <div class="row mb-5">
+      <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 col-md-6 col-lg-4" v-for="dish in restaurant.dishes" :key="dish.id">
+            <div class="card text-center p-3 mb-4" style="height: 30rem;">
+              <div class="text-center pb-2">
+                <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
+                <h5 class="fw-bold">{{ dish.name }}</h5>
+                <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
+              </div>
+              <div class="card-image menù-image">
+                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
+                  style="width: 90%; height: 12rem;">
       <div class="container-sm-fluid container-xl ps-sm-5 pe-sm-5 ps-xl-0 pe-xl-0">
         <div class="row pb-5 mb-4">
           <div class="col-12">
@@ -346,7 +399,7 @@ export default {
       //console.log(localStorage)
       //console.log(cartRestaurantName)
 
-      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug) 
+      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)
         if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
           localStorage.setItem("cartItems", JSON.stringify([]));
         else
@@ -532,5 +585,4 @@ export default {
 
 .fa-circle-minus:hover {
   color: #ff9933;
-}
-</style>
+}</style>
