@@ -46,17 +46,6 @@
                   alt="">
                 <img class="position-absolute" :src="'http://localhost:8000/storage/' + category.image"
                   :alt="category.name">
-              </div>
-            </a>
-            <p>{{ category.name }}</p>
-          </div>
-        </div>
-        <div class="div cat-all mt-2">
-          <a class="text-black text-decoration-none" href="">
-            <div class="row category-all" @click="navigateToCategory('all')">
-              <div class="d-flex justify-content-center align-items-center">
-                <h3 class="text-uppercase">Tutti i ristoranti</h3>
-              </div>
               </a>
             </div>
 
@@ -243,7 +232,6 @@
     </div>
   </div>
 
-  <div class="curved pb-5">
   <div class="curved">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
@@ -251,9 +239,9 @@
     <div class="row d-flex justify-content-between mb-5">
       <div class="col-12 col-md-4">
         <div class="text-center">
-          <router-link to="/rider">
+          <a href="">
             <img src="img/rider.png" alt="rider">
-          </router-link>
+          </a>
           <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
         </div>
       </div>
