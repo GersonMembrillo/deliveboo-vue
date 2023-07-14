@@ -1,31 +1,7 @@
 <template>
-  <ShoppingCart :key="cartKey" />
-
-  <LoaderComponent v-if="loading" />
-  <div class="container" v-if="!loading">
-    <div class="row mt-4 mb-4">
-      <div class="col-12 col-lg-8 mb-2 mb-lg-0">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title">
-              <h1 class="fw-bold">{{ restaurant.name }}</h1>
-              <div class="mx-2">
-                <span><i class="fa-solid fa-location-dot mx-2"></i></span>
-                {{ restaurant.address }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-lg-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title">
-              <h3 class="fw-bold">Categories</h3>
-            </div>
-            <div class="card-text d-flex d-lg-block">
-              <div v-for="category in restaurant.categories" :key="category.id">
-                <h5><span class="badge rounded-pill text-white me-2 mb-0">{{ category.name }}</span></h5>
+  <div class="d-block d-lg-none">
+    <ShoppingCart :key="cartKey" />
+  </div>
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
@@ -47,18 +23,6 @@
         </div>
       </div>
     </div>
-    <div class="row mb-4">
-      <div class="col-12">
-        <div class="card">
-          <div id="carouselExample" class="carousel slide custom-carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item" v-for="(image, index) in restaurant.images"
-                :class="{ 'active': index === activeIndex }" :key="image.id">
-                <div class="carousel-image-container">
-                  <img :src="'http://localhost:8000/storage/' + image.image" class="object-fit-cover w-100 h-100"
-                    alt="...">
-                </div>
-              </div>
     <section class="w-100 bg-light position-relative">
       <div v-if="!loading" id="carouselExample" class="carousel slide custom-carousel">
         <div class="carousel-inner">
@@ -77,21 +41,6 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    </div>
-    <div class="row mb-5">
-      <h2 class="fw-bold text-uppercase text-white menù-title">menù</h2>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-12 col-md-6 col-lg-4" v-for="dish in restaurant.dishes" :key="dish.id">
-            <div class="card text-center p-3 mb-4" style="height: 30rem;">
-              <div class="text-center pb-2">
-                <div class="pb-3 fs-3"><i @click="addToCart(dish)" class="fa-solid fa-circle-plus plus-button"></i></div>
-                <h5 class="fw-bold">{{ dish.name }}</h5>
-                <h6><span class="text-secondary">Category:</span> {{ dish.category }}</h6>
-              </div>
-              <div class="card-image menù-image">
-                <img class="object-fit-cover" :src="'http://localhost:8000/storage/' + dish.image" :alt="dish.name"
-                  style="width: 90%; height: 12rem;">
       <div class="container-sm-fluid container-xl ps-sm-5 pe-sm-5 ps-xl-0 pe-xl-0">
         <div class="row pb-5 mb-4">
           <div class="col-12">
@@ -234,9 +183,8 @@
                 </div>
               </div>
               <div class="col-md-4 col-lg-3 d-none d-lg-block">
-                <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
-                  <h4>questo potrebbe essere un carrello</h4>
-                  <p>sparisce a dimensione 800 circa</p>
+                <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 shopping-cart-wrapper">
+                  <ShoppingCart2 :key="cartKey" />
                 </div>
               </div>
             </div>
@@ -252,13 +200,15 @@
 import axios from 'axios';
 import LoaderComponent from '../components/LoaderComponent.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
+import ShoppingCart2 from '../components/ShoppingCart2.vue';
 
 export default {
   name: 'ShowRestaurant',
 
   components: {
     LoaderComponent,
-    ShoppingCart
+    ShoppingCart,
+    ShoppingCart2
   },
 
   data() {
@@ -528,6 +478,16 @@ export default {
   top: 0;
   z-index: 10000;
 }
+
+.shopping-cart-wrapper {
+  position: fixed;
+  top: 30%;
+  z-index: 10000;
+}
+
+
+
+
 // h1 {
 //   font-size: 5rem;
 // }
