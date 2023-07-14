@@ -407,4 +407,9 @@ export default {
   background-color: rgb(255, 204, 0) !important;
   color: rgb(255, 255, 255) !important;
 }
+
+input[type="checkbox"]:checked {
+  background-color: rgb(255, 204, 0) !important;
+  border: 0;
+}
 </style>

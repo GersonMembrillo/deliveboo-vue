@@ -1,5 +1,7 @@
 <template>
-  <ShoppingCart :key="cartKey" />
+  <div class="d-block d-lg-none">
+    <ShoppingCart :key="cartKey" />
+  </div>
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
@@ -181,9 +183,8 @@
                 </div>
               </div>
               <div class="col-md-4 col-lg-3 d-none d-lg-block">
-                <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
-                  <h4>questo potrebbe essere un carrello</h4>
-                  <p>sparisce a dimensione 800 circa</p>
+                <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 shopping-cart-wrapper">
+                  <ShoppingCart2 :key="cartKey" />
                 </div>
               </div>
             </div>
@@ -199,13 +200,15 @@
 import axios from 'axios';
 import LoaderComponent from '../components/LoaderComponent.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
+import ShoppingCart2 from '../components/ShoppingCart2.vue';
 
 export default {
   name: 'ShowRestaurant',
 
   components: {
     LoaderComponent,
-    ShoppingCart
+    ShoppingCart,
+    ShoppingCart2
   },
 
   data() {
@@ -475,6 +478,16 @@ export default {
   top: 0;
   z-index: 10000;
 }
+
+.shopping-cart-wrapper {
+  position: fixed;
+  top: 30%;
+  z-index: 10000;
+}
+
+
+
+
 // h1 {
 //   font-size: 5rem;
 // }
