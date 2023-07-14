@@ -349,7 +349,7 @@ export default {
       //console.log(localStorage)
       //console.log(cartRestaurantName)
 
-      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug) 
+      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)
         if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
           localStorage.setItem("cartItems", JSON.stringify([]));
         else
@@ -545,5 +545,4 @@ export default {
 
 .fa-circle-minus:hover {
   color: #ff9933;
-}
-</style>
+}</style>

@@ -2,12 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
 import Restaurants from '../pages/Restaurants.vue';
 import ShowRestaurant from '../pages/ShowRestaurant.vue';
-// import RestaurantListPage from '../pages/RestaurantListPage.vue';
+
 import { triggerRef } from 'vue';
-// import NotFound from '../pages/NotFound.vue';
 
 import NotFound from '../pages/NotFound.vue';
 import CheckoutPage from '../pages/CheckoutPage.vue';
+import RiderPage from '../pages/RiderPage.vue';
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -33,12 +33,16 @@ const router = createRouter({
 			name: "not-found",
 			component: NotFound
 		},
-
 		{
 			path: '/checkout',
 			name: 'checkout',
 			component: CheckoutPage,
 		},
+		{
+			path: '/rider',
+			name: 'rider',
+			component: RiderPage,
+		}
 		// {
 		// 	path: '/about',
 		// 	name: 'about',

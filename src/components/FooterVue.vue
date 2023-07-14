@@ -1,5 +1,5 @@
 <template>
-  <footer class="position-relative bg-dark py-5 d-none d-sm-block">
+  <footer class="position-relative bg-dark py-5 d-none d-sm-block pt-5 pb-5">
     <img class="moto position-absolute" src="/img/moto_dude.svg" alt="rider_img">
     <div class="container">
       <div class="row">
