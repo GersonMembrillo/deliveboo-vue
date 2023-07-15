@@ -8,23 +8,26 @@
       <div class="row pt-5">
         <div class="col-12">
           <div class="row">
-            <div class="row">
+            <div class="row sticky">
               <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4">
-                <div class="input-group mb-4">
-                    <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                <div class="input-group">
+                  <input type="text" class="shadow rounded-4 mb-2 input form-control border border-0 rounded-4 rounded-4"
+                    v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
                 </div>
               </div>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-2 pe-3 pt-2">
-              <div class="card d-none d-md-block border border-0 shadow-sm rounded-4 rounded">
+              <div class="card d-none d-md-block border border-0 shadow rounded-4 rounded sticky-2">
                 <div class="card-body">
                   <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input inputt" :checked="isAllChecked && index > 1" :value="all"
-                      @click="resetCeckBox()">
+                    <input type="checkbox" class="form-check-input inputt" :checked="isAllChecked && index > 1"
+                      :value="all" @click="resetCeckBox()">
                     <label class="form-check-label">all</label>
                   </div>
                   <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
-                    <input type="checkbox" class="form-check-input" :checked="this.categoryId == category.id ? true : false" :id="category.id" :value="category.name"
+                    <input type="checkbox" class="form-check-input"
+                      :checked="this.categoryId == category.id ? true : false" :id="category.id" :value="category.name"
                       @click="clickCheckBox(category.name)">
                     <label class="form-check-label" :for="category.id">{{ category.name }}</label>
                   </div>
@@ -55,9 +58,10 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1 && !notFound">
+            <div class="col-md-8 col-lg-9 col-xl-10 position-relative"
+              v-if="filteredRestaurants.length === 0 && index > 1 && !notFound">
               <div class="">
-                <div class="row ps-2 pe-2 mb-3">
+                <div class="row ps-2 pe-2 pt-3 pb-3 mb-3 mt-2 me-2 ms-2 sticky-2 bg-white shadow rounded-4">
                   <div class="col-12">
                     <h3>Ristoranti a domicilio nella tua zona</h3>
                     <span v-if="filteredRestaurants.length == 0"
@@ -164,14 +168,15 @@
               </div>
               <div class="row ps-2 pe-2 mb-5 mt-5 pt-5 pb-5">
                 <div class="col-sm-5 col-lg-5 col-xl-3 pb-4 m-auto">
-                    <div class="card bg-light border border-0">
-                      <div class="pt-2">
-                        <p class="m-0 ps-2 text-center">Ci dispiace, non sono stati trovati ristoranti con le categorie selezionate</p>
-                        <div class="pt-1 text-center mt-3">
-                          <a class="btn btn-primary" href="#" role="button" @click="resetCeckBox()">Inzia da capo</a>
-                        </div>
+                  <div class="card bg-light border border-0">
+                    <div class="pt-2">
+                      <p class="m-0 ps-2 text-center">Ci dispiace, non sono stati trovati ristoranti con le categorie
+                        selezionate</p>
+                      <div class="pt-1 text-center mt-3">
+                        <a class="btn btn-primary" href="#" role="button" @click="resetCeckBox()">Inzia da capo</a>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -235,7 +240,7 @@ export default {
         this.restaurantsAll = res.data.results.restaurantsAll;
         this.clickCheckBox();
         this.getRestaurantsRanked(this.restaurantsAll)
-       
+
       }).catch((error) => {
         console.log(error);
       }).finally(() => {
@@ -244,18 +249,18 @@ export default {
         this.filteredRestaurants = []
       })
 
-      if(page != undefined){
+      if (page != undefined) {
         this.showPopular = false
         this.isAllChecked = true
       }
-      if(page == 1){
+      if (page == 1) {
         this.showPopular = true
         this.isAllChecked = true
       }
-      
+
 
     },
-    
+
     resetCeckBox() {
       this.notFound = false
       this.isAllChecked = true;
@@ -276,23 +281,23 @@ export default {
     },
 
     clickCheckBox(value) {
-      if (this.index === 0 && this.categoryId){
-        if(this.categoryId == 1){
+      if (this.index === 0 && this.categoryId) {
+        if (this.categoryId == 1) {
           this.name = 'Italiano'
-        } else if (this.categoryId == 2){
+        } else if (this.categoryId == 2) {
           this.name = 'Pizza'
-        } else if (this.categoryId == 3){
+        } else if (this.categoryId == 3) {
           this.name = 'Cinese'
-        } else if (this.categoryId == 4){
+        } else if (this.categoryId == 4) {
           this.name = 'Hamburger'
         } else {
           this.name = 'All'
           this.index = 2;
         }
-        if(this.name !== 'All'){
+        if (this.name !== 'All') {
           this.checkedCategories.push(this.name);
         }
-        this.index ++;
+        this.index++;
         this.filteredRestaurant();
       } else {
         if (this.checkedCategories.includes(value)) {
@@ -312,33 +317,33 @@ export default {
           checkboxprova[0].checked = true
           this.filteredRestaurants = [];
         }
-        this.index ++;
+        this.index++;
         this.filteredRestaurant();
       }
     },
 
     filteredRestaurant() {
       if (this.checkedCategories.length > 0) {
-    this.filteredRestaurants = this.restaurantsAll.filter(restaurante =>
-      this.checkedCategories.every(category => restaurante.categories.includes(category))
-    );
-    this.notFound = this.filteredRestaurants.length === 0;
-  } else {
-    this.filteredRestaurants = [];
-    this.notFound = false;
-  }
-      
+        this.filteredRestaurants = this.restaurantsAll.filter(restaurante =>
+          this.checkedCategories.every(category => restaurante.categories.includes(category))
+        );
+        this.notFound = this.filteredRestaurants.length === 0;
+      } else {
+        this.filteredRestaurants = [];
+        this.notFound = false;
+      }
+
     },
 
     filterSearch() {
       if (this.nameRestaurants != '') {
         let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
         checkboxprova.forEach(item => {
-        if(item.checked){
-          item.checked = false
-          this.checkedCategories = []
-        } 
-      })
+          if (item.checked) {
+            item.checked = false
+            this.checkedCategories = []
+          }
+        })
         this.nameRestaurants = this.nameRestaurants.toLowerCase()
         this.filteredRestaurants = []
         this.restaurantsAll.forEach(restaurant => {
@@ -347,18 +352,18 @@ export default {
             this.filteredRestaurants.push(restaurant)
           }
         })
-      } else{
+      } else {
         this.isAllChecked = true
         this.filteredRestaurants = []
         let checkboxprova = document.querySelectorAll('input[type="checkbox"]')
         checkboxprova.forEach(item => {
-        console.log(item.value)
-        if(item.value == 'all'){
-          item.checked = true
-        } else{
-          item.checked = false
-        }
-      })
+          console.log(item.value)
+          if (item.value == 'all') {
+            item.checked = true
+          } else {
+            item.checked = false
+          }
+        })
 
       }
     },
@@ -375,7 +380,7 @@ export default {
     },
   },
   computed: {
-    
+
   },
   mounted() {
     this.getData();
@@ -384,7 +389,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 #restaurants-category {
   .img-restaurant {
     width: 100%;
@@ -403,7 +407,7 @@ export default {
   z-index: 10000;
 }
 
-.badge-style{
+.badge-style {
   background-color: rgb(255, 204, 0) !important;
   color: rgb(255, 255, 255) !important;
 }
@@ -411,5 +415,17 @@ export default {
 input[type="checkbox"]:checked {
   background-color: rgb(255, 204, 0) !important;
   border: 0;
+}
+
+div.sticky {
+  position: sticky;
+  top: 20px;
+  z-index: 10000;
+}
+
+div.sticky-2 {
+  position: sticky;
+  top: 75px;
+  z-index: 10000;
 }
 </style>

@@ -1,31 +1,20 @@
 <template>
-  <nav class="navbar pt-3 pb-3">
-    <nav class="navbar py-3">
-      <div class="container">
-        <div class="navbar-logo">
-          <a href="http://localhost:5174/">
-            <img src="/img/deliveboo3.png" alt="deliveboo_logo" />
-          </a>
-        </div>
-        <div class="navbar-buttons">
-          <a href="http://localhost:8000">
-            <button type="button" class="btn btn-outline-warning text-uppercase fs-5">
-              <i class="fa-solid fa-house-user px-1"></i>
-              accedi
-            </button>
-          </a>
-        </div>
+  <nav class="navbar py-3">
+    <div class="container">
+      <div class="navbar-logo">
+        <a href="http://localhost:5174/">
+          <img src="/img/deliveboo3.png" alt="deliveboo_logo" />
+        </a>
       </div>
-      <nav class="navbar py-3">
-        <div class="container">
-          <div class="navbar-logo">
-            <a href="http://localhost:5174/">
-              <img src="/img/deliveboo3.png" alt="deliveboo_logo" />
-            </a>
-          </div>
-        </div>
-      </nav>
-    </nav>
+      <div class="navbar-buttons">
+        <a href="http://localhost:8000">
+          <button type="button" class="btn btn-outline-warning text-uppercase fs-5">
+            <i class="fa-solid fa-house-user px-1"></i>
+            accedi
+          </button>
+        </a>
+      </div>
+    </div>
   </nav>
 </template>
 

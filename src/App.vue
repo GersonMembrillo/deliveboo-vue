@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+
     <header>
       <HomeNav />
     </header>
@@ -7,9 +8,11 @@
     <main>
       <router-view></router-view>
     </main>
+
     <footer>
       <FooterVue />
     </footer>
+
   </div>
 </template>
 
@@ -22,7 +25,8 @@ export default {
   name: 'App',
   components: {
     FooterVue,
-    HomeNav
+    HomeNav,
+
   },
 
   methods: {

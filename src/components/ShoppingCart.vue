@@ -15,9 +15,11 @@
                     <!-- <h5 class="modal-title" id="cartModalLabel">Your DeliveBoo!</h5> -->
                     <div class="d-flex flex-column gap-2">
                         <h4>Your DeliveBoo!</h4>
-                        <h6 v-if="restaurantName != ''" data-bs-dismiss="modal" @click="goToRestaurant()" class="text-primary text-decoration-underline cursor-pointer">{{ restaurantName }}</h6>
+                        <h6 v-if="restaurantName != ''" data-bs-dismiss="modal" @click="goToRestaurant()"
+                            class="text-primary text-decoration-underline cursor-pointer">{{ restaurantName }}</h6>
                     </div>
-                    <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close align-self-start" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <table v-if="items.length > 0" class="table table-light">
@@ -49,7 +51,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button v-if="items.length > 0" @click="goToCheckout()" type="button" class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
+                    <button v-if="items.length > 0" @click="goToCheckout()" type="button"
+                        class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
                         order {{ totalQuantity }} items for {{ totalPrice }} &euro;
                     </button>
                     <span v-else class="w-100 text-center">This is your cart. Add some items!</span>
@@ -237,6 +240,8 @@ export default {
 
 .modal {
     word-wrap: break-word;
+    background-color: rgb(155, 155, 155) !important;
+    z-index: 13000;
 }
 
 .cursor-pointer {
@@ -290,5 +295,4 @@ export default {
 .small-x {
     font-size: 0.8rem;
     opacity: 0.5;
-}
-</style>
+}</style>
