@@ -237,6 +237,8 @@ export default {
 
 .modal {
     word-wrap: break-word;
+    background-color: rgb(155, 155, 155) !important;
+    z-index: 13000;
 }
 
 .cursor-pointer {
