@@ -10,8 +10,8 @@
           <div class="row">
             <div class="row sticky">
               <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4">
-                <div class="input-group">
-                  <input type="text" class="shadow rounded-4 mb-2 input form-control border border-0 rounded-4 rounded-4"
+                <div class="input-group mb-4">
+                  <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4"
                     v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
                 </div>
@@ -415,17 +415,5 @@ export default {
 input[type="checkbox"]:checked {
   background-color: rgb(255, 204, 0) !important;
   border: 0;
-}
-
-div.sticky {
-  position: sticky;
-  top: 20px;
-  z-index: 10000;
-}
-
-div.sticky-2 {
-  position: sticky;
-  top: 75px;
-  z-index: 10000;
 }
 </style>

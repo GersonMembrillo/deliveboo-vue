@@ -31,10 +31,10 @@
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
 
-  <div class="bg-white center">
+  <div class="bg-white center py-5">
     <div class="container center">
 
-      <h2 class="text-center text-uppercase fw-bold my-5">I migliori ristoranti e molto altro</h2>
+      <h2 class="text-center text-uppercase fw-bold">I migliori ristoranti e molto altro</h2>
       <div class="mb-3 mx-4 mx-xl-5">
         <div class="row text-center row-center">
           <div class="mb-4 col-6 col-md-4 col-lg-3 category text-center " v-for="(category, index) in categories"
