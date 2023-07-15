@@ -5,7 +5,7 @@
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
-  <section v-if="!loading">
+  <section v-if="!loading" class="position-relative">
     <div v-if="popUpDish" class="position-abs d-flex align-items-center justify-content-center">
       <div class="container">
         <div class="row">
@@ -46,7 +46,7 @@
           <div class="col-12">
             <div class="row m-position">
               <div class="col-md-12 col-lg-9">
-                <div class="card p-3 pt-4 pb-4  border border-0 shadow bg-body-tertiary rounded-4">
+                <div class="card p-3 pt-4 pb-4 border border-0 shadow bg-body-tertiary rounded-4 sticky">
                   <h1>{{ restaurant.name }}</h1>
                   <div class="d-flex align-items-center">
                     <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{ category.name }}</span>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="row pt-3">
                   <div class="col-sm-12 col-md-3 pb-3 d-none d-md-block">
-                    <div class="card border border-0 shadow bg-body-tertiary rounded-4">
+                    <div class="card border border-0 shadow bg-body-tertiary rounded-4 sticky-2">
                       <p class="m-0 pt-3 ps-3 fw-bold fs-5"><i class="fa-solid fa-square-poll-horizontal"></i> Sezioni</p>
                       <p class="m-0 pt-3 ps-3 p-selected" :class="{'selected' : selectedAll}" @click="resetFilter()">Tutti i piatti</p>
                       <!-- <p class="m-0 pt-3 ps-3">I più venduti</p> -->
@@ -84,13 +84,15 @@
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-9"> 
-                    <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 min-h">
-                      <div class="input-group mb-4">
-                        <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nomePiatto" @keyup="filterSearchDish" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                    <div class="card border border-0 shadow bg-body-tertiary rounded-4 min-h">
+                      <div class="bg-light shadow rounded-4 sticky-2 mb-3">
+                        <div class="input-group pt-4 pb-4 p-3">
+                          <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nomePiatto" @keyup="filterSearchDish" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                        </div>
                       </div>
-                      <h3 v-if="showAllDishes && !filteredCategory">Tutti i piatti</h3>
-                      <h3 v-if="!showAllDishes && !notFound || filteredCategory">La tua ricerca</h3>
-                      <div class="row max-h mt-2">
+                      <h3 v-if="showAllDishes && !filteredCategory" class="ps-3 pt-3">Tutti i piatti</h3>
+                      <h3 v-if="!showAllDishes && !notFound && filteredCategory" class="ps-3 pt-3">La tua ricerca</h3>
+                      <div class="row max-h mt-2 p-3">
                         <div v-if="showAllDishes && !filteredCategory" class="row">
                           <div class="col-12 col-xxl-6 pt-2 pb-2" v-for="dish in restaurant.dishes" :key="dish.id">
                             <div class="card p-3 border border-0 shadow-sm rounded-3 h-100 d-flex flex-column">
@@ -262,16 +264,17 @@ export default {
       this.selectedAll = false
       this.showAllDishes = false;
     } else {
+      this.selectedCategory = null
+      this.selectedAll = true
+      this.filteredCategory = false
       this.showAllDishes = true;
     }
 
     
     if(this.nomePiatto !== "" && this.filteredDish.length == 0){
       this.notFound = true
-      console.log('non trovati', this.notFound)
     } else{
       this.notFound = false
-      console.log('trovati', this.notFound)
     }
 
 
@@ -289,7 +292,8 @@ export default {
   this.filteredDish = [];
   this.selectedCategory = index;
 
-  if (category !== '') {
+  if (category || this.selectedCategory == index) {
+    console.log('category !== ""')
     this.dishesCategories.forEach((dish) => {
       if (dish.category.includes(category)) {
         this.filteredDish.push(dish);
@@ -297,6 +301,7 @@ export default {
     });
     this.filteredCategory = true;
   } else {
+    console.log('category == ""')
     this.filteredCategory = false;
   }
   },
@@ -427,10 +432,7 @@ export default {
   max-height: 400px;
 }
 
-// .max-h{
-//   max-height: 800px;
-//   overflow: auto;
-// }
+
 
 .min-h{
   min-height: 300px;
@@ -475,9 +477,9 @@ export default {
 }
 
 .position-abs {
-  position: absolute;
+  position: fixed;
   top: 0;
-  z-index: 10000;
+  z-index: 11000;
 }
 
  
@@ -487,71 +489,15 @@ export default {
 div.sticky {
   position: sticky;
   top: 20px;
+  z-index: 10000;
+}
+
+div.sticky-2{
+  position: sticky;
+  top: 160px;
+  z-index: 10000;
 }
 
 
 
-
-
-
-
-
-
-// h1 {
-//   font-size: 5rem;
-// }
-
-// .badge {
-//   background-color: #ff9933;
-// }
-
-// .carousel-image-container {
-//   width: 100%;
-//   height: 350px;
-//   /* altezza predefinita per dimensioni diverse da md */
-// }
-
-// /* Media query per dimensioni medie (md) */
-// @media (min-width: 768px) {
-//   .carousel-image-container {
-//     height: 550px;
-//     /* altezza desiderata per md */
-//   }
-// }
-
-// .rotate {
-//   transform: rotate(180deg);
-// }
-
-// .card {
-//   cursor: pointer;
-// }
-
-// h2.menù-title {
-//   font-size: 4rem;
-// }
-
-.menù-image {
-  transition: transform .15s ease-in-out;
-  transition-property: transform;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0s;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.plus-button:hover {
-  font-size: 30px;
-  color: #ff9933;
-}
-
-.fa-circle-plus:hover {
-  color: #ff9933;
-}
-
-.fa-circle-minus:hover {
-  color: #ff9933;
-}</style>
+</style>

@@ -8,15 +8,15 @@
       <div class="row pt-5">
         <div class="col-12">
           <div class="row">
-            <div class="row">
+            <div class="row sticky">
               <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4">
-                <div class="input-group mb-4">
-                    <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
+                <div class="input-group">
+                    <input type="text" class="shadow rounded-4 mb-2 input form-control border border-0 rounded-4 rounded-4" v-model="nameRestaurants" @keyup="filterSearch" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca piatto">
                 </div>
               </div>
             </div>
             <div class="col-md-4 col-lg-3 col-xl-2 pe-3 pt-2">
-              <div class="card d-none d-md-block border border-0 shadow-sm rounded-4 rounded">
+              <div class="card d-none d-md-block border border-0 shadow rounded-4 rounded sticky-2">
                 <div class="card-body">
                   <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input inputt" :checked="isAllChecked && index > 1" :value="all"
@@ -57,7 +57,7 @@
             </div>
             <div class="col-md-8 col-lg-9 col-xl-10 position-relative" v-if="filteredRestaurants.length === 0 && index > 1 && !notFound">
               <div class="">
-                <div class="row ps-2 pe-2 mb-3">
+                <div class="row ps-2 pe-2 pt-3 pb-3 mb-3 mt-2 me-2 ms-2 sticky-2 bg-white shadow rounded-4">
                   <div class="col-12">
                     <h3>Ristoranti a domicilio nella tua zona</h3>
                     <span v-if="filteredRestaurants.length == 0"
@@ -411,5 +411,17 @@ export default {
 input[type="checkbox"]:checked {
   background-color: rgb(255, 204, 0) !important;
   border: 0;
+}
+
+div.sticky {
+  position: sticky;
+  top: 20px;
+  z-index: 10000;
+}
+
+div.sticky-2{
+  position: sticky;
+  top: 75px;
+  z-index: 10000;
 }
 </style>
