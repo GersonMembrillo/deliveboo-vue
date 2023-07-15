@@ -22,9 +22,9 @@
               </a>
             </li>
             <li>
-              <a href="#" class="text-decoration-none text-white">
-                Diventa un rider
-              </a>
+              <router-link to="/rider" class="text-decoration-none text-white">
+                <p class="mb-0">Diventa un rider</p>
+              </router-link>
             </li>
             <li>
               <a href="http://localhost:8000/register" class="text-decoration-none text-white">
