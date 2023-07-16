@@ -2,7 +2,7 @@
     <div style="background-color: #ff9933;">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-12 p-4">
                     <div class="text-center text-white pt-3 pb-5">
                         <h3>Unisciti a noi!</h3>
                         <h1 class="fw-bold text-uppercase">consegna dove e quando vuoi</h1>
@@ -12,10 +12,10 @@
                             </button>
                         </a>
                     </div>
-                    <div class="row pt-5 pb-5">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-white">
+                    <div class="row pb-5">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 text-white px-4">
                             <h2>Scegli tu dove e quando guadagnare in scooter, bici o auto.</h2>
-                            <div class="pt-3">
+                            <div class="p-4">
                                 <div>
                                     <i class="fa-solid fa-clock align-top left-icon"></i>
                                     <span class="fs-3 px-3">Scegli tu quando lavorare</span>
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 px-4">
                             <div class="card p-3">
                                 <div class="card-title px-3 pt-1">
                                     <h2 class="fw-bold">Cosa ti serve</h2>
@@ -62,11 +62,11 @@
                     </div>
                     <div class="row mt-5 pb-5">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-8">
-                            <div class="card mx-auto mb-5" style="width: 80%;">
+                            <div class="card mx-auto mb-5" style="width: 95%;">
                                 <img class="card-image-top" src="/img/rider-deliveroo.jpg" alt="rider_img">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4 px-4">
                             <div class="text-white">
                                 <h2 class="fw-bold fs-1">Sempre al tuo fianco!</h2>
                                 <p class="fs-4 pt-2">
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="row text-white g-4 pt-3 pb-5">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold dark-purple">Tariffe competitive per raggiungere i tuoi obiettivi
                                 </h3>
@@ -95,7 +95,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold red">Come aumentare i tuoi guadagni</h3>
                                 <p class="fs-4 pt-2">
@@ -103,7 +103,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold plum">Assistenza, formazione e tranquillità</h3>
                                 <p class="fs-5 pt-2">
@@ -114,7 +114,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold green">Pagamenti regolari</h3>
                                 <p class="fs-4 pt-2">
@@ -122,7 +122,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold dark-green-water">Kit professionale gratuito</h3>
                                 <p class="fs-5 pt-2">
@@ -132,7 +132,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-4 px-4">
                             <div>
                                 <h3 class="fs-2 fw-bold dark-green">Migliaia di ristoranti partner</h3>
                                 <p class="fs-5 pt-2">
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row pt-3 pb-5">
+                    <div class="row pt-3">
                         <div class="col-12 text-center text-white p-4">
                             <h2 class="fw-bold">Inviare la candidatura è un gioco da ragazzi!</h2>
                             <p class="fs-4">
@@ -157,10 +157,10 @@
                             </a>
                         </div>
                     </div>
-                    <div class="row pt-3 pb-5">
+                    <div class="row pb-5">
                         <div class="col-12">
                             <h2 class="text-center text-uppercase fw-bold fs-1 pt-5 pb-5">domande frequenti</h2>
-                            <div class="accordion pb-5" id="accordionExample">
+                            <div class="accordion px-4" id="accordionExample">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button fs-2" type="button" data-bs-toggle="collapse"
@@ -342,4 +342,5 @@ button {
 
 .accordion {
     --bs-accordion-border-color: rgb(197, 197, 197);
-}</style>
+}
+</style>
