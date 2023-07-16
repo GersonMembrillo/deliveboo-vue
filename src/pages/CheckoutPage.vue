@@ -118,7 +118,6 @@
 import braintree from 'braintree-web';
 import paypal from 'paypal-checkout';
 import axios from "axios";
-import { store } from "../store.js";
 
 export default {
     data() {
@@ -129,7 +128,6 @@ export default {
             customerName: "",
             customerAddress: "",
             checkoutCompleted: false,
-            store: store,
             amount: null,
             quantity: null
         }
@@ -190,8 +188,7 @@ export default {
                         localStorage.setItem("cartItems", JSON.stringify([]));
                         localStorage.setItem("cartRestaurantSlug", "");
                         localStorage.setItem("cartRestaurantName", "");
-                        this.store.checkoutQuantity = null;
-                        this.store.checkoutPrice = null;
+                        sessionStorage.clear();
                     });
                 })
                     .catch(err => {
@@ -202,8 +199,8 @@ export default {
         }
     },
     mounted() {
-        this.quantity = this.store.checkoutQuantity;
-        this.amount = this.store.checkoutPrice;
+        this.quantity = sessionStorage.getItem("checkoutQuantity");
+        this.amount = sessionStorage.getItem("checkoutPrice");
 
         document.documentElement.scrollTop = 0;
 
