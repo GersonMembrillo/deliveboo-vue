@@ -1,33 +1,38 @@
 <template>
   <div>
-    <div v-if="totalQuantity > 0" :class="[{ 'changed-items': even() }, { 'changed-items': !even() }]">
-      {{ totalQuantity }}
+    <div v-if="totalQuantity > 0" :class="[{ 'changed-items': even() }, { 'changed-items': !even() }]" class="d-flex justify-content-between">
+      <span class="fs-4">{{ totalQuantity }}</span>
+
+      <span @click="goToRestaurant()" class="text-primary text-decoration-underline cursor-pointer">{{restaurantName}}</span>
     </div>
 
-    <table v-if="items.length > 0" class="table table-light">
-      <tbody>
-        <tr v-for="item in items" :key="item" class="align-middle">
-          <td>
-            <span class="small-x">x</span> {{ item.quantity }}
-          </td>
+    <div v-if="items.length > 0" class="table-responsive">
+      <hr>
+      <table class="table table-light">
+        <tbody>
+          <tr v-for="item in items" :key="item" class="align-middle">
+            <td>
+              <span class="d-flex align-items-center gap-1"><span class="small-x">x</span> {{ item.quantity }}</span>
+            </td>
 
-          <td>
-            {{ item.name }}
-          </td>
+            <td>
+              {{ item.name }}
+            </td>
 
-          <td>
-            {{ item.price }}
-          </td>
+            <td>
+              {{ item.price }}
+            </td>
 
-          <td>
-            <span class="d-flex gap-2 fs-4">
-              <i @click="addToCart(item)" class="fa-solid fa-circle-plus green"></i>
-              <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus red"></i>
-            </span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td>
+              <span class="d-flex gap-2 fs-4">
+                <i @click="addToCart(item)" class="fa-solid fa-circle-plus green"></i>
+                <i @click="removeFromCart(item)" class="fa-solid fa-circle-minus red"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div v-else class="text-center">
       <img class="img-food" src="/img/Food.png" alt="cart_image">
@@ -49,6 +54,7 @@ export default {
   data() {
     return {
       items: [],
+      restaurantName: ""
     }
   },
 
@@ -130,7 +136,11 @@ export default {
       sessionStorage.setItem("checkoutPrice", this.totalPrice);
 
       window.location.href = "/checkout";
-    }
+    },
+
+    goToRestaurant() {
+            window.location.href = "/restaurants/" + localStorage.getItem("cartRestaurantSlug");
+        }
   },
 
   computed: {
@@ -146,6 +156,8 @@ export default {
 
     totalQuantity() {
       let totalQuantity = 0;
+
+      this.restaurantName = localStorage.getItem("cartRestaurantName");
 
       this.items.forEach((item) => {
         totalQuantity += item.quantity;
@@ -165,5 +177,28 @@ export default {
 <style lang="scss" scoped>
 .img-food {
   width: 150px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.green {
+    color: rgb(141, 255, 47);
+    cursor: pointer;
+}
+
+.red {
+    color: rgb(255, 67, 67);
+    cursor: pointer;
+}
+
+.small-x {
+    font-size: 0.8rem;
+    opacity: 0.5;
+}
+
+td {
+  word-wrap: break-word;
 }
 </style>

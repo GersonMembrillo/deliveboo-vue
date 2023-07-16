@@ -220,7 +220,7 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     color: white;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 10000;
     transition: all 300ms;
 
     &:hover {
@@ -292,4 +292,5 @@ export default {
 .small-x {
     font-size: 0.8rem;
     opacity: 0.5;
-}</style>
+}
+</style>
