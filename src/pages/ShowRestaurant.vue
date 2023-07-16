@@ -2,6 +2,7 @@
   <div class="d-block d-lg-none">
     <ShoppingCart :key="cartKey" />
   </div>
+  <WarningModal @cartCleared="cartKey++" />
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
@@ -239,6 +240,7 @@ import LoaderComponent from '../components/LoaderComponent.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 import ShoppingCart2 from '../components/ShoppingCart2.vue';
 import DishShow from '../components/DishShow.vue';
+import WarningModal from '../components/WarningModal.vue';
 
 export default {
   name: 'ShowRestaurant',
@@ -247,7 +249,8 @@ export default {
     LoaderComponent,
     ShoppingCart,
     ShoppingCart2,
-    DishShow
+    DishShow,
+    WarningModal
   },
 
   data() {
@@ -395,12 +398,11 @@ export default {
 
       let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
       let cartRestaurantName = localStorage.getItem("cartRestaurantName");
-
-      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)
-        if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
-          localStorage.setItem("cartItems", JSON.stringify([]));
-        else
-          return;
+      
+      if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)  {
+        new bootstrap.Modal(document.querySelector("#warningModal")).show();
+        return;
+      }
 
       cartRestaurantSlug = this.restaurant.slug;
       cartRestaurantName = this.restaurant.name;

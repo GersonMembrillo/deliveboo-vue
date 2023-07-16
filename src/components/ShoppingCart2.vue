@@ -94,26 +94,31 @@ export default {
       let index = -1;
       let quantity = 1;
 
-      for (let i = 0; i < items.length && index < 0; i++) {
+      for (let i = 0; i < items.length && index < 0; i++)
         if (oldItem.id == items[i].id) {
           index = i;
           quantity = items[i].quantity - 1;
         }
-      }
 
-      if (quantity > 0) {
+      if (quantity > 0)
         items.splice(index, 1, {
           id: oldItem.id,
           name: oldItem.name,
           price: oldItem.price,
           quantity: quantity
         });
-      } else {
+      else
         items.splice(index, 1);
-      }
 
       this.items = items;
       localStorage.setItem("cartItems", JSON.stringify(items));
+
+      if (items.length < 1) {
+        localStorage.setItem("cartRestaurantSlug", "");
+        localStorage.setItem("cartRestaurantName", "");
+
+        this.restaurantName = "";
+      }
     },
 
     even() {
@@ -121,11 +126,11 @@ export default {
     },
 
     goToCheckout() {
-            sessionStorage.setItem("checkoutQuantity", this.totalQuantity);
-            sessionStorage.setItem("checkoutPrice", this.totalPrice);
-            
-            window.location.href = "/checkout";
-        }
+      sessionStorage.setItem("checkoutQuantity", this.totalQuantity);
+      sessionStorage.setItem("checkoutPrice", this.totalPrice);
+
+      window.location.href = "/checkout";
+    }
   },
 
   computed: {
