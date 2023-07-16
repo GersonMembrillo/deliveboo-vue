@@ -12,18 +12,26 @@
           <div class="m-auto col-sm-12 col-md-9 col-lg-8 col-xl-6">
             <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
               <p @click="popUpDish = false"><i class="fa-solid fa-xmark fs-3"></i></p>
-              <img class="w-50 m-auto rounded-3" :src="'http://localhost:8000/storage/' + dataDish.image"
-                :alt="dataDish.name">
+              <div>
+                <div class="position-relative text-center">
+                  <img class="w-50 rounded-3" :src="'http://localhost:8000/storage/' + dataDish.image" :alt="dataDish.name">
+                  <p v-if="totalQuantity(dataDish) != 0" class="circle rounded-circle">{{ totalQuantity(dataDish) }}</p>
+                </div>
+              </div>
               <div class="pe-5 ps-5 mt-4">
                 <p class="m-0 fs-4">{{ dataDish.name }}</p>
                 <p class="fs-6">{{ dataDish.description }}</p>
                 <p class="fs-6">{{ dataDish.price }} euro</p>
+                <p class="m-0" @click="addToCart(dataDish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                <p class="m-0" @click="removeFromCart(dataDish)"><i class="fa-solid fa-circle-minus fs-3"></i></p>
+                <p>{{totalPrice(dataDish)}} euro</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- <DishShow/> -->
     <section class="w-100 bg-light">
       <div v-if="!loading" id="carouselExample" class="carousel slide custom-carousel">
         <div class="carousel-inner">
@@ -135,6 +143,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                   <p class="m-0">{{ dish.price }} euro</p>
                                   <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                                  <p class="m-0" @click="removeFromCart(dish)">-</p>
                                 </div>
                               </div>
                             </div>
@@ -229,6 +238,7 @@ import axios from 'axios';
 import LoaderComponent from '../components/LoaderComponent.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
 import ShoppingCart2 from '../components/ShoppingCart2.vue';
+import DishShow from '../components/DishShow.vue';
 
 export default {
   name: 'ShowRestaurant',
@@ -236,7 +246,8 @@ export default {
   components: {
     LoaderComponent,
     ShoppingCart,
-    ShoppingCart2
+    ShoppingCart2,
+    DishShow
   },
 
   data() {
@@ -257,6 +268,8 @@ export default {
       filteredCategory: false,
       closeButton: true,
       cartKey: 0,
+      restaurantName: "",
+      numDishCart: 0,
     }
   },
   methods: {
@@ -375,11 +388,13 @@ export default {
     },
 
     addToCart(newItem) {
+
+      this.numDishCart++
+
       sessionStorage.clear();
+
       let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
       let cartRestaurantName = localStorage.getItem("cartRestaurantName");
-      //console.log(localStorage)
-      //console.log(cartRestaurantName)
 
       if (cartRestaurantSlug != "" && cartRestaurantSlug != this.restaurant.slug)
         if (window.confirm("Warning! You are adding an item from " + this.restaurant.name + ". If you proceed with this action you will lose all the items from " + cartRestaurantName + ". \n\nAre you sure to proceed?"))
@@ -421,8 +436,60 @@ export default {
       localStorage.setItem("cartItems", JSON.stringify(items));
       this.cartKey++;
     },
+    removeFromCart(newItem) {
+      this.numDishCart--
+      let items = localStorage.getItem("cartItems");
+      items = JSON.parse(items);
+
+      let index = -1;
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].id === newItem.id) {
+          index = i;
+          break;
+        }
+      }
+
+      if (index >= 0) {
+        if (items[index].quantity > 1) {
+          items[index].quantity--;
+        } else {
+          items.splice(index, 1);
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify(items));
+        this.cartKey--;
+      }
+    },
+    totalPrice(data) {
+    let items = localStorage.getItem("cartItems");
+    items = JSON.parse(items);
+
+    let totalPrice = 0;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === data.id) {
+        totalPrice += items[i].price * items[i].quantity;
+      }
+    }
+
+    return totalPrice;
+  },
+  totalQuantity(data) {
+    let items = localStorage.getItem("cartItems");
+    items = JSON.parse(items);
+
+    let totalQuantity = 0;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].id === data.id) {
+        totalQuantity += items[i].quantity;
+      }
+    }
+
+    return totalQuantity;
+  }
+
 
   },
+  
   mounted() {
     this.getData();
   },
@@ -525,4 +592,25 @@ div.sticky-2 {
   position: sticky;
   top: 160px;
   z-index: 10000;
-}</style>
+}
+
+.position-relative {
+  position: relative;
+ 
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  position: absolute;
+  top: -20px;
+  right: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+</style>

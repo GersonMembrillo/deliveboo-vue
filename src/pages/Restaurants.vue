@@ -111,8 +111,10 @@
                 </div>
               </div>
             </div>
+
             <div class="col-md-8 col-lg-9 col-xl-10" v-if="1 > 2">
               <div class="row ps-2 pe-2 mb-3">
+
                 <div class="col-12">
                   <h3 class="">Ristoranti filtrati</h3>
                   <span v-for="category in checkedCategories" :key="category" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">{{ category }}</span>
@@ -462,5 +464,17 @@ export default {
 input[type="checkbox"]:checked {
   background-color: rgb(255, 204, 0) !important;
   border: 0;
+}
+
+div.sticky {
+  position: sticky;
+  top: 20px;
+  z-index: 10000;
+}
+
+div.sticky-2 {
+  position: sticky;
+  top: 75px;
+  z-index: 10000;
 }
 </style>
