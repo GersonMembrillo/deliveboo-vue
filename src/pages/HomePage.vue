@@ -1,7 +1,7 @@
 <template>
   <ShoppingCart />
   <div class="" style="background-color: #ff9933;">
-    <div class="container top">
+    <div class="container top pb-4 pb-lg-0">
 
       <div class="d-lg-flex align-items-center justify-content-center text-center" style="margin: 0 auto;">
 
@@ -233,7 +233,7 @@
     </div>
   </div>
 
-  <div class="curved">
+  <div class="curved" style="background-color: #ff9933;">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
   <div class="" style="background-color: #ff9933;">
