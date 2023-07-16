@@ -144,7 +144,6 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                   <p class="m-0">{{ dish.price }} euro</p>
                                   <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
-                                  <p class="m-0" @click="removeFromCart(dish)">-</p>
                                 </div>
                               </div>
                             </div>
@@ -587,13 +586,13 @@ export default {
 div.sticky {
   position: sticky;
   top: 20px;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 div.sticky-2 {
   position: sticky;
   top: 160px;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .position-relative {
