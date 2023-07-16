@@ -142,10 +142,7 @@ export default {
         },
 
         goToRestaurant() {
-            this.$router.push({
-                name: 'restaurant-show',
-                params: { slug: localStorage.getItem("cartRestaurantSlug") }
-            });
+            window.location.href = "/restaurants/" + localStorage.getItem("cartRestaurantSlug");
         },
 
         even() {
