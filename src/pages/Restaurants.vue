@@ -20,7 +20,7 @@
                 <div class="card-body">
                   <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input inputt" :checked="filterCategoryNames.length < 1" @click="resetCheckBox($event)" id="resetCheckbox">
-                    <label class="form-check-label">all</label>
+                    <label class="form-check-label">Tutti</label>
                   </div>
                   <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
                     <input type="checkbox" class="form-check-input" :checked="categoryChecked(category.name)" :id="category.id" :value="category.name" @click="clickCheckBox(category.name)">
