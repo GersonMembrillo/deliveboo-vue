@@ -11,7 +11,7 @@
             <div class="row sticky">
               <div class="col-sm-12 col-md-8 col-lg-6 col-xl-4">
                 <div class="input-group mb-4">
-                  <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="inputText" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca Ristorante...">
+                  <input type="text" class="input form-control border border-0 shadow-sm rounded-4 rounded-4" v-model="inputText" @keyup="searchByName" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Cerca Ristorante...">
                 </div>
               </div>
             </div>
@@ -38,7 +38,9 @@
                   <div class="card rounded-4 rounded">
                     <div class="card-body">
                       <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all" @click="resetCeckBox()">
+                        <input type="checkbox" class="form-check-input">
+                        <!-- <input type="checkbox" class="form-check-input" :value="all"> -->
+                        <!-- <input type="checkbox" class="form-check-input" :checked="isAllChecked" :value="all" @click="resetCeckBox()"> -->
                         <label class="form-check-label">all</label>
                       </div>
                       <div class="mb-3 form-check" v-for="category in categories" :key="category.id">
@@ -55,7 +57,7 @@
                 <div class="row ps-2 pe-2 pt-3 pb-3 mb-3 mt-2 me-2 ms-2 sticky-2 bg-white shadow rounded-4">
                   <div class="col-12">
                     <h3>Ristoranti a domicilio nella tua zona</h3>
-                    <span v-for="filterCategoryName in filterCategoryNames" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">
+                    <span v-for="filterCategoryName in filterCategoryNames" :key="filterCategoryName" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">
                       {{ filterCategoryName }}
                     </span>
                     <span v-if="filterCategoryNames.length < 1" class="me-2 badge rounded-pill shadow-sm text-bg-dark rounded badge-style">Tutti</span>
@@ -81,7 +83,8 @@
                   </div>
                   <div class="row ps-2 pe-2" v-if="!loading">
                     <p v-if="showNotFound()" class="fs-4 mb-3">Nessun risultato corrisponde ai criteri di ricerca.</p>
-                    <div v-for="restaurant in restaurants" :key="restaurant.id" v-show="showRestaurant(restaurant.categories) && searchByName(restaurant.name)" class="col-sm-6 col-lg-4 col-xl-3 pb-4">
+                    <div v-for="restaurant in restaurants" :key="restaurant.id" v-show="showRestaurant(restaurant.categories) && filteredRestaurants.length == 0 && !showNotFound()" class="col-sm-6 col-lg-4 col-xl-3 pb-4">
+                    <!-- <div v-for="restaurant in restaurants" :key="restaurant.id" v-show="showRestaurant(restaurant.categories) && searchByName(restaurant.name) && filteredRestaurants.length == 0" class="col-sm-6 col-lg-4 col-xl-3 pb-4"> -->
                       <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
                         <div class="card bg-light border border-0">
                           <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://localhost:8000/storage/' + restaurant.image" :alt="restaurant.name">
@@ -95,7 +98,21 @@
                         </div>
                       </router-link>
                     </div>
-                    <div v-if="!showNotFound()" class="d-flex justify-content-center mt-5 mb-5">
+                    <div v-for="restaurant in filteredRestaurants" :key="restaurant.id" v-show="filteredRestaurants.length > 0" class="col-sm-6 col-lg-4 col-xl-3 pb-4">
+                      <router-link class="link-offset-2 link-underline link-underline-opacity-0" :to="{ name: 'restaurant-show', params: { slug: restaurant.slug } }">
+                        <div class="card bg-light border border-0">
+                          <img class="w-100 rounded-4 img-restaurant shadow rounded" :src="'http://localhost:8000/storage/' + restaurant.image" :alt="restaurant.name">
+                          <div class="pt-2">
+                            <p class="m-0 ps-2">{{ restaurant.name }}</p>
+                            <div class="pt-1">
+                              <span v-for="category in restaurant.categories" :key="category" class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{
+                                category }}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </router-link>
+                    </div>
+                    <div v-if="!showNotFound() && filterCategoryNames.length == 0" class="d-flex justify-content-center mt-5 mb-5">
                       <nav aria-label="Page navigation example my-3">
                         <ul class="pagination">
                           <li class="page-item"><button class="page-link" :class="{ 'disabled': currentPage === 1 }" @click="getData(currentPage - 1)">Previous</button></li>
@@ -237,14 +254,14 @@ export default {
     }
       })
 
-      if (page != undefined) {
-        this.showPopular = false
-        this.isAllChecked = true
-      }
-      if (page == 1) {
-        this.showPopular = true
-        this.isAllChecked = true
-      }
+      // if (page != undefined) {
+      //   this.showPopular = false
+      //   this.isAllChecked = true
+      // }
+      // if (page == 1) {
+      //   this.showPopular = true
+      //   this.isAllChecked = true
+      // }
 
 
     },
@@ -375,6 +392,7 @@ export default {
 
       event.currentTarget.checked = true;
       this.filterCategoryNames = [];
+      this.filteredRestaurants = [];
     },
 
     clickCheckBox(categoryName) {
@@ -385,6 +403,14 @@ export default {
         this.filterCategoryNames.push(categoryName);
       else
         this.filterCategoryNames = this.filterCategoryNames.filter((name) => name != categoryName);
+
+      if (this.filterCategoryNames.length > 0) {
+        this.filteredRestaurants = this.restaurantsAll.filter((restaurant) => {
+        return restaurant.categories.some((category) => this.filterCategoryNames.includes(category));
+      });
+      }
+      return this.filteredRestaurants
+
     },
 
     showRestaurant(restaurantCategories) {
@@ -398,15 +424,19 @@ export default {
       return result;
     },
 
-    searchByName(name) {
-      let result = true;
+    searchByName() {
 
-      let dim = this.inputText.length;
-      for (let i = 0; i < dim && result; i++)
-        if (name[i].toUpperCase() != this.inputText[i].toUpperCase())
-          result = false;
-
-      return result;
+      if (this.inputText != '') {
+        this.filteredRestaurants = []
+        this.inputText = this.inputText.toUpperCase()
+        this.restaurantsAll.forEach(restaurant => {
+          let name = restaurant.name.toUpperCase()
+          if (name.includes(this.inputText)) {
+            this.filteredRestaurants.push(restaurant)
+          }
+        })
+      }
+      return this.filteredRestaurants
     },
 
     categoryChecked(categoryName) {
@@ -419,13 +449,21 @@ export default {
     },
 
     showNotFound() {
-      let result = true;
+      let result = false;
 
-      for(let i = 0; i < this.restaurants.length && result; i++)
-        if(this.searchByName(this.restaurants[i].name) && this.showRestaurant(this.restaurants[i].categories))
-          result = false;
+      if ((this.inputText != '' || this.filterCategoryNames.length > 0) && this.filteredRestaurants.length < 1) {
+        result = true;
+      }
+      console.log(result);
 
       return result;
+      // let result = false;
+
+      // for(let i = 0; i < this.restaurants.length && result; i++)
+      //   if(this.searchByName(this.restaurants[i].name) && this.showRestaurant(this.restaurants[i].categories))
+      //     result = false;
+
+      // return result;
     }
   },
   computed: {
