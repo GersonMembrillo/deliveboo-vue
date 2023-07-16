@@ -1,32 +1,34 @@
 <template>
   <ShoppingCart />
-  <div class="container top">
+  <div class="" style="background-color: #ff9933;">
+    <div class="container top">
 
-    <div class="d-lg-flex align-items-center justify-content-center text-center" style="margin: 0 auto;">
+      <div class="d-lg-flex align-items-center justify-content-center text-center" style="margin: 0 auto;">
 
-      <video data-v-f4daae2a="" data-test-id="animation-video" autoplay="autoplay" loop="loop" muted="muted" width="450"
-        height="450" class="animation__element">
-        <source data-v-f4daae2a=""
-          src="https://res.cloudinary.com/glovoapp/video/upload/website_assets/images/landing/address-container-animation.webm"
-          preload="auto" type="video/webm">
-      </video>
+        <video data-v-f4daae2a="" data-test-id="animation-video" autoplay="autoplay" loop="loop" muted="muted" width="450"
+          height="450" class="animation__element">
+          <source data-v-f4daae2a=""
+            src="https://res.cloudinary.com/glovoapp/video/upload/website_assets/images/landing/address-container-animation.webm"
+            preload="auto" type="video/webm">
+        </video>
 
-      <div class="px-5 text-center">
-        <div class="">
-          <h1 class="text-uppercase fw-bolder">Arriva DeliveBoo!</h1>
-          <h3 class="fw-normal text-white fs-4">L'App n°1 di consegna di cibo a domicilio e molto altro...</h3>
-          <router-link @click="store.categorySelected = '';" :to="{ name:  'all-restaurants'}" class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4">
-            <div>
-              <h3 class="text-uppercase mb-0">Tutti i ristoranti</h3>
-            </div>
-          </router-link>
+        <div class="px-5 text-center">
+          <div class="">
+            <h1 class="text-uppercase fw-bolder">Arriva DeliveBoo!</h1>
+            <h3 class="fw-normal text-white fs-4">L'App n°1 di consegna di cibo a domicilio e molto altro...</h3>
+            <router-link @click="store.categorySelected = '';" :to="{ name: 'all-restaurants' }"
+              class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4">
+              <div>
+                <h3 class="text-uppercase mb-0">Tutti i ristoranti</h3>
+              </div>
+            </router-link>
+          </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </div>
-
-  <div class="curve pt-4">
+  <div class="curve">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
 
@@ -234,30 +236,32 @@
   <div class="curved">
     <img class="bg-white" src="img/curve.jpg" alt="curve.png">
   </div>
-  <div class="container bottom mt-3">
-    <div class="row d-flex justify-content-between mb-5">
-      <div class="col-12 col-md-4">
-        <div class="text-center">
-          <a href="/rider">
-            <img src="img/rider.png" alt="rider">
-          </a>
-          <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
+  <div class="" style="background-color: #ff9933;">
+    <div class="container bottom pb-1">
+      <div class="row d-flex justify-content-between mb-5">
+        <div class="col-12 col-md-4">
+          <div class="text-center">
+            <a href="/rider">
+              <img src="img/rider.png" alt="rider">
+            </a>
+            <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
+          </div>
         </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="text-center">
-          <a href="">
-            <img src="img/collab.png" alt="partner">
-          </a>
-          <p class="fw-bold fs-4 pt-3">Diventa un Partner!</p>
+        <div class="col-12 col-md-4">
+          <div class="text-center">
+            <a href="">
+              <img src="img/collab.png" alt="partner">
+            </a>
+            <p class="fw-bold fs-4 pt-3">Diventa un Partner!</p>
+          </div>
         </div>
-      </div>
-      <div class="col-12 col-md-4">
-        <div class="text-center">
-          <a href="http://localhost:8000/register">
-            <img src="img/restaurant.png" alt="activity">
-          </a>
-          <p class="fw-bold fs-4 pt-3">Registra la tua attività!</p>
+        <div class="col-12 col-md-4">
+          <div class="text-center">
+            <a href="http://localhost:8000/register">
+              <img src="img/restaurant.png" alt="activity">
+            </a>
+            <p class="fw-bold fs-4 pt-3">Registra la tua attività!</p>
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@
       <HomeNav />
     </header>
 
-    <main>
+    <main class="bg-light">
       <router-view></router-view>
     </main>
 
@@ -58,10 +58,10 @@ export default {
 }
 
 main {
-  //flex: 1;
-  //display: flex;
-  //flex-direction: column;
-  background-color: #ff9933;
-  //overflow-y: auto;
+  flex: 1;
+  display: block;
+  flex-direction: column;
+  // background-color: #ff9933;
+  // overflow-y: auto;
 }
 </style>
