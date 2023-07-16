@@ -18,10 +18,9 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
-			path: '/restaurants/:categoryId',
+			path: '/restaurants',
 			name: 'all-restaurants',
 			component: Restaurants,
-			props: true,
 		},
 		{
 			path: '/restaurants/:slug',

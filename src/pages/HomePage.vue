@@ -15,12 +15,11 @@
         <div class="">
           <h1 class="text-uppercase fw-bolder">Arriva DeliveBoo!</h1>
           <h3 class="fw-normal text-white fs-4">L'App n°1 di consegna di cibo a domicilio e molto altro...</h3>
-          <a class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4"
-            href="http://localhost:5174/restaurants/0">
+          <router-link :to="{ name:  'all-restaurants'}" class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4">
             <div>
               <h3 class="text-uppercase mb-0">Tutti i ristoranti</h3>
             </div>
-          </a>
+          </router-link>
         </div>
       </div>
 
@@ -40,7 +39,7 @@
           <div class="mb-4 col-6 col-md-4 col-lg-3 category text-center " v-for="(category, index) in categories"
             :key="category.id">
             <div class="position-relative">
-              <a class="" @click="navigateToCategory(category.id)">
+              <a class="" @click="navigateToCategory(category.name)">
                 <img class="position-absolute"
                   src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
                   alt="">
@@ -269,6 +268,7 @@
 import axios from 'axios';
 import HomeNav from '../components/HomeNav.vue';
 import ShoppingCart from '../components/ShoppingCart.vue';
+import { store } from "../store.js"
 export default {
   components: {
     ShoppingCart
@@ -278,7 +278,8 @@ export default {
       showHeader: false,
       cartKey: 0,
       categories: [],
-      videoUrl: "https://www.youtube.com/embed/QAnLqf2PTrg"
+      videoUrl: "https://www.youtube.com/embed/QAnLqf2PTrg",
+      store: store
     };
   },
   methods: {
@@ -290,15 +291,16 @@ export default {
         console.log(errors);
       })
     },
-    navigateToCategory(categoryId) {
-      // console.log(categoryId);
-      this.$router.push(`/restaurants/${categoryId}`);
+    navigateToCategory(categoryName) {
+      this.store.categorySelected = categoryName;
+      this.$router.push(`/restaurants`);
     }
 
   },
   mounted() {
     this.$emit('update:showHeader', false);
     this.getData();
+    console.log(this.categories)
   },
 };
 </script>
