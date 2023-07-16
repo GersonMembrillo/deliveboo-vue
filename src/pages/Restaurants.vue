@@ -507,12 +507,12 @@ input[type="checkbox"]:checked {
 div.sticky {
   position: sticky;
   top: 20px;
-  z-index: 10000;
+  z-index: 1000;
 }
 
 div.sticky-2 {
   position: sticky;
   top: 75px;
-  z-index: 10000;
+  z-index: 1000;
 }
 </style>
