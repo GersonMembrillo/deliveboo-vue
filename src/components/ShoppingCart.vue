@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button v-if="items.length > 0" @click="goToCheckout()" type="button"
+                    <button @click="goToCheckout()" v-if="items.length > 0" type="button"
                         class="btn btn-outline-warning text-uppercase fs-6" data-bs-dismiss="modal">
                         order {{ totalQuantity }} items for {{ totalPrice }} &euro;
                     </button>
@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import { store } from "../store.js";
 
 export default {
     name: "ShoppingCart",
@@ -72,12 +71,12 @@ export default {
         return {
             items: [],
             restaurantName: "",
-            store: store
         }
     },
 
     methods: {
         addToCart(newItem) {
+            sessionStorage.clear();
             let items = localStorage.getItem("cartItems");
             items = JSON.parse(items);
             let quantity = 1;
@@ -109,6 +108,7 @@ export default {
         },
 
         removeFromCart(oldItem) {
+            sessionStorage.clear();
             let items = localStorage.getItem("cartItems");
             items = JSON.parse(items);
             let index = -1;
@@ -141,15 +141,6 @@ export default {
             }
         },
 
-        goToCheckout() {
-            this.store.checkoutQuantity = this.totalQuantity;
-            this.store.checkoutPrice = this.totalPrice;
-
-            this.$router.push({
-                name: 'checkout'
-            });
-        },
-
         goToRestaurant() {
             this.$router.push({
                 name: 'restaurant-show',
@@ -164,6 +155,13 @@ export default {
                 result = true;
 
             return result;
+        },
+
+        goToCheckout() {
+            sessionStorage.setItem("checkoutQuantity", this.totalQuantity);
+            sessionStorage.setItem("checkoutPrice", this.totalPrice);
+            
+            window.location.href = "/checkout";
         }
     },
 
@@ -240,7 +238,6 @@ export default {
 
 .modal {
     word-wrap: break-word;
-    background-color: rgb(155, 155, 155) !important;
     z-index: 13000;
 }
 

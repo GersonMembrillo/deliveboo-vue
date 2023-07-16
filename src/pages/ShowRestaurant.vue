@@ -388,7 +388,11 @@ export default {
     },
 
     addToCart(newItem) {
+
       this.numDishCart++
+
+      sessionStorage.clear();
+
       let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
       let cartRestaurantName = localStorage.getItem("cartRestaurantName");
 
