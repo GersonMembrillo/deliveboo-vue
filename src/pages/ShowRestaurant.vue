@@ -2,7 +2,7 @@
   <div class="d-block d-lg-none">
     <ShoppingCart :key="cartKey" />
   </div>
-  <WarningModal @cartCleared="cartKey++" />
+  <WarningModal @cartCleared="addToCart(tempNewItem);" />
   <div v-if="loading" class="position-abs w-100 h-100 d-flex align-items-center justify-content-center bg-light">
     <LoaderComponent />
   </div>
@@ -57,7 +57,7 @@
         <div class="row pb-5 mb-4">
           <div class="col-12">
             <div class="row m-position">
-              <div class="col-md-12 col-lg-9">
+              <div class="col-md-12 col-lg-8">
                 <div class="card p-3 pt-4 pb-4 border border-0 shadow bg-body-tertiary rounded-4 sticky">
                   <h1>{{ restaurant.name }}</h1>
                   <div class="d-flex align-items-center">
@@ -143,7 +143,7 @@
                               <div class="row mt-3 align-items-end h-100">
                                 <div class="d-flex justify-content-between align-items-center">
                                   <p class="m-0">{{ dish.price }} euro</p>
-                                  <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
+                                  <p class="m-0" @click="addToCart(dish)"><i class="fa-solid fa-circle-plus fs-3 green"></i></p>
                                 </div>
                               </div>
                             </div>
@@ -220,7 +220,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4 col-lg-3 d-none d-lg-block">
+              <div class="col-md-5 col-lg-4 d-none d-lg-block">
                 <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 sticky">
                   <ShoppingCart2 :key="cartKey" />
                 </div>
@@ -272,6 +272,7 @@ export default {
       cartKey: 0,
       restaurantName: "",
       numDishCart: 0,
+      tempNewItem: null
     }
   },
   methods: {
@@ -393,6 +394,7 @@ export default {
 
       this.numDishCart++
 
+      this.tempNewItem = newItem;
       sessionStorage.clear();
 
       let cartRestaurantSlug = localStorage.getItem("cartRestaurantSlug");
@@ -613,5 +615,10 @@ div.sticky-2 {
   justify-content: center;
   color: white;
   font-weight: bold;
+}
+
+.green {
+    color: rgb(62, 211, 25);
+    cursor: pointer;
 }
 </style>

@@ -39,7 +39,7 @@
           <div class="mb-4 col-6 col-md-4 col-lg-3 category text-center " v-for="(category, index) in categories"
             :key="category.id">
             <div class="position-relative">
-              <a class="" @click="navigateToCategory(category.name)">
+              <a class="cursor-pointer" @click="navigateToCategory(category.name)">
                 <img class="position-absolute"
                   src="https://just-eat-prod-eu-res.cloudinary.com/image/upload/c_fill,f_auto,h_480,q_auto,w_640/v1/experiments/projecticing/it/cuisine-icons/pizza"
                   alt="">
@@ -403,5 +403,9 @@ export default {
 
 .accordion-button:focus {
   box-shadow: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>
