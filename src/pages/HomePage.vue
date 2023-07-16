@@ -15,7 +15,7 @@
         <div class="">
           <h1 class="text-uppercase fw-bolder">Arriva DeliveBoo!</h1>
           <h3 class="fw-normal text-white fs-4">L'App n°1 di consegna di cibo a domicilio e molto altro...</h3>
-          <router-link :to="{ name:  'all-restaurants'}" class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4">
+          <router-link @click="store.categorySelected = '';" :to="{ name:  'all-restaurants'}" class="col-12 category-all text-black text-decoration-none d-flex justify-content-center align-items-center mt-4">
             <div>
               <h3 class="text-uppercase mb-0">Tutti i ristoranti</h3>
             </div>
@@ -238,9 +238,9 @@
     <div class="row d-flex justify-content-between mb-5">
       <div class="col-12 col-md-4">
         <div class="text-center">
-          <router-link to="/rider">
+          <a href="/rider">
             <img src="img/rider.png" alt="rider">
-          </router-link>
+          </a>
           <p class="fw-bold fs-4 pt-3">Diventa un Rider!</p>
         </div>
       </div>
