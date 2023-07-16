@@ -11,21 +11,32 @@
       <div class="container">
         <div class="row">
           <div class="m-auto col-sm-12 col-md-9 col-lg-8 col-xl-6">
-            <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4">
+            <div class="card p-3 border border-0 shadow bg-body-tertiary rounded-4 position-relative">
               <p @click="popUpDish = false"><i class="fa-solid fa-xmark fs-3"></i></p>
+              <p v-if="totalQuantity(dataDish) != 0" class="circle rounded-circle green-bg">{{ totalQuantity(dataDish) }}</p>
               <div>
-                <div class="position-relative text-center">
+                <div class="text-center">
                   <img class="w-50 rounded-3" :src="'http://localhost:8000/storage/' + dataDish.image" :alt="dataDish.name">
-                  <p v-if="totalQuantity(dataDish) != 0" class="circle rounded-circle">{{ totalQuantity(dataDish) }}</p>
                 </div>
               </div>
               <div class="pe-5 ps-5 mt-4">
-                <p class="m-0 fs-4">{{ dataDish.name }}</p>
+                <div class="d-flex mb-3">
+                  <div>
+                    <p class="m-0 fs-4">{{ dataDish.name }}</p>
+                  </div>
+                  <div>
+                    <span class="badge rounded-pill selected-bg mt-1 ms-2 fs-6">{{ dataDish.price }} euro</span>
+                    <span class="ms-3">x {{ totalQuantity(dataDish) }}</span>
+                  </div>
+                </div>
                 <p class="fs-6">{{ dataDish.description }}</p>
-                <p class="fs-6">{{ dataDish.price }} euro</p>
-                <p class="m-0" @click="addToCart(dataDish)"><i class="fa-solid fa-circle-plus fs-3"></i></p>
-                <p class="m-0" @click="removeFromCart(dataDish)"><i class="fa-solid fa-circle-minus fs-3"></i></p>
-                <p>{{totalPrice(dataDish)}} euro</p>
+                <div class="d-flex justify-content-center mt-5 mb-4">
+                  <div class="d-flex aling-items-center">
+                    <p class="m-0 me-4 fs-3" @click="addToCart(dataDish)"><i class="fa-solid fa-circle-plus fs-3 green"></i></p>
+                    <p class="m-0 fs-3">{{totalPrice(dataDish)}} euro</p>
+                    <p class="m-0 ms-4 fs-3" @click="removeFromCart(dataDish)"><i class="fa-solid fa-circle-minus fs-3 text-danger"></i></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -62,7 +73,7 @@
                   <h1>{{ restaurant.name }}</h1>
                   <div class="d-flex align-items-center">
                     <span v-for="category in restaurant.categories" :key="category"
-                      class="me-2 badge rounded-pill text-body-tertiary shadow-sm bg-body-tertiary rounded">{{
+                      class="me-2 badge rounded-pill text-body-tertiary shadow-sm rounded selected-bg">{{
                         category.name }}</span>
                   </div>
                 </div>
@@ -528,7 +539,7 @@ export default {
 
 .img-effetto {
   filter: brightness(50%);
-  max-height: 400px;
+  height: 400px;
 }
 
 
@@ -608,7 +619,7 @@ div.sticky-2 {
   background-color: red;
   position: absolute;
   top: -20px;
-  right: 100px;
+  right: -20px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -619,6 +630,10 @@ div.sticky-2 {
 
 .green {
     color: rgb(62, 211, 25);
+    cursor: pointer;
+}
+.green-bg {
+    background-color: rgb(62, 211, 25);
     cursor: pointer;
 }
 </style>
