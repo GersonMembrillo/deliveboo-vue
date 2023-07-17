@@ -235,7 +235,7 @@ export default {
       if (this.filterCategoryNames.length > 0) {
         this.filteredRestaurants = this.restaurantsAll.filter((restaurant) => {
           return this.filterCategoryNames.every((category) => restaurant.categories.includes(category))
-            && restaurant.categories.length === this.filterCategoryNames.length;
+            // && restaurant.categories.length === this.filterCategoryNames.length;
         });
       } else {
         this.filteredRestaurants = [];
